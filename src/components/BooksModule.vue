@@ -2,6 +2,13 @@
   <div class="hello">
     <h1>Books Module</h1>
 
+    <p>
+      ACTION = {{ action }} <br/>
+      ID = {{ id }} <br/>
+      <a href="/#/books/list/all">Back to the list</a> <br/>
+      <a href="/#/books/edit/0">Add a new book</a> <br/>
+    </p>
+
 
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
