@@ -37,6 +37,7 @@
     <table v-if="action === 'edit'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
+          <th>Book ID</th>
           <th>Book Name</th>
           <th>Author</th>
           <th>Description</th>
@@ -49,13 +50,24 @@
           <td>{{ currentBook.book_id }}</td>
           <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
           <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
-          <td>{{ currentBook.book_author }}</td>
-          <td>{{ currentBook.book_description }}</td>
-          <td>{{ currentBook.book_publicationDate }}</td>
-          <td>{{ currentBook.book_isbn }}</td>
+          <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
+          <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
+          <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
+          <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
+          <!-- example of select tag
+            <td> <select name="car_brand" v-model="oneCar.car_brand" >
+                <option v-for="b of brands" v-bind:key="b.brand_id" :value="b.brand_id" >
+                  {{ b.brand_name }}
+                </option>
+              </select>
+            </td>
+          -->
+          <!-- example of checkbox
+            <td> <input type="checkbox" name="car_isFancy" v-model="oneCar.car_isFancy"/> </td>
+          -->
         </tr>
         <tr>
-          <td colspan="5">
+          <td colspan="6">
             <input type = "button" value="SEND" @click="sendEditRequest()">
           </td>
         </tr>
