@@ -1,28 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>   <!-- {{value}} are variables -->
-
-    <h1>JAJAJAJ</h1>
-
-
-    <div>
-      click me
-      <button v-on:click="click">
-        Click me
-      </button>
-    </div>
-
-
-    <!--
-    <table v-if="action === 'show'">
-    <table v-if="action === 'edit'">
-    <table v-if="action === 'list'">
-
-
-
-    -->
-
-
+    <h1>Books Module</h1>
 
 
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
@@ -37,7 +15,7 @@
       </thead>
       <tbody>
       <tr>
-        <td>{{ book.book_id }}</td>
+        <td>{{ book.book_id }}</td>   <!-- {{value}} are variables -->
         <td>{{ book.book_name }}</td>
         <td>{{ book.book_author }}</td>
         <td>{{ book.book_description }}</td>
@@ -110,7 +88,6 @@ export default {
   props : ['action','id'],  // properties that can be passed to the component
   data () {
     return {   // variables that can be used in the template
-      msg: 'Welcome to Your Vue.js App',
 
       books: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
@@ -153,7 +130,7 @@ export default {
         // the get is executed in the background (separate thread)
         //this.books = responseBooks.data;
 
-        
+
 
         // for testing purposes
         this.books = [
@@ -222,7 +199,4 @@ export default {
     color: #42b983;
   }
 
-  table {
-    margin: 40px auto;
-  }
 </style>
