@@ -23,12 +23,12 @@
       </thead>
       <tbody>
       <tr>
-        <td>{{ book.book_id }}</td>   <!-- {{value}} are variables -->
-        <td>{{ book.book_name }}</td>
-        <td>{{ book.book_author }}</td>
-        <td>{{ book.book_description }}</td>
-        <td>{{ book.book_publicationDate }}</td>
-        <td>{{ book.book_isbn }}</td>
+        <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
+        <td>{{ currentBook.book_name }}</td>
+        <td>{{ currentBook.book_author }}</td>
+        <td>{{ currentBook.book_description }}</td>
+        <td>{{ currentBook.book_publicationDate }}</td>
+        <td>{{ currentBook.book_isbn }}</td>
       </tr>
       </tbody>
     </table>
@@ -46,13 +46,13 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ book.book_id }}</td>
+          <td>{{ currentBook.book_id }}</td>
           <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
-          <td> <input type="text" name="book name" v-model="book.book_name"> </td>
-          <td>{{ book.book_author }}</td>
-          <td>{{ book.book_description }}</td>
-          <td>{{ book.book_publicationDate }}</td>
-          <td>{{ book.book_isbn }}</td>
+          <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
+          <td>{{ currentBook.book_author }}</td>
+          <td>{{ currentBook.book_description }}</td>
+          <td>{{ currentBook.book_publicationDate }}</td>
+          <td>{{ currentBook.book_isbn }}</td>
         </tr>
         <tr>
           <td colspan="5">
@@ -75,11 +75,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="b of bookArray" v-bind:key="b.book_id">
-          <td>{{ b.book_id }}</td>
-          <td>{{ b.book_name }}</td>
-          <td><a :href="'/#/books/show/' + b.book_id">[SHOW]</a></td>
-          <td><a :href="`/#/books/edit/${b.book_id}`">[EDIT]</a></td>
+        <tr v-for="book of bookArray" v-bind:key="book.book_id">
+          <td>{{ book.book_id }}</td>
+          <td>{{ book.book_name }}</td>
+          <td><a :href="'/#/books/show/' + book.book_id">[SHOW]</a></td>
+          <td><a :href="`/#/books/edit/${book.book_id}`">[EDIT]</a></td>
           <td><input type="button" value="DELETE" @click="sendDeleteRequest()" /></td>
         </tr>
       </tbody>
@@ -99,7 +99,7 @@ export default {
 
       bookArray: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
-      book: {
+      currentBook: {
         book_id: 0,
         book_name: '',
         book_author: '',
@@ -160,7 +160,7 @@ export default {
       }
     },
 
-    async refreshOneBook() {
+    async refreshCurrentBook() {
       if (this.$props.id === "all" || this.$props.id === "0") return;
       try {
         /*
@@ -170,7 +170,7 @@ export default {
 
         // for testing purposes
         const bookId = Number(this.$props.id);   // Convert the id prop to a number (before comparing)
-        this.book = this.bookArray.find(b => b.book_id === bookId);
+        this.currentBook = this.bookArray.find(b => b.book_id === bookId);
 
 
       } catch (exception) {
@@ -185,13 +185,13 @@ export default {
 
   watch: {   // watch for changes in the variables
     id: function(newId, oldId) {
-      this.refreshOneBook();
+      this.refreshCurrentBook();
     }
   },
 
   created() {   // executed when the component is created
     this.getAllData();
-    this.refreshOneBook();
+    this.refreshCurrentBook();
 
   },
 }
