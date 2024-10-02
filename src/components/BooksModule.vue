@@ -13,6 +13,7 @@
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
       <tr>
+        <th>Book ID</th>
         <th>Book Name</th>
         <th>Author</th>
         <th>Description</th>
@@ -166,6 +167,12 @@ export default {
         let responseBook = await this.$http.get('http://localhost:3000/books/' + this.$props.id);
         this.book = responseBook.data;
          */
+
+        // for testing purposes
+        const bookId = Number(this.$props.id);   // Convert the id prop to a number (before comparing)
+        this.book = this.bookArray.find(b => b.book_id === bookId);
+
+
       } catch (exception) {
         console.log(exception);
       }
@@ -184,6 +191,7 @@ export default {
 
   created() {   // executed when the component is created
     this.getAllData();
+    this.refreshOneBook();
 
   },
 }
