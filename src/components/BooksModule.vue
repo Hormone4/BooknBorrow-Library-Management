@@ -81,6 +81,7 @@
         <tr>
           <td>ID</td>
           <td>NAME</td>
+          <td>AUTHOR</td>
           <td>SEE BOOK</td>
           <td>EDIT BOOK</td>
           <td>DELETE BOOK</td>
@@ -90,6 +91,8 @@
         <tr v-for="book of bookArray" v-bind:key="book.book_id">
           <td>{{ book.book_id }}</td>
           <td>{{ book.book_name }}</td>
+          <td>{{ book.book_author }}</td>
+          <!-- in the future, make the author field a link leading to a list of books GROUP BY author-->
           <td><a :href="'/#/books/show/' + book.book_id">[SHOW]</a></td>
           <td><a :href="`/#/books/edit/${book.book_id}`">[EDIT]</a></td>
           <td><input type="button" value="DELETE" @click="sendDeleteRequest()" /></td>
@@ -181,8 +184,7 @@ export default {
          */
 
         // for testing purposes
-        const bookId = Number(this.$props.id);   // Convert the id prop to a number (before comparing)
-        this.currentBook = this.bookArray.find(b => b.book_id === bookId);
+        this.currentBook = this.bookArray.find(b => b.book_id === Number(this.$props.id));   // or String(b.book_id)
 
 
       } catch (exception) {
