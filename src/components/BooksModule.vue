@@ -55,7 +55,7 @@
     </table>
 
 
-    <!-- for: /books/list/all -->
+    <!-- when on: /books/list/all -->
     <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>

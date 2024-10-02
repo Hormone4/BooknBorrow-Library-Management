@@ -7,11 +7,12 @@
       <li>
         <!-- link to the books module -->
         <a
-          href="#/books/"
+          href="#/books/list/all/"
           target="_blank"
         >
           Book list
         </a>
+
       </li>
     </ul>
   </div>
