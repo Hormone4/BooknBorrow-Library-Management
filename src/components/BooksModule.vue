@@ -78,18 +78,22 @@
 
 
     <!-- for: /books/list/all -->
-    <table v-if="action === 'list'">
+    <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-          <td>ID</td><td>NAME</td><td>SHOW DATASHEET</td><td>EDIT CAR</td><td>DELETE CAR</td>
+          <td>ID</td>
+          <td>NAME</td>
+          <td>SEE BOOK</td>
+          <td>EDIT BOOK</td>
+          <td>DELETE BOOK</td>
         </tr>
       </thead>
       <tbody>
         <tr v-for="b of books" v-bind:key="b.book_id">
           <td>{{ b.book_id }}</td>
           <td>{{ b.book_name }}</td>
-          <td><a :href="'/#/cars/show/' + b.book_id">[SHOW]</a></td>
-          <td><a :href="`/#/cars/edit/${b.book_id}`">[EDIT]</a></td>
+          <td><a :href="'/#/books/show/' + b.book_id">[SHOW]</a></td>
+          <td><a :href="`/#/books/edit/${b.book_id}`">[EDIT]</a></td>
           <td><input type="button" value="DELETE" @click="sendDeleteRequest()" /></td>
         </tr>
       </tbody>
@@ -135,7 +139,7 @@ export default {
     }
   },
 
-  methods: {   // where the logic that can be called from the template
+  methods: {   // logic that can be called from the template
 
     click: function() {   // test function
       alert('clicked');
@@ -148,6 +152,9 @@ export default {
         // await forces to wait for the response before executing the next lines
         // the get is executed in the background (separate thread)
         //this.books = responseBooks.data;
+
+
+        
 
         this.books = [
           { book_id: 1, book_name: 'Book 1', book_author: 'Author 1', book_description: 'Description 1', book_publicationDate: '2021-01-01', book_isbn: '1234567890' },
@@ -182,12 +189,12 @@ export default {
   watch: {   // watch for changes in the variables
     id: function(newId, oldId) {
       this.refreshOneBook();
-    },
-
-    created() {   // executed when the component is created
-      this.getAllData();
-      this.refreshOneBook();
     }
+  },
+
+  created() {   // executed when the component is created
+    this.getAllData();
+
   },
 }
 </script>
@@ -207,5 +214,9 @@ export default {
   }
   a {
     color: #42b983;
+  }
+
+  table {
+    margin: 40px auto;
   }
 </style>
