@@ -74,7 +74,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="b of books" v-bind:key="b.book_id">
+        <tr v-for="b of bookArray" v-bind:key="b.book_id">
           <td>{{ b.book_id }}</td>
           <td>{{ b.book_name }}</td>
           <td><a :href="'/#/books/show/' + b.book_id">[SHOW]</a></td>
@@ -96,7 +96,7 @@ export default {
   data () {
     return {   // variables that can be used in the template
 
-      books: [],
+      bookArray: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
       book: {
         book_id: 0,
@@ -107,7 +107,7 @@ export default {
         book_isbn: ''
       },
 
-      libraries: [],
+      libraryArray: [],
       // library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber)
       /*
       library: {   // library object, idk if it is needed
@@ -140,7 +140,7 @@ export default {
 
 
         // for testing purposes
-        this.books = [
+        this.bookArray = [
           { book_id: 1, book_name: "The Great Gatsby", book_author: "F. Scott Fitzgerald", book_description: "A novel set in the 1920s, exploring themes of wealth and society.", book_publicationDate: "1925-04-10", book_isbn: "9780743273565" },
           { book_id: 2, book_name: "A Brief History of Time", book_author: "Stephen Hawking", book_description: "A book explaining the universe, time, and black holes.", book_publicationDate: "1988-04-01", book_isbn: "9780553380163" },
           { book_id: 3, book_name: "The Hobbit", book_author: "J.R.R. Tolkien", book_description: "A fantasy novel about the adventures of Bilbo Baggins.", book_publicationDate: "1937-09-21", book_isbn: "9780547928227" },
