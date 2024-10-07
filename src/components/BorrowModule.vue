@@ -9,7 +9,7 @@
       <a href="/#/borrow/edit/0">Add a new borrow record</a> <br />
     </p>
 
-    <!-- Show Borrow Details -->
+    <!-- Show Borrow details of one reservation -->
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
