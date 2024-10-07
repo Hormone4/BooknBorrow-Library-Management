@@ -38,6 +38,16 @@ export default new Router({
       name: 'libraries',
       component: LibraryModule,
       props: true
+    },
+    {
+      path: '/borrow',
+      redirect: '/borrow/list/all'
+    },
+    {
+      path: '/borrow/:action/:id',
+      name: 'borrow',
+      component: BorrowModule,
+      props: true
     }
   ]
 })
