@@ -49,7 +49,7 @@
         <tr>
           <td>{{ currentBook.book_id }}</td>
           <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
-          <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
+          <td> <input   type="text" name="book name" v-model="currentBook.book_name"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
           <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
