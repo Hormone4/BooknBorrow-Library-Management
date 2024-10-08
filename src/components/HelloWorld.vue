@@ -6,13 +6,7 @@
     <ul>
       <li>
         <!-- link to the books module -->
-        <a
-          href="#/books/list/all/"
-          target="_blank"
-        >
-          Book list
-        </a>
-
+        <a href="#/books/list/all/"> Book list</a>
       </li>
       <li>
         <a href="#/libraries/list/all"> Libraries</a>
