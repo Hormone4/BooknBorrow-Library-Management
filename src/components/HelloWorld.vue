@@ -15,9 +15,9 @@
 
       </li>
       <li>
-        <a href="/libraries/list/all"> Libraries</a>
+        <a href="#/libraries/list/all"> Libraries</a>
       </li>
-      <li><a href="/borrow/list/all"> Reservations</a></li>
+      <li><a href="#/borrow/list/all"> Reservations</a></li>
     </ul>
   </div>
 </template>
