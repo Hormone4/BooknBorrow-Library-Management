@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import BooksModule from '@/components/BooksModule'
 import LibraryModule from '@/components/LibraryModule' // Import the LibraryModule component
-import BorrowModule from '@/component/BorrowModule'
+import BorrowModule from '@/components/BorrowModule'
 Vue.use(Router)
 
 export default new Router({
