@@ -49,7 +49,6 @@
         <tr>
           <td>{{ currentBorrow.borrow_id }}</td>
           <td>
-            <!-- Assuming you have a list of books to select from -->
             <select v-model="currentBorrow.book_id">
               <option v-for="book in bookArray" :key="book.book_id" :value="book.book_id">
                 {{ book.book_name }}
@@ -75,7 +74,6 @@
       </tbody>
     </table>
 
-    <!-- List All Borrow Records -->
     <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
@@ -85,7 +83,9 @@
           <td>Borrow Date</td>
           <td>Return Date</td>
           <td>Status</td>
-          <td>Actions</td>
+          <td>See</td>
+          <td>Edit</td>
+          <td>Delete</td>
         </tr>
       </thead>
       <tbody>
@@ -98,8 +98,11 @@
           <td>{{ borrow.status }}</td>
           <td>
             <a :href="'/#/borrow/show/' + borrow.borrow_id">[SHOW]</a>
+            </td>
+            <td>
             <a :href="'/#/borrow/edit/' + borrow.borrow_id">[EDIT]</a>
-            <input type="button" value="DELETE" @click="sendDeleteRequest(borrow.borrow_id)" />
+            </td>
+            <td><input type="button" value="DELETE" @click="sendDeleteRequest(borrow.borrow_id)" />
           </td>
         </tr>
       </tbody>
@@ -149,7 +152,7 @@ export default {
             return_date: '2023-09-20',
             status: 'borrowed'
           }
-          // Add more sample borrow records as needed
+
         ];
 
         // Sample data for books
@@ -157,7 +160,7 @@ export default {
           { book_id: 1, book_name: 'The Great Gatsby' },
           { book_id: 2, book_name: 'A Brief History of Time' },
           { book_id: 3, book_name: 'The Hobbit' }
-          // Add more sample books as needed
+
         ];
       } catch (exception) {
         console.log(exception);

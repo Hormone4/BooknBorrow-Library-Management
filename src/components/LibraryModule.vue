@@ -125,7 +125,6 @@ export default {
   methods: {
     async getAllData() {
       try {
-        // Replace this with your actual API call
         this.libraryArray = [
           {
             library_id: 1,
@@ -147,7 +146,7 @@ export default {
             library_streetName: 'Second St',
             library_streetNumber: '200'
           }
-          // Add more sample libraries as needed
+
         ];
       } catch (exception) {
         console.log(exception);
