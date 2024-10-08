@@ -79,9 +79,6 @@
         <tr>
           <td>Borrow ID</td>
           <td>Book Name</td>
-          <td>Borrower Name</td>
-          <td>Borrow Date</td>
-          <td>Return Date</td>
           <td>Status</td>
           <td>See</td>
           <td>Edit</td>
@@ -92,9 +89,6 @@
         <tr v-for="borrow in borrowArray" :key="borrow.borrow_id">
           <td>{{ borrow.borrow_id }}</td>
           <td>{{ borrow.book_name }}</td>
-          <td>{{ borrow.borrower_name }}</td>
-          <td>{{ borrow.borrow_date }}</td>
-          <td>{{ borrow.return_date }}</td>
           <td>{{ borrow.status }}</td>
           <td>
             <a :href="'/#/borrow/show/' + borrow.borrow_id">[SHOW]</a>
