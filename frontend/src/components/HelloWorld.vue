@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>BooknBorrow</h1>
+    <h1 class="component-h1">BooknBorrow</h1>
 
     <h2>Table Links</h2>
     <ul>

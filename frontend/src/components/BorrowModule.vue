@@ -1,13 +1,6 @@
 <template>
   <div class="borrow-module">
-    <h1>Borrow Module</h1>
-
-    <p>
-      ACTION = {{ action }} <br />
-      ID = {{ id }} <br />
-      <a href="/#/borrow/list/all">Back to the list</a> <br />
-      <a href="/#/borrow/edit/0">Add a new borrow record</a> <br />
-    </p>
+    <h1 class="component-h1">Borrow Module</h1>
 
     <!-- Show Borrow details of one reservation -->
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">

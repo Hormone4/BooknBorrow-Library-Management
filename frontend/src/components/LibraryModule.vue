@@ -1,13 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Libraries Module</h1>
-
-    <p>
-      ACTION = {{ action }} <br/>
-      ID = {{ id }} <br/>
-      <a href="/#/libraries/list/all">Back to the list</a> <br/>
-      <a href="/#/libraries/edit/0">Add a new library</a> <br/>
-    </p>
+    <h1 class="component-h1">Library List</h1>
 
     <!-- Show Library Details -->
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">

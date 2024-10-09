@@ -1,14 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Books Module</h1>
-
-    <p>
-      ACTION = {{ action }} <br/>
-      ID = {{ id }} <br/>
-      <a href="/#/books/list/all">Back to the list</a> <br/>
-      <a href="/#/books/edit/0">Add a new book</a> <br/>
-    </p>
-
+    <h1 class="component-h1">Books List</h1>
 
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
@@ -225,8 +217,7 @@ export default {
 
   /************ LISTS ************/
   ul {
-    margin: 10px auto; /* Center the ul element */
-    padding: 20px;
+    margin: auto; /* Center the ul element */
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -239,17 +230,15 @@ export default {
   }
 
   ul li {
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     text-align: center;
     position: relative;
   }
 
 
 
-  .zoom-hover:hover {
-    transform: scale(1.2);
-    transition: transform 0.1s;
-  }
 
 
   a {
