@@ -76,40 +76,44 @@
 
 
     <!-- when on: /books/list/all -->
-    <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>NAME</td>
-          <td>AUTHOR</td>
-          <td>SEE BOOK</td>
-          <td>EDIT BOOK</td>
-          <td>DELETE BOOK</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="book of bookArray" v-bind:key="book.book_id">
-          <td>{{ book.book_id }}</td>
-          <td>{{ book.book_name }}</td>
-          <td>{{ book.book_author }}</td>
-          <!-- in the future, make the author field a link leading to a list of books GROUP BY author-->
-          <td>
-            <a :href="'/#/books/show/' + book.book_id">
-              <img src="../assets/see-logo.png" alt="[SHOW]">
-            </a>
-          </td>
-          <td>
-            <a :href="`/#/books/edit/${book.book_id}`">
-              <img src="../assets/edit-logo.png" alt="[EDIT]">
-            </a>
-          </td>
-          <td>
-            <input type="button" value="DELETE" @click="sendDeleteRequest()" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ul>
+      <li v-if="action === 'list'" v-for="book of bookArray" v-bind:key="book.book_id">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th colspan="3">{{ book.book_name }}</th>
+            </tr>
+            <tr>
+              <th colspan="3">
+                <img src="" width="150" height="200">
+              </th>
+            </tr>
+            <!-- in the future, make the author field a link leading to a list of books GROUP BY author -->
+            <tr>
+              <th colspan="3">{{ book.book_author }}</th>
+            </tr>
+          </thead>
 
+          <tbody>
+            <tr>
+              <td>
+                <a :href="'/#/books/show/' + book.book_id">
+                  <img src="../assets/see-logo.png" alt="[SHOW]">
+                </a>
+              </td>
+              <td>
+                <a :href="`/#/books/edit/${book.book_id}`">
+                  <img src="../assets/edit-logo.png" alt="[EDIT]">
+                </a>
+              </td>
+              <td>
+                <input type="button" value="DELETE" @click="sendDeleteRequest()" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
 
   </div>
 </template>
@@ -212,6 +216,8 @@ export default {
   h1, h2 {
     font-weight: normal;
   }
+
+  /*
   ul {
     list-style-type: none;
     padding: 0;
@@ -220,6 +226,34 @@ export default {
     display: inline-block;
     margin: 0 10px;
   }
+   */
+
+
+  /************ LISTS ************/
+  ul {
+    margin: 10px auto; /* Center the ul element */
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    list-style-type: none; /* Remove dots */
+    max-width: 1200px; /* Set a maximum width */
+  }
+
+  ul li {
+    margin: 20px;
+    text-align: center;
+    position: relative;
+  }
+
+
+
+
+
   a {
     color: #42b983;
   }
