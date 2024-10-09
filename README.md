@@ -4,7 +4,7 @@
 - **Members**: LAURENT Sacha & ELIOT Simon
 
 ## Entity-relationship diagram
-<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/ER-diagram.png" alt=""/>
+<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/ER-diagram.png" alt=""/>
 
 ## Table structure diagram
-<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/Table-structure-diagram.png" alt=""/>
+<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/Table-structure-diagram.png" alt=""/>
