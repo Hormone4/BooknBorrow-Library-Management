@@ -93,9 +93,19 @@
           <td>{{ book.book_name }}</td>
           <td>{{ book.book_author }}</td>
           <!-- in the future, make the author field a link leading to a list of books GROUP BY author-->
-          <td><a :href="'/#/books/show/' + book.book_id">[SHOW]</a></td>
-          <td><a :href="`/#/books/edit/${book.book_id}`">[EDIT]</a></td>
-          <td><input type="button" value="DELETE" @click="sendDeleteRequest()" /></td>
+          <td>
+            <a :href="'/#/books/show/' + book.book_id">
+              <img src="../assets/see-logo.png" alt="" width="30">
+            </a>
+          </td>
+          <td>
+            <a :href="`/#/books/edit/${book.book_id}`">
+              <img src="../assets/edit-logo.png" alt="" width="30">
+            </a>
+          </td>
+          <td>
+            <input type="button" value="DELETE" @click="sendDeleteRequest()" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -121,21 +131,7 @@ export default {
         book_description: '',
         book_publicationDate: '',
         book_isbn: ''
-      },
-
-      libraryArray: [],
-      // library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber)
-      /*
-      library: {   // library object, idk if it is needed
-        library_name: '',
-        library_email: '',
-        library_phone: '',
-        library_creationYear: '',
-        library_zipCode: '',
-        library_streetName: '',
-        library_streetNumber: ''
-      },
-       */
+      }
     }
   },
 
