@@ -95,12 +95,12 @@
           <!-- in the future, make the author field a link leading to a list of books GROUP BY author-->
           <td>
             <a :href="'/#/books/show/' + book.book_id">
-              <img src="../assets/see-logo.png" alt="" width="30">
+              <img src="../assets/see-logo.png" alt="[SHOW]">
             </a>
           </td>
           <td>
             <a :href="`/#/books/edit/${book.book_id}`">
-              <img src="../assets/edit-logo.png" alt="" width="30">
+              <img src="../assets/edit-logo.png" alt="[EDIT]">
             </a>
           </td>
           <td>
