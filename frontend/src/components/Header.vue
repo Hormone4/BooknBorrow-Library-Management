@@ -3,10 +3,12 @@
     <nav>
       <ul>
         <li>
-          <h1 class="zoom-hover">
-            <a href="/"> <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="100"> BooknBorrow </a>
-          </h1>
+          <a href="/">
+            <h1> <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="100"> BooknBorrow </h1>
+          </a>
         </li>
+
+
       </ul>
     </nav>
   </header>
