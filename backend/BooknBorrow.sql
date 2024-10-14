@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS bookLibraryMapping (
     book_library_mapping_id INT AUTO_INCREMENT PRIMARY KEY,
     book_id INT NOT NULL,
     library_id INT NOT NULL,
-    book_status ENUM('available', 'borrowed') NOT NULL,
+    book_status ENUM('available', 'borrowed', 'reserved') NOT NULL,
     FOREIGN KEY (book_id) REFERENCES book(book_id),
     FOREIGN KEY (library_id) REFERENCES library(library_id)
 );
