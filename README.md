@@ -15,8 +15,9 @@
 ## Use case diagrams
 
 ### Borrowing Process Use Case Diagram
+<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/use-cases/Borrowing-Process.png" alt=""/>
 - Actors: User, Admin
-- Use Cases: Borrow Book, Return Book, Check Book Availability, Extend Borrowing Period, Pay Fine (User), Manage Borrow Records (Admin).
+- Use Cases: Borrow Book, Reserve Book, Return Book, Check Book Availability, Extend Borrowing Period, Pay Fine (User), Manage Borrow Records (Admin).
 
 ### Library and Book Management Use Case Diagram
 - Actors: Admin, User
