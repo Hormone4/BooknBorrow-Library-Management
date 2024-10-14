@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <td colspan="6">
-            <input type = "button" value="SEND" @click="sendEditRequest()">
+            <input type = "button" value="SEND" @click="sendEditRequest()" class="zoom-hover">
           </td>
         </tr>
       </tbody>
@@ -69,7 +69,7 @@
 
     <!-- when on: /books/list/all -->
     <ul v-if="action === 'list'">
-      <li v-for="book of bookArray" v-bind:key="book.book_id">
+      <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
         <a :href="'/#/books/show/' + book.book_id">
           <table class="table table-bordered">
             <thead>

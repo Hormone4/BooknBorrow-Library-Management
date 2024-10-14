@@ -57,7 +57,7 @@
         </tr>
         <tr>
           <td colspan="8">
-            <input type="button" value="SEND" @click="sendEditRequest()" />
+            <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover"/>
           </td>
         </tr>
       </tbody>
@@ -67,28 +67,31 @@
     <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Phone</td>
-          <td>SEE Library</td>
-          <td>EDIT Library</td>
-          <td>DELETE Library</td>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>SEE Library</th>
+          <th>EDIT Library</th>
+          <th>DELETE Library</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="library in libraryArray" :key="library.library_id">
-          <td>{{ library.library_id }}</td>
           <td>{{ library.library_name }}</td>
           <td>{{ library.library_email }}</td>
           <td>{{ library.library_phone }}</td>
           <td>
-            <a :href="'/#/libraries/show/' + library.library_id">[SHOW]</a>
+            <a :href="'/#/libraries/show/' + library.library_id">
+              <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+            </a>
             </td>
             <td>
-            <a :href="'/#/libraries/edit/' + library.library_id">[EDIT]</a>
-          </td><td>
-            <input type="button" value="DELETE" @click="sendDeleteRequest(library.library_id)" />
+            <a :href="'/#/libraries/edit/' + library.library_id">
+              <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+            </a>
+          </td>
+          <td>
+            <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
           </td>
         </tr>
       </tbody>

@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <td colspan="6">
-            <input type="button" value="SEND" @click="sendEditRequest()" />
+            <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover"/>
           </td>
         </tr>
       </tbody>
@@ -70,12 +70,12 @@
     <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-          <td>Borrow ID</td>
-          <td>Book Name</td>
-          <td>Status</td>
-          <td>See</td>
-          <td>Edit</td>
-          <td>Delete</td>
+          <th>Borrow ID</th>
+          <th>Book Name</th>
+          <th>Status</th>
+          <th>See</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -84,12 +84,17 @@
           <td>{{ borrow.book_name }}</td>
           <td>{{ borrow.status }}</td>
           <td>
-            <a :href="'/#/borrow/show/' + borrow.borrow_id">[SHOW]</a>
-            </td>
-            <td>
-            <a :href="'/#/borrow/edit/' + borrow.borrow_id">[EDIT]</a>
-            </td>
-            <td><input type="button" value="DELETE" @click="sendDeleteRequest(borrow.borrow_id)" />
+            <a :href="'/#/borrow/show/' + borrow.borrow_id">
+              <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+            </a>
+          </td>
+          <td>
+            <a :href="'/#/borrow/edit/' + borrow.borrow_id">
+              <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+            </a>
+          </td>
+          <td>
+            <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
           </td>
         </tr>
       </tbody>
