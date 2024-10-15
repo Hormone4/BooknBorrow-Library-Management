@@ -46,17 +46,6 @@
           <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
           <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
-          <!-- example of select tag
-            <td> <select name="car_brand" v-model="oneCar.car_brand" >
-                <option v-for="b of brands" v-bind:key="b.brand_id" :value="b.brand_id" >
-                  {{ b.brand_name }}
-                </option>
-              </select>
-            </td>
-          -->
-          <!-- example of checkbox
-            <td> <input type="checkbox" name="car_isFancy" v-model="oneCar.car_isFancy"/> </td>
-          -->
         </tr>
         <tr>
           <td colspan="6">
