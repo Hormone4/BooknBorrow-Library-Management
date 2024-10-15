@@ -238,13 +238,10 @@ export default {
     text-align: center;
 
     list-style-type: none; /* Remove dots */
-    max-width: 1200px; /* Set a maximum width */
   }
 
   ul li {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin: 0 20px 20px;
     text-align: center;
     position: relative;
   }
