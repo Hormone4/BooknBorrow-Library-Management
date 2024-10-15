@@ -1,14 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>Books Module</h1>
-
-    <p>
-      ACTION = {{ action }} <br/>
-      ID = {{ id }} <br/>
-      <a href="/#/books/list/all">Back to the list</a> <br/>
-      <a href="/#/books/edit/0">Add a new book</a> <br/>
-    </p>
-
+  <div>
+    <h1 class="component-h1">Book List</h1>
 
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
@@ -49,26 +41,15 @@
         <tr>
           <td>{{ currentBook.book_id }}</td>
           <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
-          <td> <input   type="text" name="book name" v-model="currentBook.book_name"> </td>
+          <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
           <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
           <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
-          <!-- example of select tag
-            <td> <select name="car_brand" v-model="oneCar.car_brand" >
-                <option v-for="b of brands" v-bind:key="b.brand_id" :value="b.brand_id" >
-                  {{ b.brand_name }}
-                </option>
-              </select>
-            </td>
-          -->
-          <!-- example of checkbox
-            <td> <input type="checkbox" name="car_isFancy" v-model="oneCar.car_isFancy"/> </td>
-          -->
         </tr>
         <tr>
           <td colspan="6">
-            <input type = "button" value="SEND" @click="sendEditRequest()">
+            <input type = "button" value="SEND" @click="sendEditRequest()" class="zoom-hover">
           </td>
         </tr>
       </tbody>
@@ -76,30 +57,57 @@
 
 
     <!-- when on: /books/list/all -->
-    <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>NAME</td>
-          <td>AUTHOR</td>
-          <td>SEE BOOK</td>
-          <td>EDIT BOOK</td>
-          <td>DELETE BOOK</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="book of bookArray" v-bind:key="book.book_id">
-          <td>{{ book.book_id }}</td>
-          <td>{{ book.book_name }}</td>
-          <td>{{ book.book_author }}</td>
-          <!-- in the future, make the author field a link leading to a list of books GROUP BY author-->
-          <td><a :href="'/#/books/show/' + book.book_id">[SHOW]</a></td>
-          <td><a :href="`/#/books/edit/${book.book_id}`">[EDIT]</a></td>
-          <td><input type="button" value="DELETE" @click="sendDeleteRequest()" /></td>
-        </tr>
-      </tbody>
-    </table>
+    <div  v-if="action === 'list'">
+      <!-- Search bar -->
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div class="col-md-8">
+            <div class="search">
+              <input type="text" class="form-control" placeholder="Search for a book, author...">
+              <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Book list -->
+      <ul>
+        <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
+          <a :href="'/#/books/show/' + book.book_id">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="3">{{ book.book_name }}<br/>{{ book.book_author }}</th>
+                </tr>
+                <tr>
+                  <th colspan="3">
+                    <img :src="`${book.book_image_link}`" alt="" width="150" height="200">
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <a :href="'/#/books/show/' + book.book_id">
+                      <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+                    </a>
+                  </td>
+                  <td>
+                    <a :href="`/#/books/edit/${book.book_id}`">
+                      <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+                    </a>
+                  </td>
+                  <td>
+                    <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </a>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>
@@ -121,29 +129,11 @@ export default {
         book_description: '',
         book_publicationDate: '',
         book_isbn: ''
-      },
-
-      libraryArray: [],
-      // library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber)
-      /*
-      library: {   // library object, idk if it is needed
-        library_name: '',
-        library_email: '',
-        library_phone: '',
-        library_creationYear: '',
-        library_zipCode: '',
-        library_streetName: '',
-        library_streetNumber: ''
-      },
-       */
+      }
     }
   },
 
   methods: {   // logic that can be called from the template
-
-    click: function() {   // test function
-      alert('clicked');
-    },
 
     async getAllData() {
       // load all data from a json file
@@ -216,16 +206,73 @@ export default {
   h1, h2 {
     font-weight: normal;
   }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+
   a {
     color: #42b983;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /************ LISTS ************/
+  ul {
+    margin: auto; /* Center the ul element */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    list-style-type: none; /* Remove dots */
+  }
+
+  ul li {
+    margin: 0 20px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+
+
+  /************ SEARCH BAR ************/
+  .container {
+    margin: 50px auto;
+  }
+
+  .search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+  }
+
+  .search input[type="text"] {
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+  }
+
+
+  .search input[type="text"]:focus {
+    box-shadow: none;
+    border: 2px solid #42b983;
+  }
+
+  .search input[type="button"] {
+    position: absolute;
+    top: 5px;     /* 5px from the top   */
+    right: 5px;   /* 5px from the right */
+    height: 50px;
+    width: 110px;
+    background: #42b983;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .search input[type="button"]:active {
+    background: #d6d4d4;
   }
 
 </style>

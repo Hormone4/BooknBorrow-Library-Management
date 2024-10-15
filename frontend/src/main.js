@@ -3,13 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import AppHeader from './components/Header.vue';
 
 Vue.config.productionTip = false
+Vue.component('AppHeader', AppHeader);
 
 /* eslint-disable no-new */
 new Vue({
+  render: h => h(App),
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
-})
+}).$mount('#app');

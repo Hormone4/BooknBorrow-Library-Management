@@ -1,13 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Libraries Module</h1>
-
-    <p>
-      ACTION = {{ action }} <br/>
-      ID = {{ id }} <br/>
-      <a href="/#/libraries/list/all">Back to the list</a> <br/>
-      <a href="/#/libraries/edit/0">Add a new library</a> <br/>
-    </p>
+    <h1 class="component-h1">Library List</h1>
 
     <!-- Show Library Details -->
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
@@ -64,42 +57,61 @@
         </tr>
         <tr>
           <td colspan="8">
-            <input type="button" value="SEND" @click="sendEditRequest()" />
+            <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover"/>
           </td>
         </tr>
       </tbody>
     </table>
 
     <!-- List All Libraries -->
-    <table v-if="action === 'list'" class="table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Phone</td>
-          <td>SEE Library</td>
-          <td>EDIT Library</td>
-          <td>DELETE Library</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="library in libraryArray" :key="library.library_id">
-          <td>{{ library.library_id }}</td>
-          <td>{{ library.library_name }}</td>
-          <td>{{ library.library_email }}</td>
-          <td>{{ library.library_phone }}</td>
-          <td>
-            <a :href="'/#/libraries/show/' + library.library_id">[SHOW]</a>
+    <div  v-if="action === 'list'">
+      <!-- Search bar -->
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div class="col-md-8">
+            <div class="search">
+              <input type="text" class="form-control" placeholder="Search for a Library">
+              <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Library List -->
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>SEE Library</th>
+            <th>EDIT Library</th>
+            <th>DELETE Library</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="library in libraryArray" :key="library.library_id">
+            <td>{{ library.library_name }}</td>
+            <td>{{ library.library_email }}</td>
+            <td>{{ library.library_phone }}</td>
+            <td>
+              <a :href="'/#/libraries/show/' + library.library_id">
+                <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+              </a>
+              </td>
+              <td>
+              <a :href="'/#/libraries/edit/' + library.library_id">
+                <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+              </a>
             </td>
             <td>
-            <a :href="'/#/libraries/edit/' + library.library_id">[EDIT]</a>
-          </td><td>
-            <input type="button" value="DELETE" @click="sendDeleteRequest(library.library_id)" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </template>
 
@@ -185,19 +197,58 @@ export default {
 </script>
 
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #42b983;
+  }
+
+
+  /************ SEARCH BAR ************/
+  .container {
+    margin: 50px auto;
+  }
+
+  .search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+  }
+
+  .search input[type="text"] {
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+  }
+
+  .search input[type="text"]:focus {
+    box-shadow: none;
+    border: 2px solid #42b983;
+  }
+
+  .search input[type="button"] {
+    position: absolute;
+    top: 5px;     /* 5px from the top   */
+    right: 5px;   /* 5px from the right */
+    height: 50px;
+    width: 110px;
+    background: #42b983;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .search input[type="button"]:active {
+    background: #d6d4d4;
+  }
 </style>
