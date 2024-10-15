@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1 class="component-h1">Books List</h1>
+  <div>
+    <h1 class="component-h1">Book List</h1>
 
     <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
       <thead>
@@ -68,42 +68,57 @@
 
 
     <!-- when on: /books/list/all -->
-    <ul v-if="action === 'list'">
-      <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
-        <a :href="'/#/books/show/' + book.book_id">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th colspan="3">{{ book.book_name }}<br/>{{ book.book_author }}</th>
-              </tr>
-              <tr>
-                <th colspan="3">
-                  <img :src="`${book.book_image_link}`" alt="" width="150" height="200">
-                </th>
-              </tr>
-            </thead>
+    <div  v-if="action === 'list'">
+      <!-- Search bar -->
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div class="col-md-8">
+            <div class="search">
+              <input type="text" class="form-control" placeholder="Search for a book, author...">
+              <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <tbody>
-              <tr>
-                <td>
-                  <a :href="'/#/books/show/' + book.book_id">
-                    <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
-                  </a>
-                </td>
-                <td>
-                  <a :href="`/#/books/edit/${book.book_id}`">
-                    <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
-                  </a>
-                </td>
-                <td>
-                  <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </a>
-      </li>
-    </ul>
+      <!-- Book list -->
+      <ul>
+        <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
+          <a :href="'/#/books/show/' + book.book_id">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="3">{{ book.book_name }}<br/>{{ book.book_author }}</th>
+                </tr>
+                <tr>
+                  <th colspan="3">
+                    <img :src="`${book.book_image_link}`" alt="" width="150" height="200">
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <a :href="'/#/books/show/' + book.book_id">
+                      <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+                    </a>
+                  </td>
+                  <td>
+                    <a :href="`/#/books/edit/${book.book_id}`">
+                      <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+                    </a>
+                  </td>
+                  <td>
+                    <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </a>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>
@@ -203,17 +218,14 @@ export default {
     font-weight: normal;
   }
 
-  /*
-  ul {
-    list-style-type: none;
-    padding: 0;
+  a {
+    color: #42b983;
+    text-decoration: none;
   }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-   */
 
+  a:hover {
+    text-decoration: underline;
+  }
 
   /************ LISTS ************/
   ul {
@@ -239,15 +251,42 @@ export default {
 
 
 
-
-
-  a {
-    color: #42b983;
-    text-decoration: none;
+  /************ SEARCH BAR ************/
+  .container {
+    margin: 50px auto;
   }
 
-  a:hover {
-    text-decoration: underline;
+  .search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+  }
+
+  .search input[type="text"] {
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+  }
+
+
+  .search input[type="text"]:focus {
+    box-shadow: none;
+    border: 2px solid #42b983;
+  }
+
+  .search input[type="button"] {
+    position: absolute;
+    top: 5px;     /* 5px from the top   */
+    right: 5px;   /* 5px from the right */
+    height: 50px;
+    width: 110px;
+    background: #42b983;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .search input[type="button"]:active {
+    background: #d6d4d4;
   }
 
 </style>
