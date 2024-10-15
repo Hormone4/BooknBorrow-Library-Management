@@ -11,6 +11,8 @@
 ### Table structure diagram
 <img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/database/Table-structure-diagram.png" alt=""/>
 
+## Planned gantt diagram
+<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/gantt/gantt-diagram.png" alt=""/>
 
 ## Use case diagrams
 
