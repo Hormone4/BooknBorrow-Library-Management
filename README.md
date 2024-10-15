@@ -27,5 +27,7 @@
 - Use Cases: Add New Library (Admin), View Library Details, Add New Book (Admin), View Book Details, View books read in the past, Update Book Information (Admin), Search for Books, View Borrowing Statistics (Admin).
 
 ### User Management Use Case Diagram:
+<img src="https://github.com/Hormone4/BooknBorrow-Library-Management/blob/main/diagrams/use-cases/User-Management.png" alt=""/>
+
 - Actors: Admin, User
 - Use Cases: Register, Login, Update Profile, View User Details, Manage User Roles (Admin only), Delete Account, Manage Users (Admin only).
