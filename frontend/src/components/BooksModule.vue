@@ -2,32 +2,9 @@
   <div>
     <h1 class="component-h1">Book List</h1>
 
-    <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
-      <thead>
-      <tr>
-        <th>Book ID</th>
-        <th>Book Name</th>
-        <th>Author</th>
-        <th>Description</th>
-        <th>Publication Date</th>
-        <th>ISBN</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
-        <td>{{ currentBook.book_name }}</td>
-        <td>{{ currentBook.book_author }}</td>
-        <td>{{ currentBook.book_description }}</td>
-        <td>{{ currentBook.book_publicationDate }}</td>
-        <td>{{ currentBook.book_isbn }}</td>
-      </tr>
-      </tbody>
-    </table>
-
-
-    <table v-if="action === 'edit'" class="table table-striped table-bordered table-hover">
-      <thead>
+    <div v-if="action === 'show'">
+      <table class="table table-striped table-bordered">
+        <thead>
         <tr>
           <th>Book ID</th>
           <th>Book Name</th>
@@ -36,24 +13,55 @@
           <th>Publication Date</th>
           <th>ISBN</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr>
-          <td>{{ currentBook.book_id }}</td>
-          <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
-          <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
-          <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
-          <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
-          <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
-          <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
+          <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
+          <td>{{ currentBook.book_name }}</td>
+          <td>{{ currentBook.book_author }}</td>
+          <td>{{ currentBook.book_description }}</td>
+          <td>{{ currentBook.book_publicationDate }}</td>
+          <td>{{ currentBook.book_isbn }}</td>
         </tr>
-        <tr>
-          <td colspan="6">
-            <input type = "button" value="SEND" @click="sendEditRequest()" class="zoom-hover">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imagePath" alt="" width="150" height="200">
+    </div>
+
+
+    <div v-if="action === 'edit'">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Publication Date</th>
+            <th>ISBN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ currentBook.book_id }}</td>
+            <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
+            <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
+            <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
+            <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
+            <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
+            <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <input type = "button" value="SEND" @click="sendEditRequest()" class="zoom-hover">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imagePath" alt="" width="150" height="200">
+    </div>
 
 
     <!-- when on: /books/list/all -->
@@ -73,38 +81,40 @@
       <!-- Book list -->
       <ul>
         <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
-          <a :href="'/#/books/show/' + book.book_id">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th colspan="3">{{ book.book_name }}<br/>{{ book.book_author }}</th>
-                </tr>
-                <tr>
-                  <th colspan="3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="3">
+                  <a :href="'/#/books/show/' + book.book_id">{{ book.book_name }}<br/>{{ book.book_author }} </a>
+                </th>
+              </tr>
+              <tr>
+                <th colspan="3">
+                  <a :href="'/#/books/show/' + book.book_id">
                     <img v-bind:src="'../../static/book-covers/'+book.book_imagePath" alt="" width="150" height="200">
-                  </th>
-                </tr>
-              </thead>
+                  </a>
+                </th>
+              </tr>
+            </thead>
 
-              <tbody>
-                <tr>
-                  <td>
-                    <a :href="'/#/books/show/' + book.book_id">
-                      <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
-                    </a>
-                  </td>
-                  <td>
-                    <a :href="`/#/books/edit/${book.book_id}`">
-                      <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
-                    </a>
-                  </td>
-                  <td>
-                    <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </a>
+            <tbody>
+              <tr>
+                <td>
+                  <a :href="'/#/books/show/' + book.book_id">
+                    <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+                  </a>
+                </td>
+                <td>
+                  <a :href="`/#/books/edit/${book.book_id}`">
+                    <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
+                  </a>
+                </td>
+                <td>
+                  <input type="button" value="DELETE" @click="sendDeleteRequest(book.book_id)" class="zoom-hover"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </li>
       </ul>
     </div>
@@ -183,7 +193,18 @@ export default {
       }
     },
 
-    async sendDeleteRequest() { },
+    async sendDeleteRequest(book_id) {
+      try {
+        //let response = await this.$http.delete('http://localhost:3000/books/' + book_id);
+        //this.books = this.books.filter(b => b.book_id !== book_id);
+
+        // for testing purposes
+        this.bookArray = this.bookArray.filter(b => b.book_id !== book_id);
+
+      } catch (exception) {
+        console.log(exception);
+      }
+    },
     async sendEditRequest() { }
 
   },
@@ -209,7 +230,7 @@ export default {
   }
 
   a {
-    color: #42b983;
+    color: #000000;
     text-decoration: none;
   }
 
