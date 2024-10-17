@@ -26,7 +26,7 @@
         </tbody>
       </table>
 
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imagePath" alt="" width="150" height="200">
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150" height="200">
     </div>
 
 
@@ -60,7 +60,7 @@
         </tbody>
       </table>
 
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imagePath" alt="" width="150" height="200">
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150" height="200">
     </div>
 
 
@@ -91,7 +91,7 @@
               <tr>
                 <th colspan="3">
                   <a :href="'/#/books/show/' + book.book_id">
-                    <img v-bind:src="'../../static/book-covers/'+book.book_imagePath" alt="" width="150" height="200">
+                    <img v-bind:src="'../../static/book-covers/'+book.book_imageFileName" alt="" width="150" height="200">
                   </a>
                 </th>
               </tr>
@@ -139,7 +139,7 @@ export default {
         book_description: '',
         book_publicationDate: '',
         book_isbn: '',
-        book_imagePath: ''
+        book_imageFileName: ''
       }
     }
   },
@@ -158,17 +158,17 @@ export default {
 
         // for testing purposes
         this.bookArray = [
-          { book_id: 1, book_name: "The Great Gatsby", book_author: "F. Scott Fitzgerald", book_description: "A novel set in the 1920s, exploring themes of wealth and society.", book_publicationDate: "1925-04-10", book_isbn: "9780743273565", book_imagePath: "The-Great-Gatsby-cover.jpg" },
-          { book_id: 2, book_name: "A Brief History of Time", book_author: "Stephen Hawking", book_description: "A book explaining the universe, time, and black holes.", book_publicationDate: "1988-04-01", book_isbn: "9780553380163", book_imagePath: "A-Brief-History-of-Time-cover.jpg" },
-          { book_id: 3, book_name: "The Hobbit", book_author: "J.R.R. Tolkien", book_description: "A fantasy novel about the adventures of Bilbo Baggins.", book_publicationDate: "1937-09-21", book_isbn: "9780547928227", book_imagePath: "The-Hobbit-cover.jpg" },
-          { book_id: 4, book_name: "1984", book_author: "George Orwell", book_description: "A dystopian novel about a totalitarian regime.", book_publicationDate: "1949-06-08", book_isbn: "9780451524935", book_imagePath: "1984-cover.jpg" },
-          { book_id: 5, book_name: "To Kill a Mockingbird", book_author: "Harper Lee", book_description: "A novel about racial injustice in the American South.", book_publicationDate: "1960-07-11", book_isbn: "9780061120084", book_imagePath: "To-Kill-a-Mockingbird-cover.jpg" },
-          { book_id: 6, book_name: "Sapiens: A Brief History of Humankind", book_author: "Yuval Noah Harari", book_description: "A book exploring the history of humanity from ancient to modern times.", book_publicationDate: "2011-09-04", book_isbn: "9780062316097", book_imagePath: "Sapiens-A-Brief-History-of-Humankind-cover.jpg" },
-          { book_id: 7, book_name: "The Da Vinci Code", book_author: "Dan Brown", book_description: "A mystery thriller involving a secret society and hidden messages.", book_publicationDate: "2003-03-18", book_isbn: "9780307474278", book_imagePath: "The-Da-Vinci-Code-cover.jpg" },
-          { book_id: 8, book_name: "Pride and Prejudice", book_author: "Jane Austen", book_description: "A classic novel about love and social class in 19th-century England.", book_publicationDate: "1813-01-28", book_isbn: "9781503290563", book_imagePath: "Pride-and-Prejudice-cover.webp" },
-          { book_id: 9, book_name: "The Catcher in the Rye", book_author: "J.D. Salinger", book_description: "A coming of age novel following the adventures of Holden Caulfield.", book_publicationDate: "1951-07-16", book_isbn: "9780316769488", book_imagePath: "The-Catcher-in-the-Rye-cover.jpg" },
-          { book_id: 10, book_name: "The Lord of the Rings", book_author: "J.R.R. Tolkien", book_description: "A fantasy epic about the quest to destroy a powerful ring.", book_publicationDate: "1954-07-29", book_isbn: "9780544003415", book_imagePath: "The-Lord-of-the-Rings-cover.jpg" },
-          { book_id: 11, book_name: "The Alchemist", book_author: "Paulo Coelho", book_description: "A philosophical novel about a shepherd's journey to find his treasure.", book_publicationDate: "1988-01-01", book_isbn: "9780062315007", book_imagePath: "The-Alchemist-cover.jpg" }
+          { book_id: 1, book_name: "The Great Gatsby", book_author: "F. Scott Fitzgerald", book_description: "A novel set in the 1920s, exploring themes of wealth and society.", book_publicationDate: "1925-04-10", book_isbn: "9780743273565", book_imageFileName: "The-Great-Gatsby-cover.jpg" },
+          { book_id: 2, book_name: "A Brief History of Time", book_author: "Stephen Hawking", book_description: "A book explaining the universe, time, and black holes.", book_publicationDate: "1988-04-01", book_isbn: "9780553380163", book_imageFileName: "A-Brief-History-of-Time-cover.jpg" },
+          { book_id: 3, book_name: "The Hobbit", book_author: "J.R.R. Tolkien", book_description: "A fantasy novel about the adventures of Bilbo Baggins.", book_publicationDate: "1937-09-21", book_isbn: "9780547928227", book_imageFileName: "The-Hobbit-cover.jpg" },
+          { book_id: 4, book_name: "1984", book_author: "George Orwell", book_description: "A dystopian novel about a totalitarian regime.", book_publicationDate: "1949-06-08", book_isbn: "9780451524935", book_imageFileName: "1984-cover.jpg" },
+          { book_id: 5, book_name: "To Kill a Mockingbird", book_author: "Harper Lee", book_description: "A novel about racial injustice in the American South.", book_publicationDate: "1960-07-11", book_isbn: "9780061120084", book_imageFileName: "To-Kill-a-Mockingbird-cover.jpg" },
+          { book_id: 6, book_name: "Sapiens: A Brief History of Humankind", book_author: "Yuval Noah Harari", book_description: "A book exploring the history of humanity from ancient to modern times.", book_publicationDate: "2011-09-04", book_isbn: "9780062316097", book_imageFileName: "Sapiens-A-Brief-History-of-Humankind-cover.jpg" },
+          { book_id: 7, book_name: "The Da Vinci Code", book_author: "Dan Brown", book_description: "A mystery thriller involving a secret society and hidden messages.", book_publicationDate: "2003-03-18", book_isbn: "9780307474278", book_imageFileName: "The-Da-Vinci-Code-cover.jpg" },
+          { book_id: 8, book_name: "Pride and Prejudice", book_author: "Jane Austen", book_description: "A classic novel about love and social class in 19th-century England.", book_publicationDate: "1813-01-28", book_isbn: "9781503290563", book_imageFileName: "Pride-and-Prejudice-cover.webp" },
+          { book_id: 9, book_name: "The Catcher in the Rye", book_author: "J.D. Salinger", book_description: "A coming of age novel following the adventures of Holden Caulfield.", book_publicationDate: "1951-07-16", book_isbn: "9780316769488", book_imageFileName: "The-Catcher-in-the-Rye-cover.jpg" },
+          { book_id: 10, book_name: "The Lord of the Rings", book_author: "J.R.R. Tolkien", book_description: "A fantasy epic about the quest to destroy a powerful ring.", book_publicationDate: "1954-07-29", book_isbn: "9780544003415", book_imageFileName: "The-Lord-of-the-Rings-cover.jpg" },
+          { book_id: 11, book_name: "The Alchemist", book_author: "Paulo Coelho", book_description: "A philosophical novel about a shepherd's journey to find his treasure.", book_publicationDate: "1988-01-01", book_isbn: "9780062315007", book_imageFileName: "The-Alchemist-cover.jpg" }
         ];
 
       } catch (exception) {

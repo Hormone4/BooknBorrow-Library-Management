@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS book (
     book_author VARCHAR(50) NOT NULL,
     book_description TEXT,
     book_publicationDate DATE,
-    book_isbn VARCHAR(13)
+    book_isbn VARCHAR(13),
+    book_imageFileName VARCHAR(50)
 );
 
 
@@ -86,7 +87,6 @@ INSERT INTO users (user_name, user_email, user_password, user_created, user_role
     ('Michael Brown', 'michael.brown@example.com', SHA2(CONCAT(now(), 'adminpass'), 224), now(), 'ADMIN')
 ;
 
-
 INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) VALUES
     ('Central Library', 'central@library.com', '1234567890', 1995, '10001', 'Main St', '101'),
     ('Westside Library', 'westside@library.com', '0987654321', 2005, '10002', 'Broadway', '202'),
@@ -95,20 +95,19 @@ INSERT INTO library (library_name, library_email, library_phone, library_creatio
     ('Downtown Library', 'downtown@library.com', '3344556677', 2000, '10005', 'Wall St', '505')
 ;
 
-INSERT INTO book (book_name, book_author, book_description, book_publicationDate, book_isbn) VALUES
-    ('The Great Gatsby', 'F. Scott Fitzgerald', 'A novel set in the 1920s, exploring themes of wealth and society.', '1925-04-10', '9780743273565'),
-    ('A Brief History of Time', 'Stephen Hawking', 'A book explaining the universe, time, and black holes.', '1988-04-01', '9780553380163'),
-    ('The Hobbit', 'J.R.R. Tolkien', 'A fantasy novel about the adventures of Bilbo Baggins.', '1937-09-21', '9780547928227'),
-    ('1984', 'George Orwell', 'A dystopian novel about a totalitarian regime.', '1949-06-08', '9780451524935'),
-    ('To Kill a Mockingbird', 'Harper Lee', 'A novel about racial injustice in the American South.', '1960-07-11', '9780061120084'),
-    ('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'A book exploring the history of humanity from ancient to modern times.', '2011-09-04', '9780062316097'),
-    ('The Da Vinci Code', 'Dan Brown', 'A mystery thriller involving a secret society and hidden messages.', '2003-03-18', '9780307474278'),
-    ('Pride and Prejudice', 'Jane Austen', 'A classic novel about love and social class in 19th-century England.', '1813-01-28', '9781503290563'),
-    ('The Catcher in the Rye', 'J.D. Salinger', 'A coming-of-age novel following the adventures of Holden Caulfield.', '1951-07-16', '9780316769488'),
-    ('The Lord of the Rings', 'J.R.R. Tolkien', 'A fantasy epic about the quest to destroy a powerful ring.', '1954-07-29', '9780544003415'),
-    ('The Alchemist', 'Paulo Coelho', 'A philosophical novel about a shepherd\'s journey to find his treasure.', '1988-01-01', '9780062315007')
+INSERT INTO book (book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName) VALUES
+  ('The Great Gatsby', 'F. Scott Fitzgerald', 'A novel set in the 1920s, exploring themes of wealth and society.', '1925-04-10', '9780743273565', 'The-Great-Gatsby-cover.jpg'),
+  ('A Brief History of Time', 'Stephen Hawking', 'A book explaining the universe, time, and black holes.', '1988-04-01', '9780553380163', 'A-Brief-History-of-Time-cover.jpg'),
+  ('The Hobbit', 'J.R.R. Tolkien', 'A fantasy novel about the adventures of Bilbo Baggins.', '1937-09-21', '9780547928227', 'The-Hobbit-cover.jpg'),
+  ('1984', 'George Orwell', 'A dystopian novel about a totalitarian regime.', '1949-06-08', '9780451524935', '1984-cover.jpg'),
+  ('To Kill a Mockingbird', 'Harper Lee', 'A novel about racial injustice in the American South.', '1960-07-11', '9780061120084', 'To-Kill-a-Mockingbird-cover.jpg'),
+  ('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'A book exploring the history of humanity from ancient to modern times.', '2011-09-04', '9780062316097', 'Sapiens-A-Brief-History-of-Humankind-cover.jpg'),
+  ('The Da Vinci Code', 'Dan Brown', 'A mystery thriller involving a secret society and hidden messages.', '2003-03-18', '9780307474278', 'The-Da-Vinci-Code-cover.jpg'),
+  ('Pride and Prejudice', 'Jane Austen', 'A classic novel about love and social class in 19th-century England.', '1813-01-28', '9781503290563', 'Pride-and-Prejudice-cover.webp'),
+  ('The Catcher in the Rye', 'J.D. Salinger', 'A coming-of-age novel following the adventures of Holden Caulfield.', '1951-07-16', '9780316769488', 'The-Catcher-in-the-Rye-cover.jpg'),
+  ('The Lord of the Rings', 'J.R.R. Tolkien', 'A fantasy epic about the quest to destroy a powerful ring.', '1954-07-29', '9780544003415', 'The-Lord-of-the-Rings-cover.jpg'),
+  ('The Alchemist', 'Paulo Coelho', 'A philosophical novel about a shepherd\'s journey to find his treasure.', '1988-01-01', '9780062315007', 'The-Alchemist-cover.jpg')
 ;
-
 
 INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
     (1, 1, 'available'),
@@ -123,7 +122,6 @@ INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
     (1, 3, 'borrowed'),
     (2, 2, 'available')
 ;
-
 
 INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) VALUES
     (3, 1, '2023-06-01', '2023-06-15', '2023-06-13', 'returned', 0), -- , 'The Hobbit by John Doe, borrowed by John Doe'),
