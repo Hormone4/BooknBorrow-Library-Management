@@ -14,6 +14,14 @@
           <a href="#/libraries/list/all"> Libraries</a>
         </li>
       </ul>
+
+      <ul>
+        <li>
+          <a href="#/">
+            <div>Profile <img src="../assets/logos/profile-logo.png" alt="" width="50"></div>
+          </a>
+        </li>
+      </ul>
     </nav>
   </header>
 </template>
@@ -35,11 +43,15 @@ export default {
 
   nav {
     margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    justify-content: space-between;
   }
 
   nav ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     align-items: center;
   }
@@ -47,5 +59,10 @@ export default {
   a {
     color: white;
     text-decoration: none;
+  }
+
+  div img {
+    margin-right: 10px;
+    margin-left: 10px;
   }
 </style>
