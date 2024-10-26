@@ -2,15 +2,19 @@
   <div id="app">
     <AppHeader />
     <router-view />  <!-- This is where your pages/components will be rendered -->
+    <AppFooter />
   </div>
 </template>
 
-<script>import AppHeader from './components/Header.vue';  // Import the header component
+<script>
+import AppHeader from './components/Header.vue';  // Import the header component
+import AppFooter from './components/Footer.vue';  // Import the footer component
 
 export default {
   name: 'App',
   components: {
-    AppHeader
+    AppHeader,
+    AppFooter
   }
 }
 </script>
