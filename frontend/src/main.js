@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import AppHeader from './components/Header.vue';
+import AppFooter from './components/Footer.vue';
 
 Vue.config.productionTip = false
 Vue.component('AppHeader', AppHeader);
+Vue.component('AppFooter', AppFooter);
 
 /* eslint-disable no-new */
 new Vue({
