@@ -7,16 +7,16 @@
             <h1> <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="100"> BooknBorrow </h1>
           </a>
         </li>
-        <li>
+        <li class="zoom-hover">
           <a href="#/books/list/all/"> Books</a>
         </li>
-        <li>
+        <li class="zoom-hover">
           <a href="#/libraries/list/all"> Libraries</a>
         </li>
       </ul>
 
       <ul>
-        <li>
+        <li class="zoom-hover">
           <a href="#/">
             <div>Profile <img src="../assets/logos/profile-logo.png" alt="" width="50"></div>
           </a>
