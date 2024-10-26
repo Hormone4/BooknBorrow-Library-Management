@@ -1,14 +1,18 @@
 <template>
-  <header class="app-header">
+  <header>
     <nav>
       <ul>
         <li>
-          <a href="/">
+          <a href="#/">
             <h1> <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="100"> BooknBorrow </h1>
           </a>
         </li>
-
-
+        <li>
+          <a href="#/books/list/all/"> Books</a>
+        </li>
+        <li>
+          <a href="#/libraries/list/all"> Libraries</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -21,23 +25,25 @@ export default {
 </script>
 
 <style scoped>
-  .app-header {
+  header {
     margin-bottom: 60px;
     background-color: #4b5861;
     padding: 10px;
     color: white;
     text-align: left;
   }
+
+  nav {
+    margin-left: 50px;
+  }
+
   nav ul {
-    margin: 0 0 0 50px;
     list-style: none;
-    padding: 0;
     display: flex;
-    justify-content: left;
+    gap: 30px;
+    align-items: center;
   }
-  nav ul li {
-    margin: 0 15px;
-  }
+
   a {
     color: white;
     text-decoration: none;
