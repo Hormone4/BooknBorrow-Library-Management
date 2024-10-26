@@ -26,7 +26,7 @@
         </tbody>
       </table>
 
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150" height="200">
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150">
     </div>
 
 
@@ -60,7 +60,7 @@
         </tbody>
       </table>
 
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150" height="200">
+      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150">
     </div>
 
 
