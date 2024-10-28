@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS book;
 CREATE TABLE IF NOT EXISTS book (
     book_id INT AUTO_INCREMENT PRIMARY KEY,
     book_name VARCHAR(50) NOT NULL,
-    book_author VARCHAR(50) NOT NULL,
+    book_author VARCHAR(60) NOT NULL,
     book_description TEXT,
     book_publicationDate DATE,
     book_isbn VARCHAR(13),
@@ -102,6 +102,7 @@ INSERT INTO book (book_name, book_author, book_description, book_publicationDate
   ('1984', 'George Orwell', 'A dystopian novel about a totalitarian regime.', '1949-06-08', '9780451524935', '1984-cover.jpg'),
   ('To Kill a Mockingbird', 'Harper Lee', 'A novel about racial injustice in the American South.', '1960-07-11', '9780061120084', 'To-Kill-a-Mockingbird-cover.jpg'),
   ('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'A book exploring the history of humanity from ancient to modern times.', '2011-09-04', '9780062316097', 'Sapiens-A-Brief-History-of-Humankind-cover.jpg'),
+  ('Design Patterns', 'Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', 'This book deals with the subject of object-oriented programming and introduces the concept of design patterns.', '1994-10-21', '9780131969452', 'Design-Patterns-cover.jpg'),
   ('The Da Vinci Code', 'Dan Brown', 'A mystery thriller involving a secret society and hidden messages.', '2003-03-18', '9780307474278', 'The-Da-Vinci-Code-cover.jpg'),
   ('Pride and Prejudice', 'Jane Austen', 'A classic novel about love and social class in 19th-century England.', '1813-01-28', '9781503290563', 'Pride-and-Prejudice-cover.webp'),
   ('The Catcher in the Rye', 'J.D. Salinger', 'A coming-of-age novel following the adventures of Holden Caulfield.', '1951-07-16', '9780316769488', 'The-Catcher-in-the-Rye-cover.jpg'),

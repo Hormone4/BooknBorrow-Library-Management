@@ -168,7 +168,8 @@ export default {
           { book_id: 8, book_name: "Pride and Prejudice", book_author: "Jane Austen", book_description: "A classic novel about love and social class in 19th-century England.", book_publicationDate: "1813-01-28", book_isbn: "9781503290563", book_imageFileName: "Pride-and-Prejudice-cover.webp" },
           { book_id: 9, book_name: "The Catcher in the Rye", book_author: "J.D. Salinger", book_description: "A coming of age novel following the adventures of Holden Caulfield.", book_publicationDate: "1951-07-16", book_isbn: "9780316769488", book_imageFileName: "The-Catcher-in-the-Rye-cover.jpg" },
           { book_id: 10, book_name: "The Lord of the Rings", book_author: "J.R.R. Tolkien", book_description: "A fantasy epic about the quest to destroy a powerful ring.", book_publicationDate: "1954-07-29", book_isbn: "9780544003415", book_imageFileName: "The-Lord-of-the-Rings-cover.jpg" },
-          { book_id: 11, book_name: "The Alchemist", book_author: "Paulo Coelho", book_description: "A philosophical novel about a shepherd's journey to find his treasure.", book_publicationDate: "1988-01-01", book_isbn: "9780062315007", book_imageFileName: "The-Alchemist-cover.jpg" }
+          { book_id: 11, book_name: "The Alchemist", book_author: "Paulo Coelho", book_description: "A philosophical novel about a shepherd's journey to find his treasure.", book_publicationDate: "1988-01-01", book_isbn: "9780062315007", book_imageFileName: "The-Alchemist-cover.jpg" },
+          { book_id: 12, book_name: "Design Patterns", book_author: "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides", book_description: "This book deals with the subject of object-oriented programming and introduces the concept of design patterns.", book_publicationDate: "1994-10-21", book_isbn: "9780062315007", book_imageFileName: "Design-Patterns-cover.jpg" }
         ];
 
       } catch (exception) {
@@ -247,7 +248,7 @@ export default {
     align-items: center;
     justify-content: center;
     text-align: center;
-
+    max-width: 1500px;
     list-style-type: none; /* Remove dots */
   }
 
@@ -255,6 +256,7 @@ export default {
     margin: 0 20px 20px;
     text-align: center;
     position: relative;
+    max-width: 200px;
   }
 
 
