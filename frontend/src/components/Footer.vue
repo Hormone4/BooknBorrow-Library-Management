@@ -4,7 +4,7 @@
       <ul>
         <li>
           <a href="#/">
-            <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="80" class="invert-colors">
+            <img src="../assets/logos/borrrow-logo-white.png" alt="BooknBorrow" width="80">
           </a>
         </li>
         <li>
@@ -12,7 +12,7 @@
             <h2> BOOKNBORROW </h2>
             <ul>
               <li class="zoom-hover">
-                <a href="https://github.com/Hormone4">
+                <a href="#/">
                   Contact us
                 </a>
               </li>
@@ -20,17 +20,17 @@
           </a>
         </li>
         <li>
-          <h2>AUTHORS</h2>
+          <h2>TEAM</h2>
           <ul>
             <li class="zoom-hover">
               <a href="https://github.com/Hormone4" class="author-link">
-                <img src="../assets/logos/github-logo.png" alt="" width="20">
+                <img src="../assets/logos/github-logo.png" alt="">
                 Hormone
               </a>
             </li>
             <li class="zoom-hover">
               <a href="https://github.com/Eliot999" class="author-link">
-                <img src="../assets/logos/github-logo.png" alt="" width="20">
+                <img src="../assets/logos/github-logo.png" alt="">
                 Eliot SIMON
               </a>
             </li>
@@ -91,10 +91,6 @@ nav ul li ul {
 a {
   color: white;
   text-decoration: none;
-}
-
-.invert-colors {
-  filter: invert(1);   /* invert the colors of the logo */
 }
 
 .author-link {
