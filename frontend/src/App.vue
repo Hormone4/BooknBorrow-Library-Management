@@ -12,7 +12,7 @@ import AppFooter from './components/Footer.vue';  // Import the footer component
 
 export default {
   name: 'App',
-  components: {
+  components: {   // Register the components so they can be used in the template
     AppHeader,
     AppFooter
   }

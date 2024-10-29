@@ -1,71 +1,91 @@
 <template>
   <div>
-    <h1 class="component-h1">Book List</h1>
 
     <div v-if="action === 'show'">
-      <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-          <th>Book ID</th>
-          <th>Book Name</th>
-          <th>Author</th>
-          <th>Description</th>
-          <th>Publication Date</th>
-          <th>ISBN</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
-          <td>{{ currentBook.book_name }}</td>
-          <td>{{ currentBook.book_author }}</td>
-          <td>{{ currentBook.book_description }}</td>
-          <td>{{ currentBook.book_publicationDate }}</td>
-          <td>{{ currentBook.book_isbn }}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="show-book">
+        <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">
 
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150">
+        <table class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th colspan="2">Book Details</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Book ID</th>
+              <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
+            </tr>
+            <tr>
+              <th>Book Name</th>
+              <td>{{ currentBook.book_name }}</td>
+            </tr>
+            <tr>
+              <th>Author</th>
+              <td>{{ currentBook.book_author }}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{ currentBook.book_description }}</td>
+            </tr>
+            <tr>
+              <th>Publication Date</th>
+              <td>{{ currentBook.book_publicationDate }}</td>
+            </tr>
+            <tr>
+              <th>ISBN</th>
+              <td>{{ currentBook.book_isbn }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
 
     <div v-if="action === 'edit'">
-      <table class="table table-striped table-bordered">
-        <thead>
+      <div class="show-book">
+        <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">
+
+        <table class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th colspan="2">Book Details</th>
+          </tr>
+          </thead>
+          <tbody>
           <tr>
             <th>Book ID</th>
-            <th>Book Name</th>
-            <th>Author</th>
-            <th>Description</th>
-            <th>Publication Date</th>
-            <th>ISBN</th>
+            <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
           </tr>
-        </thead>
-        <tbody>
           <tr>
-            <td>{{ currentBook.book_id }}</td>
-            <!-- v-model is a two-way data binding, when the input changes, the variable changes too -->
+            <th>Book Name</th>
             <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
+          </tr>
+          <tr>
+            <th>Author</th>
             <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
+          </tr>
+          <tr>
+            <th>Description</th>
             <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
+          </tr>
+          <tr>
+            <th>Publication Date</th>
             <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
+          </tr>
+          <tr>
+            <th>ISBN</th>
             <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
           </tr>
-          <tr>
-            <td colspan="6">
-              <input type = "button" value="SEND" @click="sendEditRequest()" class="zoom-hover">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="150">
+          </tbody>
+        </table>
+      </div>
     </div>
 
 
     <!-- when on: /books/list/all -->
-    <div  v-if="action === 'list'">
+    <div  v-if="action === 'list'">   <!-- v-if is a conditional rendering -->
+      <h1 class="component-h1">Book List</h1>
       <!-- Search bar -->
       <div class="container">
         <div class="row height d-flex justify-content-center align-items-center">
@@ -79,19 +99,19 @@
       </div>
 
       <!-- Book list -->
-      <ul>
+      <ul class="book-list">
         <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
           <table class="table table-bordered">
             <thead>
               <tr>
                 <th colspan="3">
-                  <a :href="'/#/books/show/' + book.book_id">{{ book.book_name }}<br/>{{ book.book_author }} </a>
+                  <a :href="'/#/books/show/' + book.book_id">{{ book.book_name }}<br/><i><small>{{ book.book_author }}</small></i> </a>
                 </th>
               </tr>
               <tr>
                 <th colspan="3">
                   <a :href="'/#/books/show/' + book.book_id">
-                    <img v-bind:src="'../../static/book-covers/'+book.book_imageFileName" alt="" width="150" height="200">
+                    <img v-bind:src="'../../static/book-covers/'+book.book_imageFileName" alt="" width="150" height="230">
                   </a>
                 </th>
               </tr>
@@ -239,8 +259,31 @@ export default {
     text-decoration: underline;
   }
 
-  /************ LISTS ************/
-  ul {
+
+  /************ BOOK DISPLAY ************/
+  .show-book {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .show-book table {
+    width: 50%;
+  }
+
+  .show-book table tbody {
+    text-align: left;
+  }
+
+  .show-book table input {
+    width: 100%;
+  }
+
+  /************ BOOK LIST ************/
+  .book-list {
     margin: auto; /* Center the ul element */
     display: flex;
     flex-wrap: wrap;
@@ -252,7 +295,7 @@ export default {
     list-style-type: none; /* Remove dots */
   }
 
-  ul li {
+  .book-list li {
     margin: 0 20px 20px;
     text-align: center;
     position: relative;
