@@ -7,9 +7,9 @@
 
         <table class="table table-striped table-bordered">
           <thead>
-          <tr>
-            <th colspan="2">Book Details</th>
-          </tr>
+            <tr>
+              <th colspan="2">Book Details</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -48,35 +48,36 @@
 
         <table class="table table-striped table-bordered">
           <thead>
-          <tr>
-            <th colspan="2">Book Details</th>
-          </tr>
+            <tr>
+              <th colspan="2">Book Details</th>
+            </tr>
           </thead>
           <tbody>
-          <tr>
-            <th>Book ID</th>
-            <td>{{ currentBook.book_id }}</td>   <!-- {{value}} are variables -->
-          </tr>
-          <tr>
-            <th>Book Name</th>
-            <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
-          </tr>
-          <tr>
-            <th>Author</th>
-            <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
-          </tr>
-          <tr>
-            <th>Publication Date</th>
-            <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
-          </tr>
-          <tr>
-            <th>ISBN</th>
-            <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
-          </tr>
+            <tr>
+              <th>Book ID</th>
+              <td>{{ currentBook.book_id }}</td>
+            </tr>
+            <tr>
+              <th>Book Name</th>
+              <td> <input type="text" name="book name" v-model="currentBook.book_name"> </td>
+              <!-- v-model is a two-way data-binding, when the input changes, the variable changes too -->
+            </tr>
+            <tr>
+              <th>Author</th>
+              <td> <input type="text" name="book name" v-model="currentBook.book_author"> </td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td> <input type="text" name="book name" v-model="currentBook.book_description"> </td>
+            </tr>
+            <tr>
+              <th>Publication Date</th>
+              <td> <input type="date" name="book name" v-model="currentBook.book_publicationDate"> </td>
+            </tr>
+            <tr>
+              <th>ISBN</th>
+              <td> <input type="text" name="book name" v-model="currentBook.book_isbn"> </td>
+            </tr>
           </tbody>
         </table>
       </div>
