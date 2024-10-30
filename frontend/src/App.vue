@@ -37,4 +37,16 @@ export default {
     margin-bottom: 30px;
   }
 
+  input[type="button"] {
+    background-color: #42b983;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+  }
+
+  input[type="button"]:active {
+    background: #d6d4d4;
+  }
+
 </style>
