@@ -53,7 +53,7 @@ export default {
 footer {
   margin-top: 60px;
   background-color: black;
-  padding: 10px;
+  padding: 20px 10px 10px;
   color: white;
   font-size: small;
 }

@@ -5,8 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import BooksModule from '@/components/BooksModule'
 import LibraryModule from '@/components/LibraryModule' // Import the LibraryModule component
 import BorrowModule from '@/components/BorrowModule'
-import RegisterModule from '@/components/RegisterModule'
-import LoginModule from '@/components/LoginModule'
+import ProfileModule from "@/components/ProfileModule.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -54,16 +53,14 @@ export default new Router({
       props: true
     },
 
-    // Register Module Routes
+    // Profile Module Routes
     {
-      path: '/register',
-      name: 'register',
-      component: RegisterModule
+      path: '/profile/:action',
+      name: 'profile',
+      component: ProfileModule,
+      props: true
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginModule
-    }
+
+
   ]
 })
