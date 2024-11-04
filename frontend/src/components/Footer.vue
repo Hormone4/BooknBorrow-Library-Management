@@ -12,7 +12,7 @@
             <h2> BOOKNBORROW </h2>
             <ul>
               <li class="zoom-hover">
-                <a href="#/">
+                <a href="#/contact">
                   Contact us
                 </a>
               </li>
