@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
-    <h1 class="component-h1">BooknBorrow</h1>
-
-    <h2>Register</h2>
+    <h1 class="component-h1">Login</h1>
 
     <form>
       <div class="form-group">
@@ -12,7 +10,7 @@
         <label for="password">Password:</label>
         <input type="password" class="form-control" id="password" name="password" required>
         <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit">Submit</button>
         <p> you don't have an account? <router-link to="/register">Register</router-link></p>
       </div>
     </form>
@@ -48,16 +46,19 @@ a {
   color: #42b983;
 }
 
+button {
+  padding: 10px;
+  margin-bottom: 20px;
+}
 
 
 form {
   display: flex;
   flex-direction: column;
   width: 30%;
-  margin: 0 auto;
   border: #42b983 3px solid;
   border-radius: 0%;
   padding: 20px;
-  margin-bottom: 250px;
+  margin: 0 auto 100px;
 }
 </style>
