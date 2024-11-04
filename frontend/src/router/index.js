@@ -6,6 +6,7 @@ import BooksModule from '@/components/BooksModule'
 import LibraryModule from '@/components/LibraryModule' // Import the LibraryModule component
 import BorrowModule from '@/components/BorrowModule'
 import ProfileModule from "@/components/ProfileModule.vue";
+import ContactModule from '../components/ContactModule.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -60,7 +61,10 @@ export default new Router({
       component: ProfileModule,
       props: true
     },
-
-
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactModule
+    }
   ]
 })
