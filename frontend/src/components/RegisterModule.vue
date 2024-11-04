@@ -16,6 +16,7 @@
         <input type="password" class="form-control" id="password" name="password" required>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <p> you already have an account? <router-link to="/login">Login</router-link></p>
       </div>
     </form>
   </div>
