@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import BooksModule from '@/components/BooksModule'
 import LibraryModule from '@/components/LibraryModule' // Import the LibraryModule component
 import BorrowModule from '@/components/BorrowModule'
+import RegisterModule from '@/components/RegisterModule'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,11 @@ export default new Router({
       name: 'borrow',
       component: BorrowModule,
       props: true
+    }
+    , {
+      path: '/register/',
+      name: 'register',
+      component: RegisterModule
     }
   ]
 })
