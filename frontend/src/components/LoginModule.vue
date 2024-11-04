@@ -55,10 +55,10 @@ button {
 form {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
+  max-width: 500px;
   border: #42b983 3px solid;
-  border-radius: 0%;
   padding: 20px;
-  margin: 0 auto 100px;
+  margin: auto auto 100px;
 }
 </style>

@@ -39,8 +39,10 @@ export default new Router({
       path: '/libraries/:action/:id',
       name: 'libraries',
       component: LibraryModule,
-      props: true
+      props: true   // Pass the route parameters as props to the component
     },
+
+    // Borrow Module Routes
     {
       path: '/borrow',
       redirect: '/borrow/list/all'
@@ -51,6 +53,8 @@ export default new Router({
       component: BorrowModule,
       props: true
     },
+
+    // Register Module Routes
     {
       path: '/register',
       name: 'register',
