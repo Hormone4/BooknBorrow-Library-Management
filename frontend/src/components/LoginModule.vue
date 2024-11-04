@@ -57,6 +57,6 @@ form {
   border: #42b983 3px solid;
   border-radius: 0%;
   padding: 20px;
-  margin-bottom: 200px;
+  margin-bottom: 250px;
 }
 </style>
