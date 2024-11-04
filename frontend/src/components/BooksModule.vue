@@ -40,7 +40,7 @@
 
 
     <div v-if="action === 'edit'">
-      <h1 class="component-h1">Edit</h1>
+      <h1 class="component-h1">Edit Book</h1>
 
       <div class="show-book">
         <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">

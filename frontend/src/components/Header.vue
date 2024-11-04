@@ -88,7 +88,7 @@ export default {
   .profile-list {
     position: absolute;
     background-color: black;
-    padding: 10px;
+    padding: 20px;
     margin-top: 10px;
     border-radius: 5px;
     display: flex;
