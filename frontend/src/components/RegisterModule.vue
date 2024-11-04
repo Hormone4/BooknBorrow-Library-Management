@@ -7,13 +7,13 @@
     <form>
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username">
+        <input type="text" class="form-control" id="username" name="username" required>
         <br>
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email">
+        <input type="email" class="form-control" id="email" name="email" required>
         <br>
         <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" class="form-control" id="password" name="password" required>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
