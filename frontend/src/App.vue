@@ -34,6 +34,7 @@ export default {
   }
 
   .component-h1 {
+    margin-top: 50px;
     margin-bottom: 30px;
   }
 

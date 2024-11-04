@@ -2,15 +2,12 @@
   <div>
 
     <div v-if="action === 'show'">
+      <h1 class="component-h1">Book Details</h1>
+
       <div class="show-book">
         <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">
 
         <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th colspan="2">Book Details</th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <th>Book ID</th>
@@ -43,15 +40,12 @@
 
 
     <div v-if="action === 'edit'">
+      <h1 class="component-h1">Edit</h1>
+
       <div class="show-book">
         <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">
 
         <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th colspan="2">Book Details</th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <th>Book ID</th>
