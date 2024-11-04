@@ -15,28 +15,47 @@
         </li>
       </ul>
 
-      <ul>
-        <li class="zoom-hover">
-          <a href="#/">
-            <div>Profile <img src="../assets/logos/profile-logo.png" alt="" width="50"></div>
-          </a>
+      <ul @mouseover="active = true" @mouseleave="active = false" >
+        <li>
+          <div>
+            Profile
+            <img src="../assets/logos/profile-logo.png" alt="" width="50">
+
+            <ul v-if="active === true" class="profile-list">
+              <li class="zoom-hover">
+                <a href="#/profile/"> My Profile</a>
+              </li>
+              <li class="zoom-hover">
+                <a href="#/register"> Register</a>
+              </li>
+              <li class="zoom-hover">
+                <a href="#/login"> Login</a>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
+
     </nav>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+
+  data () {
+    return {   // variables that can be used in the template
+      active: false
+      }
+  },
 }
 </script>
 
 <style scoped>
   header {
-    margin-bottom: 0px;
     background-color: #4b5861;
-    padding: 10px;
+    padding-top: 10px;
     color: white;
     text-align: left;
   }
@@ -65,4 +84,16 @@ export default {
     margin-right: 10px;
     margin-left: 10px;
   }
+
+  .profile-list {
+    position: absolute;
+    background-color: black;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
 </style>
