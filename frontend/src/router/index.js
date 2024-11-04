@@ -50,13 +50,14 @@ export default new Router({
       name: 'borrow',
       component: BorrowModule,
       props: true
-    }
-    , {
-      path: '/register/',
+    },
+    {
+      path: '/register',
       name: 'register',
       component: RegisterModule
-    }
-    , {path: '/login/',
+    },
+    {
+      path: '/login',
       name: 'login',
       component: LoginModule
     }
