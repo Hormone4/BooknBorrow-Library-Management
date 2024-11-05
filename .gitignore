@@ -129,3 +129,8 @@ frontend/.yarn/build-state.yml
 frontend/.yarn/install-state.gz
 frontend/.pnp.*
 
+
+backend/.vscode
+backend/dist/
+backend/node_modules/
+
