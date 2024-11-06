@@ -9,8 +9,8 @@ const bookRepo = require('../utils/books.repository');
 
 
 router.get('/brands', authorListAction);
-router.get('/list', bookListAction);
-router.get('/show/:bookId', bookShowAction);
+router.get('/list', bookListAction); //Works
+router.get('/show/:bookId', bookShowAction); // works
 router.get('/del/:bookId', bookDelAction);
 router.post('/update/:bookId', bookUpdateAction);
 
