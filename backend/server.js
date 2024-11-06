@@ -50,6 +50,8 @@ app.get('/', (request, response) => { // 'GET' or 'POST'...
 
 // setup additional routes
 // app.use(routeBase, callback);
-app.use("/static", express.static(__dirname + '/static'));
-app.use("/booknborrowapi", require("./controllers/booksapi.route"));
+
+//app.use("/static", express.static(__dirname + '/static'));
+//app.use("/booknborrowapi", require("./controllers/booksapi.route"));
+
 // app.use("/auth", require("./controllers/auth.route"));
