@@ -165,14 +165,14 @@ export default {
     async getAllData() {
       // load all data from a json file
       try {
-        //let responseBooks = await this.$http.get('http://localhost:3000/books');
+        let responseBooks = await this.$http.get('http://localhost:9000/booksapi/list');
         // await forces to wait for the response before executing the next lines
         // the get is executed in the background (separate thread)
-        //this.books = responseBooks.data;
-
-
+        this.bookArray = await responseBooks.json();
+        this.refreshCurrentBook();
 
         // for testing purposes
+        /*
         this.bookArray = [
           { book_id: 1, book_name: "The Great Gatsby", book_author: "F. Scott Fitzgerald", book_description: "A novel set in the 1920s, exploring themes of wealth and society.", book_publicationDate: "1925-04-10", book_isbn: "9780743273565", book_imageFileName: "The-Great-Gatsby-cover.jpg" },
           { book_id: 2, book_name: "A Brief History of Time", book_author: "Stephen Hawking", book_description: "A book explaining the universe, time, and black holes.", book_publicationDate: "1988-04-01", book_isbn: "9780553380163", book_imageFileName: "A-Brief-History-of-Time-cover.jpg" },
@@ -187,6 +187,7 @@ export default {
           { book_id: 11, book_name: "The Lord of the Rings", book_author: "J.R.R. Tolkien", book_description: "A fantasy epic about the quest to destroy a powerful ring.", book_publicationDate: "1954-07-29", book_isbn: "9780544003415", book_imageFileName: "The-Lord-of-the-Rings-cover.jpg" },
           { book_id: 12, book_name: "The Alchemist", book_author: "Paulo Coelho", book_description: "A philosophical novel about a shepherd's journey to find his treasure.", book_publicationDate: "1988-01-01", book_isbn: "9780062315007", book_imageFileName: "The-Alchemist-cover.jpg" },
         ];
+         */
 
       } catch (exception) {
         console.log(exception);
@@ -200,9 +201,11 @@ export default {
         let responseBook = await this.$http.get('http://localhost:3000/books/' + this.$props.id);
         this.book = responseBook.data;
          */
+        let response = await this.$http.get("http://localhost:9000/boorsapi/del/" + this.$props.id);
+        this.currentBook = response.data;
 
         // for testing purposes
-        this.currentBook = this.bookArray.find(b => b.book_id === Number(this.$props.id));   // or String(b.book_id)
+        //this.currentBook = this.bookArray.find(b => b.book_id === Number(this.$props.id));   // or String(b.book_id)
 
 
       } catch (exception) {
@@ -212,11 +215,12 @@ export default {
 
     async sendDeleteRequest(book_id) {
       try {
-        //let response = await this.$http.delete('http://localhost:3000/books/' + book_id);
-        //this.books = this.books.filter(b => b.book_id !== book_id);
+        let response = await this.$http.get("http://localhost:9000/boorsapi/del/" + book_id);
+        this.getAllData();
+
 
         // for testing purposes
-        this.bookArray = this.bookArray.filter(b => b.book_id !== book_id);
+        //this.bookArray = this.bookArray.filter(b => b.book_id !== book_id);
 
       } catch (exception) {
         console.log(exception);
