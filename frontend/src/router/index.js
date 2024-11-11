@@ -5,6 +5,8 @@ import HelloWorld from '@/components/HelloWorld'
 import BooksModule from '@/components/BooksModule'
 import LibraryModule from '@/components/LibraryModule' // Import the LibraryModule component
 import BorrowModule from '@/components/BorrowModule'
+import ProfileModule from "@/components/ProfileModule.vue";
+import ContactModule from '../components/ContactModule.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -37,8 +39,10 @@ export default new Router({
       path: '/libraries/:action/:id',
       name: 'libraries',
       component: LibraryModule,
-      props: true
+      props: true   // Pass the route parameters as props to the component
     },
+
+    // Borrow Module Routes
     {
       path: '/borrow',
       redirect: '/borrow/list/all'
@@ -48,6 +52,19 @@ export default new Router({
       name: 'borrow',
       component: BorrowModule,
       props: true
+    },
+
+    // Profile Module Routes
+    {
+      path: '/profile/:action',
+      name: 'profile',
+      component: ProfileModule,
+      props: true
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactModule
     }
   ]
 })
