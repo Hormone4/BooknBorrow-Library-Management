@@ -8,17 +8,13 @@ const bookRepo = require('../utils/books.repository');
 
 
 
-router.get('/brands', authorListAction);
+
 router.get('/list', bookListAction); //Works
 router.get('/show/:bookId', bookShowAction); // works
-router.get('/del/:bookId', bookDelAction);
+router.get('/del/:bookId', bookDelAction); // need to add check to see if no book_id is used as foreign key
 router.post('/update/:bookId', bookUpdateAction);
 
-// http://localhost:9000/booksapi/brands
-async function authorListAction(request, response) {
-    var brands = await bookRepo.getAllBrands();
-    response.send(JSON.stringify(brands));
-}
+
 
 async function bookListAction(request, response) {
     var books = await bookRepo.getAllBooks();
