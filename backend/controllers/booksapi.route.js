@@ -8,11 +8,11 @@ const bookRepo = require('../utils/books.repository');
 
 
 
-router.get('/books/brands', authorListAction);
-router.get('/books/list', bookListAction); //Works
-router.get('/books/show/:bookId', bookShowAction); // works
-router.get('/books/del/:bookId', bookDelAction);
-router.post('/books/update/:bookId', bookUpdateAction);
+router.get('/brands', authorListAction);
+router.get('/list', bookListAction); //Works
+router.get('/show/:bookId', bookShowAction); // works
+router.get('/del/:bookId', bookDelAction);
+router.post('/update/:bookId', bookUpdateAction);
 
 // http://localhost:9000/booksapi/brands
 async function authorListAction(request, response) {
