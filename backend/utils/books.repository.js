@@ -1,4 +1,4 @@
-pool = require(__dirname + "/db.include.js");
+pool = require(__dirname + "/db.include.js"); // don't forget to change the / to \\ on Windows
 
 module.exports = {
     getBlankBook() {
