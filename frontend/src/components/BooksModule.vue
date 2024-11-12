@@ -72,16 +72,21 @@
               <th>ISBN</th>
               <td> <input type="text" name="book isbn" v-model="currentBook.book_isbn"> </td>
             </tr>
+            <tr>
+              <th>Image File Name</th>
+              <td> <input type="text" name="book image" v-model="currentBook.book_imageFileName"> </td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <input type="button" value="SEND UPDATE" @click="sendEditRequest()" class="zoom-hover send-update">
+      <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover send-update">
     </div>
 
 
     <!-- when on: /books/list/all -->
     <div  v-if="action === 'list'">   <!-- v-if is a conditional rendering -->
       <h1 class="component-h1">Book List</h1>
+
       <!-- Search bar -->
       <div class="container">
         <div class="row height d-flex justify-content-center align-items-center">
@@ -93,6 +98,9 @@
           </div>
         </div>
       </div>
+
+      <!-- New book button -->
+      <input type="button" value="Add a new book" @click="$router.push('/books/edit/0')" class="zoom-hover new-book-button" />
 
       <!-- Book list -->
       <ul class="book-list">
@@ -142,10 +150,11 @@
 <script>
 export default {
   name: 'Books',
-  props : ['action','id'],  // properties that can be passed to the component
-  data () {
+  props: ['action', 'id'],  // properties that can be passed to the component
+  // action: show, edit, list
+  // id: book_id
+  data() {
     return {   // variables that can be used in the template
-
       bookArray: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
       currentBook: {
@@ -157,7 +166,7 @@ export default {
         book_isbn: '',
         book_imageFileName: ''
       }
-    }
+    };
   },
 
   methods: {   // logic that can be called from the template
@@ -165,14 +174,13 @@ export default {
     async getAllData() {
       // load all data from a json file
       try {
-        let responseBooks = await this.$http.get('http://localhost:9000/booksapi/list');
+        let responseBooks = await this.$http.get('http://localhost:9000/api/books/list ');
+        this.bookArray = await responseBooks.data;
         // await forces to wait for the response before executing the next lines
         // the get is executed in the background (separate thread)
-        this.bookArray = await responseBooks.json();
-        this.refreshCurrentBook();
 
-        // for testing purposes
         /*
+        // for testing purposes
         this.bookArray = [
           { book_id: 1, book_name: "The Great Gatsby", book_author: "F. Scott Fitzgerald", book_description: "A novel set in the 1920s, exploring themes of wealth and society.", book_publicationDate: "1925-04-10", book_isbn: "9780743273565", book_imageFileName: "The-Great-Gatsby-cover.jpg" },
           { book_id: 2, book_name: "A Brief History of Time", book_author: "Stephen Hawking", book_description: "A book explaining the universe, time, and black holes.", book_publicationDate: "1988-04-01", book_isbn: "9780553380163", book_imageFileName: "A-Brief-History-of-Time-cover.jpg" },
@@ -195,38 +203,55 @@ export default {
     },
 
     async refreshCurrentBook() {
-      if (this.$props.id === "all" || this.$props.id === "0") return;
-      try {
-        /*
-        let responseBook = await this.$http.get('http://localhost:3000/books/' + this.$props.id);
-        this.book = responseBook.data;
-         */
-        let response = await this.$http.get("http://localhost:9000/boorsapi/del/" + this.$props.id);
-        this.currentBook = response.data;
-
-        // for testing purposes
-        //this.currentBook = this.bookArray.find(b => b.book_id === Number(this.$props.id));   // or String(b.book_id)
-
-
-      } catch (exception) {
-        console.log(exception);
+      if (this.$props.id === "all" || this.$props.id === "0") {
+        this.currentBook = {
+          book_id: 0,
+          book_name: 'Book Name',
+          book_author: 'Book Author',
+          book_description: 'Description...',
+          book_publicationDate: '2000-01-01',
+          book_isbn: '9780000000000',
+          book_imageFileName: 'file-name.jpg'
+        };
+        return;
       }
+      try {
+        let responseBook = await this.$http.get("http://localhost:9000/api/books/show/" + this.$props.id);
+        this.currentBook = responseBook.data;
+
+      } catch (ex) {
+        console.log(ex);
+      }
+
+      // for testing purposes
+      //this.currentBook = this.bookArray.find(b => b.book_id === Number(this.$props.id));   // or String(b.book_id)
     },
 
     async sendDeleteRequest(book_id) {
       try {
-        let response = await this.$http.get("http://localhost:9000/boorsapi/del/" + book_id);
+        alert("DELETING BOOK #" + book_id + "...");
+        let response = await this.$http.get("http://localhost:9000/api/books/del/" + book_id);
+        alert("DELETED: " + response.data.rowsDeleted + " book(s)");
         this.getAllData();
 
-
-        // for testing purposes
-        //this.bookArray = this.bookArray.filter(b => b.book_id !== book_id);
-
-      } catch (exception) {
-        console.log(exception);
+      } catch (ex) {
+        console.log(ex);
       }
     },
-    async sendEditRequest() { }
+
+    async sendEditRequest() {
+      alert("ATTTEMPTTTT EDITING BOOK");
+      try {
+        alert("EDITING BOOK #" + this.currentBook.book_id + "...");
+        let response = await this.$http.post("http://localhost:9000/api/books/update/" + this.currentBook.book_id, this.currentBook);
+        alert("EDITED: " + response.data.rowsUpdated);
+        this.$router.push({path: '/books'}); // redirect to the book list
+        this.getAllData();
+
+      } catch (ex) {
+        console.log(ex)
+      }
+    },
 
   },
 
@@ -239,9 +264,8 @@ export default {
   created() {   // executed when the component is created
     this.getAllData();
     this.refreshCurrentBook();
-
-  },
-}
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -257,6 +281,12 @@ export default {
 
   a:hover {
     text-decoration: underline;
+  }
+
+  .new-book-button {
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: -30px;
   }
 
 
@@ -295,6 +325,7 @@ export default {
   /************ BOOK LIST ************/
   .book-list {
     margin: auto; /* Center the ul element */
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
