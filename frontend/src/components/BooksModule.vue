@@ -243,7 +243,14 @@ export default {
       alert("ATTTEMPTTTT EDITING BOOK");
       try {
         alert("EDITING BOOK #" + this.currentBook.book_id + "...");
-        let response = await this.$http.post("http://localhost:9000/api/books/update/" + this.currentBook.book_id, this.currentBook);
+        let response = await this.$http.post("http://localhost:9000/api/books/update/" + this.currentBook.book_id, {
+          book_name: this.currentBook.book_name,
+          book_author: this.currentBook.book_author,
+          book_description: this.currentBook.book_description,
+          book_publicationDate: this.currentBook.book_publicationDate,
+          book_isbn: this.currentBook.book_isbn,
+          book_imageFileName: this.currentBook.book_imageFileName
+        });
         alert("EDITED: " + response.data.rowsUpdated);
         this.$router.push({path: '/books'}); // redirect to the book list
         this.getAllData();
