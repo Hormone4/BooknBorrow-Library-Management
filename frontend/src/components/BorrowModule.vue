@@ -3,7 +3,7 @@
     <h1 class="component-h1">Borrow Module</h1>
 
     <!-- Show Borrow details of one reservation -->
-    <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
+    <table v-if="action === 'show'" id="myTable" class="display">
       <thead>
         <tr>
           <th>Borrow ID</th>
