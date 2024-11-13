@@ -1,4 +1,12 @@
-pool = require(__dirname + "\\db.include.js"); // don't forget to change the / to \\ on Windows
+require('dotenv').config();
+const os = process.env.OS;
+let path;
+if (os === 'l') {
+    path = __dirname + "/db.include.js";  // Linux path
+} else if (os === 'w') {
+    path = __dirname + "\\db.include.js";  // Windows path
+}
+pool = require(path);
 
 module.exports = {
     getBlankBook() {
