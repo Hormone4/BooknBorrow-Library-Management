@@ -30,28 +30,43 @@ async function bookDelAction(request, response) {
     response.send(JSON.stringify(result));
 }
 async function bookUpdateAction(request, response) {
-    //var json = JSON.stringify(request.body); // bodyParser can process json in body + regular POST form input too
-    // console.log(json);
-    // TODO: !!! INPUT VALIDATION !!!
-    var bookId = request.params.bookId;
-    if (bookId==="0") {
-        bookId = await bookRepo.addOneBook(
-            request.body.book_name,
-            request.body.book_author,
-            request.body.book_description,
-            request.body.book_publicationDate,
-            request.body.book_isbn,
-            request.body.book_imageFileName);
+    try {
+        if (!request.body) {
+            return response.status(400).json({ error: 'No data provided in request body' });
+        }
+
+        const bookId = request.params.bookId;
+        let result;
+
+        if (bookId === "0") {
+            // Add new book
+            const newBookId = await bookRepo.addOneBook(
+                request.body.book_name,
+                request.body.book_author,
+                request.body.book_description,
+                request.body.book_publicationDate,
+                request.body.book_isbn,
+                request.body.book_imageFileName
+            );
+            result = { bookId: newBookId, message: 'Book added successfully' };
+        } else {
+            // Update existing book
+            const numRows = await bookRepo.editOneBook(
+                bookId,
+                request.body.book_name,
+                request.body.book_author,
+                request.body.book_description,
+                request.body.book_publicationDate,
+                request.body.book_isbn,
+                request.body.book_imageFileName
+            );
+            result = { rowsUpdated: numRows };
+        }
+
+        response.json(result);
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
     }
-    var numRows = await bookRepo.editOneBook(bookId,
-        request.body.book_name,
-        request.body.book_author,
-        request.body.book_description,
-        request.body.book_publicationDate,
-        request.body.book_isbn,
-        request.body.book_imageFileName);
-    let result = { rowsUpdated: numRows };
-    response.send(JSON.stringify(result));
 }
 
 module.exports = router;
