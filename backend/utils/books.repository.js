@@ -118,5 +118,22 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+
+    async searchForBook(userText) {
+        try {
+            let sql = "SELECT * FROM book WHERE book_name LIKE ? OR book_author LIKE ? OR book_description LIKE ? OR book_isbn LIKE ?";
+            const [rows, fields] = await pool.execute(sql, [`%${userText}%`, `%${userText}%`, `%${userText}%`, `%${userText}%`]);
+            rows.forEach(row => {
+                row.book_publicationDate = row.book_publicationDate.toISOString().slice(0, 10);
+                // convert date from javascript format (YYYY-MM-DDT00:00:00.000Z) to SQL format (YYYY-MM-DD)
+            });
+            console.log("Books FILTERED: " + rows.length);
+            return rows;
+
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 };

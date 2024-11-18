@@ -92,7 +92,7 @@
         <div class="row height d-flex justify-content-center align-items-center">
           <div class="col-md-8">
             <div class="search">
-              <input type="text" class="form-control" placeholder="Search for a book, author...">
+              <input type="text" @input="searchRequest()" id="searchBar" class="form-control" placeholder="Search for a book, author...">
               <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
             </div>
           </div>
@@ -258,11 +258,25 @@ export default {
       }
     },
 
+    async searchRequest() {
+      try {
+        let searchValue = document.getElementById("searchBar").value;
+        let response = await this.$http.get("http://localhost:9000/api/books/search/" + searchValue);
+        this.bookArray = response.data;
+
+      } catch (ex) {
+        console.log(ex);
+      }
+    }
+
   },
 
   watch: {   // watch for changes in the variables
     id: function(newId, oldId) {
       this.refreshCurrentBook();
+    },
+    action: function(newAction, oldAction) {
+      this.getAllData();
     }
   },
 

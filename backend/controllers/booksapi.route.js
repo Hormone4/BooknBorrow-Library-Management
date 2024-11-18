@@ -13,6 +13,7 @@ router.get('/list', bookListAction); //Works
 router.get('/show/:bookId', bookShowAction); // works
 router.get('/del/:bookId', bookDelAction); // need to add check to see if no book_id is used as foreign key
 router.post('/update/:bookId', bookUpdateAction); // post means that it is a form submission
+router.get('/search/:input', bookSearchAction);
 
 
 
@@ -68,5 +69,11 @@ async function bookUpdateAction(request, response) {
         response.status(500).json({ error: 'Failed to process request' });
     }
 }
+
+async function bookSearchAction(request, response) {
+    var books = await bookRepo.searchForBook(request.params.input);
+    response.send(JSON.stringify(books));
+}
+
 
 module.exports = router;
