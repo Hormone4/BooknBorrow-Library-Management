@@ -1,70 +1,98 @@
 <template>
   <div class="hello">
-    <h1 class="component-h1">Library List</h1>
 
     <!-- Show Library Details -->
-    <table v-if="action === 'show'" class="table table-striped table-bordered table-hover">
-      <thead>
+    <div v-if="action === 'show'">
+
+      <h1 class="component-h1">Library Details</h1>
+
+      <table class="table table-striped table-bordered table-hover show-table">
+        <tbody>
         <tr>
           <th>Library ID</th>
-          <th>Library Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Creation Year</th>
-          <th>Zip Code</th>
-          <th>Street Name</th>
-          <th>Street Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
           <td>{{ currentLibrary.library_id }}</td>
+        </tr>
+        <tr>
+          <th>Library Name</th>
           <td>{{ currentLibrary.library_name }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
           <td>{{ currentLibrary.library_email }}</td>
+        </tr>
+        <tr>
+          <th>Phone</th>
           <td>{{ currentLibrary.library_phone }}</td>
+        </tr>
+        <tr>
+          <th>Creation Year</th>
           <td>{{ currentLibrary.library_creationYear }}</td>
+        </tr>
+        <tr>
+          <th>Zip Code</th>
           <td>{{ currentLibrary.library_zipCode }}</td>
+        </tr>
+        <tr>
+          <th>Street Name</th>
           <td>{{ currentLibrary.library_streetName }}</td>
+        </tr>
+        <tr>
+          <th>Street Number</th>
           <td>{{ currentLibrary.library_streetNumber }}</td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Edit Library Details -->
-    <table v-if="action === 'edit'" class="table table-striped table-bordered table-hover">
-      <thead>
+    <div v-if="action === 'edit'">
+
+      <h1 class="component-h1">Edit Library</h1>
+
+      <table class="table table-striped table-bordered table-hover show-table">
+        <tbody>
         <tr>
           <th>Library ID</th>
-          <th>Library Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Creation Year</th>
-          <th>Zip Code</th>
-          <th>Street Name</th>
-          <th>Street Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
           <td>{{ currentLibrary.library_id }}</td>
+        </tr>
+        <tr>
+          <th>Library Name</th>
           <td><input type="text" v-model="currentLibrary.library_name" /></td>
+        </tr>
+        <tr>
+          <th>Email</th>
           <td><input type="email" v-model="currentLibrary.library_email" /></td>
+        </tr>
+        <tr>
+          <th>Phone</th>
           <td><input type="tel" v-model="currentLibrary.library_phone" /></td>
+        </tr>
+        <tr>
+          <th>Creation Year</th>
           <td><input type="number" v-model="currentLibrary.library_creationYear" /></td>
+        </tr>
+        <tr>
+          <th>Zip Code</th>
           <td><input type="text" v-model="currentLibrary.library_zipCode" /></td>
+        </tr>
+        <tr>
+          <th>Street Name</th>
           <td><input type="text" v-model="currentLibrary.library_streetName" /></td>
+        </tr>
+        <tr>
+          <th>Street Number</th>
           <td><input type="text" v-model="currentLibrary.library_streetNumber" /></td>
         </tr>
-        <tr>
-          <td colspan="8">
-            <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover"/>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <input type="button" value="SEND" @click="sendEditRequest()"  class="zoom-hover send-update" />
+    </div>
 
     <!-- List All Libraries -->
     <div  v-if="action === 'list'">
+
+      <h1 class="component-h1">Library List</h1>
+
       <!-- Search bar -->
       <div class="container">
         <div class="row height d-flex justify-content-center align-items-center">
@@ -76,6 +104,9 @@
           </div>
         </div>
       </div>
+
+      <!-- New Library button -->
+      <input type="button" value="Add a new Library" @click="$router.push('/libraries/edit/0')" class="zoom-hover new-button" />
 
       <!-- Library List -->
       <table class="table table-striped table-bordered table-hover">
@@ -105,7 +136,7 @@
               </a>
             </td>
             <td>
-              <input type="button" value="DELETE" @click="sendDeleteRequest()" class="zoom-hover"/>
+              <input type="button" value="DELETE" @click="sendDeleteRequest(library.library_id)" class="zoom-hover"/>
             </td>
           </tr>
         </tbody>
@@ -137,53 +168,73 @@ export default {
   methods: {
     async getAllData() {
       try {
-        this.libraryArray = [
-          {
-            library_id: 1,
-            library_name: 'Central Library',
-            library_email: 'central@example.com',
-            library_phone: '123-456-7890',
-            library_creationYear: 1900,
-            library_zipCode: '10001',
-            library_streetName: 'Main St',
-            library_streetNumber: '1'
-          },
-          {
-            library_id: 2,
-            library_name: 'Westside Branch',
-            library_email: 'westside@example.com',
-            library_phone: '123-555-7890',
-            library_creationYear: 1950,
-            library_zipCode: '10002',
-            library_streetName: 'Second St',
-            library_streetNumber: '200'
-          }
+        let responseLibraries = await this.$http.get('http://localhost:9000/api/libraries/list ');
+        this.libraryArray = await responseLibraries.data;
 
-        ];
       } catch (exception) {
         console.log(exception);
       }
     },
+
     async refreshCurrentLibrary() {
-      if (this.id === 'all' || this.id === '0') return;
+      if (this.$props.id === "all" || this.$props.id === "0") {
+        this.currentLibrary = {
+          library_id: 0,
+          library_name: 'New Library Name',
+          library_email: 'librarymail@example.com',
+          library_phone: '1234567890',
+          library_creationYear: '2000',
+          library_zipCode: '12345',
+          library_streetName: 'Street Name',
+          library_streetNumber: '1'
+        };
+        return;
+      }
       try {
-        // Replace this with your actual API call
-        this.currentLibrary = this.libraryArray.find(
-          (lib) => lib.library_id === Number(this.id)
-        );
+        let responseLibrary = await this.$http.get("http://localhost:9000/api/libraries/show/" + this.$props.id);
+        this.currentLibrary = responseLibrary.data;
+
       } catch (exception) {
         console.log(exception);
       }
     },
-    async sendDeleteRequest(libraryId) {
-      // Implement the delete functionality
-      alert('Delete library with ID: ' + libraryId);
+
+    async sendDeleteRequest(library_id) {
+      try {
+        alert("DELETING LIBRARY #" + library_id + "...");
+        let response = await this.$http.get("http://localhost:9000/api/libraries/del/" + library_id);
+        alert("DELETED: " + response.data.rowsDeleted + " library(ies)");
+        this.getAllData();
+
+      } catch (ex) {
+        console.log(ex);
+      }
     },
+
     async sendEditRequest() {
-      // Implement the save functionality
-      alert('Save library data: ' + JSON.stringify(this.currentLibrary));
+      try {
+        alert("EDITING LIBRARY #" + this.currentLibrary.library_id + "...");
+        let response = await this.$http.post("http://localhost:9000/api/libraries/update/" + this.currentLibrary.library_id,
+         {
+          library_name: this.currentLibrary.library_name,
+          library_email: this.currentLibrary.library_email,
+          library_phone: this.currentLibrary.library_phone,
+          library_creationYear: this.currentLibrary.library_creationYear,
+          library_zipCode: this.currentLibrary.library_zipCode,
+          library_streetName: this.currentLibrary.library_streetName,
+          library_streetNumber: this.currentLibrary.library_streetNumber
+         }
+        );
+        alert("EDITED: " + response.data.rowsUpdated);
+        this.$router.push({path: '/libraries/list/all'}); // redirect to the Library list
+        this.getAllData();
+
+      } catch (ex) {
+        console.log(ex)
+      }
     }
   },
+
   watch: {
     id(newId, oldId) {
       this.refreshCurrentLibrary();
@@ -214,6 +265,18 @@ export default {
     color: #42b983;
   }
 
+
+  .show-table {
+    text-align: left;
+    margin: auto;
+    max-width: 700px;
+  }
+
+
+  .send-update {
+    margin-top: 20px;
+    padding: 10px;
+  }
 
   /************ SEARCH BAR ************/
   .container {
@@ -251,4 +314,13 @@ export default {
   .search input[type="button"]:active {
     background: #d6d4d4;
   }
+
+
+
+  .new-button {
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-top: -30px;
+  }
+
 </style>
