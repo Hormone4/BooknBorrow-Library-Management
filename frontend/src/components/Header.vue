@@ -13,6 +13,9 @@
         <li class="zoom-hover">
           <a href="#/libraries/list/all"> Libraries</a>
         </li>
+        <li class="zoom-hover">
+          <a href="#/borrow/list/all"> Borrows</a>
+        </li>
       </ul>
 
       <ul @mouseover="active = true" @mouseleave="active = false" >
@@ -74,7 +77,7 @@ export default {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
     align-items: center;
   }
 
