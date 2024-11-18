@@ -124,6 +124,10 @@ export default {
   methods: {
     async getAllData() {
       try {
+
+        //let responseBorrows = await this.$http.get('http://localhost:9000/api/libraries/list ');
+        //this.borrowArray  = await responseBorrows.data;
+
         // Sample data for borrow records
         this.borrowArray = [
           {
