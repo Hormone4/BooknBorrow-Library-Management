@@ -214,8 +214,7 @@ export default {
     async sendEditRequest() {
       try {
         alert("EDITING LIBRARY #" + this.currentLibrary.library_id + "...");
-        let response = await this.$http.post("http://localhost:9000/api/libraries/update/" + this.currentLibrary.library_id,
-         {
+        let response = await this.$http.post("http://localhost:9000/api/libraries/update/" + this.currentLibrary.library_id, {
           library_name: this.currentLibrary.library_name,
           library_email: this.currentLibrary.library_email,
           library_phone: this.currentLibrary.library_phone,
@@ -223,8 +222,7 @@ export default {
           library_zipCode: this.currentLibrary.library_zipCode,
           library_streetName: this.currentLibrary.library_streetName,
           library_streetNumber: this.currentLibrary.library_streetNumber
-         }
-        );
+          });
         alert("EDITED: " + response.data.rowsUpdated);
         this.$router.push({path: '/libraries/list/all'}); // redirect to the Library list
         this.getAllData();
@@ -236,9 +234,10 @@ export default {
   },
 
   watch: {
-    id(newId, oldId) {
+    id: function(newId, oldId) {
       this.refreshCurrentLibrary();
     }
+
   },
   created() {
     this.getAllData();

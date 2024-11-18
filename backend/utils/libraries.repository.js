@@ -1,6 +1,6 @@
 require('dotenv').config();
 const os = process.env.OS;
-let path;
+let path = __dirname + "\\db.include.js";
 if (os === 'l') {
     path = __dirname + "/db.include.js";  // Linux path
 } else if (os === 'w') {
@@ -47,7 +47,8 @@ module.exports = {
 
     async addOneLibrary(library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) {
         try {
-            let sql = "INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            let sql = "INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) "+
+                             "VALUES (?, ?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await pool.execute(sql, [library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber]);
             console.log("INSERT " + JSON.stringify(okPacket));
             return okPacket.insertId;
