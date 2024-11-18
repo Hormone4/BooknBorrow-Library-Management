@@ -276,7 +276,9 @@ export default {
       this.refreshCurrentBook();
     },
     action: function(newAction, oldAction) {
-      this.getAllData();
+      if (newAction === 'list') {
+        this.getAllData();
+      }
     }
   },
 
