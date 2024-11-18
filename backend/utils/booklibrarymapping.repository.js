@@ -1,6 +1,6 @@
 require('dotenv').config();
 const os = process.env.OS;
-let path;
+let path = __dirname + "\\db.include.js";
 if (os === 'l') {
     path = __dirname + "/db.include.js";  // Linux path
 } else if (os === 'w') {
