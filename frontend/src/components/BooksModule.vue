@@ -100,7 +100,7 @@
       </div>
 
       <!-- New book button -->
-      <input type="button" value="Add a new book" @click="$router.push('/books/edit/0')" class="zoom-hover new-book-button" />
+      <input type="button" value="Add a new book" @click="$router.push('/books/edit/0')" class="zoom-hover new-button" />
 
       <!-- Book list -->
       <ul class="book-list">
@@ -172,7 +172,6 @@ export default {
   methods: {   // logic that can be called from the template
 
     async getAllData() {
-      // load all data from a json file
       try {
         let responseBooks = await this.$http.get('http://localhost:9000/api/books/list ');
         this.bookArray = await responseBooks.data;
@@ -211,7 +210,7 @@ export default {
           book_description: 'Description...',
           book_publicationDate: '2000-01-01',
           book_isbn: '9780000000000',
-          book_imageFileName: 'file-name.jpg'
+          book_imageFileName: 'default-cover.jpg'
         };
         return;
       }
@@ -240,7 +239,6 @@ export default {
     },
 
     async sendEditRequest() {
-      alert("ATTTEMPTTTT EDITING BOOK");
       try {
         alert("EDITING BOOK #" + this.currentBook.book_id + "...");
         let response = await this.$http.post("http://localhost:9000/api/books/update/" + this.currentBook.book_id, {
@@ -290,7 +288,7 @@ export default {
     text-decoration: underline;
   }
 
-  .new-book-button {
+  .new-button {
     padding: 10px;
     margin-bottom: 20px;
     margin-top: -30px;
