@@ -112,8 +112,7 @@ module.exports = {
     async editOneBook(book_id, book_author, book_name, book_description, book_publicationDate, book_isbn, book_imageFileName) {
         try {
             let sql = "UPDATE book SET book_author=?, book_name=?, book_description=?, book_publicationDate=?, book_isbn=?, book_imageFileName=? WHERE book_id=?";
-            const [okPacket, fields] = await pool.execute(sql, [book_author, book_name, book_description, book_publicationDate, book_isbn, book_imageFileName, book_id]);
-            console.log("UPDATE " + JSON.stringify(okPacket));
+            const [okPacket, fields] = await pool.execute(sql, [book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName, book_id]);            console.log("UPDATE " + JSON.stringify(okPacket));
             return okPacket.affectedRows;
         } catch (err) {
             console.log(err);
