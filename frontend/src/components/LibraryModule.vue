@@ -85,8 +85,10 @@
         </tr>
         </tbody>
       </table>
+      <div id="edit-error"></div>
       <input type="button" value="SEND" @click="sendEditRequest()"  class="zoom-hover send-update" />
     </div>
+
 
     <!-- List All Libraries -->
     <div  v-if="action === 'list'">
@@ -229,6 +231,13 @@ export default {
 
       } catch (ex) {
         console.log(ex)
+        // add a div under the table to show the error message
+        let errorDiv = document.createElement("div");
+        errorDiv.innerHTML = "Make sure Lybrary Email & phone number are unique and all fields are filled";
+        // Make it red
+        errorDiv.style.color = "red";
+        // Add it to the error div
+        document.getElementById("edit-error").appendChild(errorDiv);
       }
     }
   },
@@ -236,6 +245,13 @@ export default {
   watch: {
     id: function(newId, oldId) {
       this.refreshCurrentLibrary();
+    },
+    action: function(newAction, oldAction) {
+      if (newAction === 'list') {
+        this.getAllData();
+        // remove the error message
+        document.getElementById("edit-error").innerHTML = "";
+      }
     }
 
   },
