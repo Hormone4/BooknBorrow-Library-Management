@@ -261,6 +261,10 @@ export default {
     async searchRequest() {
       try {
         let searchValue = document.getElementById("searchBar").value;
+        if (searchValue === "") {
+          this.getAllData();
+          return;
+        }
         let response = await this.$http.get("http://localhost:9000/api/books/search/" + searchValue);
         this.bookArray = response.data;
 
