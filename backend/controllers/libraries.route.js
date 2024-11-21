@@ -8,6 +8,7 @@ router.get('/list', libraryListAction); //Works
 router.get('/show/:libraryId', libraryShowAction);
 router.get('/del/:libraryId', libraryDelAction);
 router.post('/update/:libraryId', libraryUpdateAction);
+router.get('/search/:input', librarySearchAction);
 
 async function libraryListAction(request, response) {
     var libraries = await libraryRepo.getAllLibraries();
@@ -65,6 +66,11 @@ async function libraryUpdateAction(request, response) {
     } catch (error) {
         response.status(500).json({ error: 'Failed to process request' });
     }
+}
+
+async function librarySearchAction(request, response) {
+    var libraries = await libraryRepo.searchForLibrary(request.params.input);
+    response.send(JSON.stringify(libraries));
 }
 
 module.exports = router;

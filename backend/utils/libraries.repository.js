@@ -109,5 +109,18 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+
+    async searchForLibrary(userText) {
+        try {
+            let sql = "SELECT * FROM library WHERE library_name LIKE ? OR library_zipCode LIKE ? OR library_streetName LIKE ?";
+            const [rows, fields] = await pool.execute(sql, [`%${userText}%`, `%${userText}%`, `%${userText}%`]);
+            console.log("Libraries FILTERED: " + rows.length);
+            return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
+
 };

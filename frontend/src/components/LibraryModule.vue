@@ -100,7 +100,7 @@
         <div class="row height d-flex justify-content-center align-items-center">
           <div class="col-md-8">
             <div class="search">
-              <input type="text" class="form-control" placeholder="Search for a Library">
+              <input type="text" @input="searchRequest()" id="searchBar" class="form-control" placeholder="Search for a Library">
               <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
             </div>
           </div>
@@ -238,6 +238,21 @@ export default {
         errorDiv.style.color = "red";
         // Add it to the error div
         document.getElementById("edit-error").appendChild(errorDiv);
+      }
+    },
+
+    async searchRequest() {
+      try {
+        let searchValue = document.getElementById("searchBar").value;
+        if (searchValue === "") {
+          this.getAllData();
+          return;
+        }
+        let response = await this.$http.get("http://localhost:9000/api/libraries/search/" + searchValue);
+        this.libraryArray = response.data;
+
+      } catch (ex) {
+        console.log(ex);
       }
     }
   },
