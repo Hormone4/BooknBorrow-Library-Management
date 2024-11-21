@@ -72,8 +72,21 @@ module.exports = {
 
     async delOneLibrary(library_id) {
         try {
-            let sql = "DELETE FROM library WHERE library_id = ?";
-            const [okPacket, fields] = await pool.execute(sql, [library_id]);
+            // First delete related borrow records
+            let sql = "DELETE b FROM borrow b " +
+                             "JOIN bookLibraryMapping blm ON b.book_library_mapping_id = blm.book_library_mapping_id " +
+                             "WHERE blm.library_id = ?";
+            let [okPacket, fields] = await pool.execute(sql, [library_id]);
+
+            // Then delete the bookLibraryMapping records
+            sql = "DELETE FROM bookLibraryMapping " +
+                  "WHERE library_id = ?";
+            [okPacket, fields] = await pool.execute(sql, [library_id]);
+
+            // Finally delete the library
+            sql = "DELETE FROM library WHERE library_id = ?";
+            [okPacket, fields] = await pool.execute(sql, [library_id]);
+
             console.log("DELETE " + JSON.stringify(okPacket));
             return okPacket.affectedRows;
         } catch (err) {
