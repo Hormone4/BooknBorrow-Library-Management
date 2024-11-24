@@ -233,7 +233,7 @@ export default {
         console.log(ex)
         // add a div under the table to show the error message
         let errorDiv = document.createElement("div");
-        errorDiv.innerHTML = "Make sure Lybrary Email & phone number are unique and all fields are filled";
+        errorDiv.innerHTML = "Make sure Library Email & phone number are unique and all fields are filled";
         // Make it red
         errorDiv.style.color = "red";
         // Add it to the error div
