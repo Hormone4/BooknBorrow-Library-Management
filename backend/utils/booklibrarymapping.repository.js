@@ -16,12 +16,11 @@ module.exports = {
             "library_id": 0,
             "book_status": 'available'
         };
-
     },
 
     async getAllBookLibraryMappings() {
         try {
-            let sql = "SELECT * FROM book_library_mapping";
+            let sql = "SELECT * FROM bookLibraryMapping";
             const [rows, fields] = await pool.execute(sql);
             console.log("BookLibraryMappings FETCHED: " + rows.length);
             return rows;
@@ -33,7 +32,7 @@ module.exports = {
 
     async getOneBookLibraryMapping(book_library_mapping_id) {
         try {
-            let sql = "SELECT * FROM book_library_mapping WHERE book_library_mapping_id = ?";
+            let sql = "SELECT * FROM bookLibraryMapping WHERE book_library_mapping_id = ?";
             const [rows, fields] = await pool.execute(sql, [book_library_mapping_id]);
             console.log("SINGLE BookLibraryMapping FETCHED: " + rows.length);
             return rows.length === 1 ? rows[0] : false;
@@ -45,7 +44,7 @@ module.exports = {
 
     async getBookLibraryMappingsByBookId(book_id) {
         try {
-            let sql = "SELECT * FROM book_library_mapping WHERE book_id = ?";
+            let sql = "SELECT * FROM bookLibraryMapping WHERE book_id = ?";
             const [rows, fields] = await pool.execute(sql, [book_id]);
             console.log("BookLibraryMappings FILTERED: " + rows.length);
             return rows;
@@ -57,7 +56,7 @@ module.exports = {
 
     async getBookLibraryMappingsByLibraryId(library_id) {
         try {
-            let sql = "SELECT * FROM book_library_mapping WHERE library_id = ?";
+            let sql = "SELECT * FROM bookLibraryMapping WHERE library_id = ?";
             const [rows, fields] = await pool.execute(sql, [library_id]);
             console.log("BookLibraryMappings FILTERED: " + rows.length);
             return rows;
@@ -69,7 +68,7 @@ module.exports = {
 
     async addBookLibraryMapping(book_id, library_id) {
         try {
-            let sql = "INSERT INTO book_library_mapping (book_id, library_id) VALUES (?, ?)";
+            let sql = "INSERT INTO bookLibraryMapping (book_id, library_id) VALUES (?, ?)";
             const [rows, fields] = await pool.execute(sql, [book_id, library_id]);
             console.log("BookLibraryMapping ADDED: " + rows.affectedRows);
             return rows.affectedRows === 1 ? true : false;
@@ -81,7 +80,7 @@ module.exports = {
 
     async delOneBookLibraryMapping(book_library_mapping_id) {
         try {
-            let sql = "DELETE FROM book_library_mapping WHERE book_library_mapping_id = ?";
+            let sql = "DELETE FROM bookLibraryMapping WHERE book_library_mapping_id = ?";
             const [rows, fields] = await pool.execute(sql, [book_library_mapping_id]);
             console.log("BookLibraryMapping DELETED: " + rows.affectedRows);
             return rows.affectedRows;
@@ -93,7 +92,7 @@ module.exports = {
 
     async delBookLibraryMappingsByBookIdAndLibraryId(book_id, library_id) {
         try {
-            let sql = "DELETE FROM book_library_mapping WHERE book_id = ? AND library_id = ?";
+            let sql = "DELETE FROM bookLibraryMapping WHERE book_id = ? AND library_id = ?";
             const [rows, fields] = await pool.execute(sql, [book_id, library_id]);
             console.log("BookLibraryMappings DELETED: " + rows.affectedRows);
             return rows.affectedRows;
@@ -102,5 +101,4 @@ module.exports = {
             throw err;
         }
     }
-
 };
