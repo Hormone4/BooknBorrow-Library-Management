@@ -54,6 +54,8 @@ app.get('/', (request, response) => { // 'GET' or 'POST'...
 app.use("/static", express.static(__dirname + '/static'));
 app.use("/api/books", require("./controllers/booksapi.route"));
 app.use("/api/libraries", require("./controllers/libraries.route"));
+app.use("/api/booklibrarymappings", require("./controllers/booklibrarymapping.route"));
+app.use("/api/borrows", require("./controllers/borrow.route"));
 //app.use("/api/borrows", require("./controllers/reservations.route"));
 
 // app.use("/auth", require("./controllers/auth.route"));
