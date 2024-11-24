@@ -7,6 +7,8 @@ if (os === 'l') {
     path = __dirname + "\\db.include.js";  // Windows path
 }
 pool = require(path);
+const { verifyInput } = require('../utils/inputvalidation');
+
 
 module.exports = {
     getBlankBook() {
@@ -39,6 +41,9 @@ module.exports = {
 
     async getBooksByName(name) {
         try {
+            // verify input
+            name = verifyInput(name);
+
             let sql = "SELECT * FROM book WHERE upper(book_name) LIKE upper(?)";
             const [rows, fields] = await pool.execute(sql, [`%${name}%`]);
             rows.forEach(row => {
@@ -55,6 +60,9 @@ module.exports = {
 
     async getOneBook(book_id) {
         try {
+            // verify input
+            book_id = verifyInput(book_id);
+
             let sql = "SELECT * FROM book WHERE book_id = ?";
             const [rows, fields] = await pool.execute(sql, [book_id]);
             console.log("SINGLE Book FETCHED: " + rows.length);
@@ -74,6 +82,9 @@ module.exports = {
 
     async delOneBook(book_id) {
         try {
+            // verify input
+            book_id = verifyInput(book_id);
+
             // First delete any related borrow records
             let sql = "DELETE b FROM borrow b " +
                              "JOIN bookLibraryMapping blm ON b.book_library_mapping_id = blm.book_library_mapping_id " +
@@ -98,6 +109,14 @@ module.exports = {
 
     async addOneBook(book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName) {
         try {
+            // verify input
+            book_name = verifyInput(book_name);
+            book_author = verifyInput(book_author);
+            book_description = verifyInput(book_description);
+            book_publicationDate = verifyInput(book_publicationDate);
+            book_isbn = verifyInput(book_isbn);
+            book_imageFileName = verifyInput(book_imageFileName);
+
             let sql = "INSERT INTO book (book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName) " +
                              "VALUES (?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await pool.execute(sql, [book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName]);
@@ -111,6 +130,14 @@ module.exports = {
 
     async editOneBook(book_id, book_author, book_name, book_description, book_publicationDate, book_isbn, book_imageFileName) {
         try {
+            // verify input
+            book_name = verifyInput(book_name);
+            book_author = verifyInput(book_author);
+            book_description = verifyInput(book_description);
+            book_publicationDate = verifyInput(book_publicationDate);
+            book_isbn = verifyInput(book_isbn);
+            book_imageFileName = verifyInput(book_imageFileName);
+
             let sql = "UPDATE book SET book_author=?, book_name=?, book_description=?, book_publicationDate=?, book_isbn=?, book_imageFileName=? WHERE book_id=?";
             const [okPacket, fields] = await pool.execute(sql, [book_name, book_author, book_description, book_publicationDate, book_isbn, book_imageFileName, book_id]);            console.log("UPDATE " + JSON.stringify(okPacket));
             return okPacket.affectedRows;
@@ -122,6 +149,9 @@ module.exports = {
 
     async searchForBook(userText) {
         try {
+            // verify input
+            userText = verifyInput(userText);
+
             let sql = "SELECT * FROM book WHERE book_name LIKE ? OR book_author LIKE ? OR book_description LIKE ? OR book_isbn LIKE ?";
             const [rows, fields] = await pool.execute(sql, [`%${userText}%`, `%${userText}%`, `%${userText}%`, `%${userText}%`]);
             rows.forEach(row => {

@@ -7,6 +7,9 @@ if (os === 'l') {
     path = __dirname + "\\db.include.js";  // Windows path
 }
 pool = require(path);
+const { verifyInput } = require('../utils/inputvalidation');
+
+
 module.exports = {
     getBlankLibrary() {
         return {
@@ -35,6 +38,9 @@ module.exports = {
 
     async getOneLibrary(library_id) {
         try {
+            // verify input
+            library_id = verifyInput(library_id);
+            
             let sql = "SELECT * FROM library WHERE library_id = ?";
             const [rows, fields] = await pool.execute(sql, [library_id]);
             console.log("SINGLE Library FETCHED: " + rows.length);
@@ -47,6 +53,16 @@ module.exports = {
 
     async addOneLibrary(library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) {
         try {
+            // verify input
+            library_id = verifyInput(library_id);
+            library_name = verifyInput(library_name);
+            library_email = verifyInput(library_email);
+            library_phone = verifyInput(library_phone);
+            library_creationYear = verifyInput(library_creationYear);
+            library_zipCode = verifyInput(library_zipCode);
+            library_streetName = verifyInput(library_streetName);
+            library_streetNumber = verifyInput(library_streetNumber);
+
             let sql = "INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) "+
                              "VALUES (?, ?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await pool.execute(sql, [library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber]);
@@ -60,6 +76,16 @@ module.exports = {
 
     async editOneLibrary(library_id, library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) {
         try {
+            // verify input
+            library_id = verifyInput(library_id);
+            library_name = verifyInput(library_name);
+            library_email = verifyInput(library_email);
+            library_phone = verifyInput(library_phone);
+            library_creationYear = verifyInput(library_creationYear);
+            library_zipCode = verifyInput(library_zipCode);
+            library_streetName = verifyInput(library_streetName);
+            library_streetNumber = verifyInput(library_streetNumber);
+
             let sql = "UPDATE library SET library_name=?, library_email=?, library_phone=?, library_creationYear=?, library_zipCode=?, library_streetName=?, library_streetNumber=? WHERE library_id=?";
             const [okPacket, fields] = await pool.execute(sql, [library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber, library_id]);
             console.log("UPDATE " + JSON.stringify(okPacket));
@@ -72,6 +98,9 @@ module.exports = {
 
     async delOneLibrary(library_id) {
         try {
+            // verify input
+            library_id = verifyInput(library_id);
+
             // First delete related borrow records
             let sql = "DELETE b FROM borrow b " +
                              "JOIN bookLibraryMapping blm ON b.book_library_mapping_id = blm.book_library_mapping_id " +
@@ -97,6 +126,9 @@ module.exports = {
 
     async getLibraryBooks(library_id) {
         try {
+            // verify input
+            library_id = verifyInput(library_id);
+
             let sql = `
                 SELECT b.*, blm.book_status
                 FROM book b
@@ -113,6 +145,9 @@ module.exports = {
 
     async searchForLibrary(userText) {
         try {
+            // verify input
+            userText = verifyInput(userText);
+
             let sql = "SELECT * FROM library WHERE library_name LIKE ? OR library_zipCode LIKE ? OR library_streetName LIKE ?";
             const [rows, fields] = await pool.execute(sql, [`%${userText}%`, `%${userText}%`, `%${userText}%`]);
             console.log("Libraries FILTERED: " + rows.length);
