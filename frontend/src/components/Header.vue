@@ -14,6 +14,9 @@
           <a href="#/libraries/list/all"> Libraries</a>
         </li>
         <li class="zoom-hover">
+          <a href="#/mappings/list/all"> Mappings</a>
+        </li>
+        <li class="zoom-hover">
           <a href="#/borrow/list/all"> Borrows</a>
         </li>
       </ul>
