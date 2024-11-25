@@ -101,7 +101,7 @@ module.exports = {
             
             // Update book status in bookLibraryMapping
             sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";
-            await pool.execute(sql, [book_library_mapping_id]);
+            [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id]);
 
             console.log("INSERT " + JSON.stringify(okPacket));
             return okPacket.insertId;
