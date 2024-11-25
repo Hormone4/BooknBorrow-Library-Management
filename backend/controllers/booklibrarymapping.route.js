@@ -5,10 +5,8 @@ const bookLibraryMappingRepo = require('../utils/booklibrarymapping.repository')
 
 router.get('/list', mappingListAction);
 router.get('/show/:mappingId', mappingShowAction);
-router.get('/book/:bookId', mappingsByBookAction);
-router.get('/library/:libraryId', mappingsByLibraryAction);
 router.get('/del/:mappingId', mappingDelAction);
-router.post('/add', mappingAddAction);
+router.post('/update/:mappingId', mappingUpdateAction);
 
 async function mappingListAction(request, response) {
     var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappings();
@@ -36,18 +34,34 @@ async function mappingDelAction(request, response) {
     response.send(JSON.stringify(result));
 }
 
-async function mappingAddAction(request, response) {
+async function mappingUpdateAction(request, response) {
     try {
-        if (!request.body || !request.body.book_id || !request.body.library_id) {
+        if (!request.body) {
             return response.status(400).json({ error: 'No data provided in request body' });
         }
 
-        const newMapping = await bookLibraryMappingRepo.addBookLibraryMapping(
-            request.body.book_id,
-            request.body.library_id
-        );
-        
-        let result = { message: 'Mapping added successfully' };
+        const mappingId = request.params.mappingId;
+        let result;
+
+        if (mappingId === "0") {
+            // Add new Mapping
+            const newMappingId = await bookLibraryMappingRepo.addOneBookLibraryMapping(
+                request.body.book_id,
+                request.body.library_id,
+                request.body.book_status
+            );
+            result = { mappingId: newMappingId, message: 'Mapping added successfully' };
+        } else {
+            // Update existing Mapping
+            const numRows = await bookLibraryMappingRepo.editOneBookLibraryMapping(
+                mappingId,
+                request.body.book_id,
+                request.body.library_id,
+                request.body.book_status
+            );
+            result = { rowsUpdated: numRows };
+        }
+
         response.json(result);
     } catch (error) {
         response.status(500).json({ error: 'Failed to process request' });
