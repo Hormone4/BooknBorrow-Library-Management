@@ -67,7 +67,7 @@ module.exports = {
         }
     },
 
-    async addBookLibraryMapping(book_id, library_id, book_status) {
+    async addOneBookLibraryMapping(book_id, library_id, book_status) {
         try {
             let sql = "INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES (?, ?, ?)";
             const [rows, fields] = await pool.execute(sql, [book_id, library_id, book_status]);
