@@ -94,5 +94,17 @@ module.exports = {
             throw err;
         }
     },
+
+    async editOneBookLibraryMapping(book_library_mapping_id, book_id, library_id, book_status) {
+        try {
+            let sql = "UPDATE bookLibraryMapping SET book_id = ?, library_id = ?, book_status = ? WHERE book_library_mapping_id = ?";
+            const [rows, fields] = await pool.execute(sql, [book_id, library_id, book_status, book_library_mapping_id]);
+            console.log("BookLibraryMapping UPDATED: " + rows.affectedRows);
+            return rows.affectedRows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
     
 };
