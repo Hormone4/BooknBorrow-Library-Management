@@ -54,7 +54,6 @@ module.exports = {
     async addOneLibrary(library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) {
         try {
             // verify input
-            library_id = verifyInput(library_id);
             library_name = verifyInput(library_name);
             library_email = verifyInput(library_email);
             library_phone = verifyInput(library_phone);
