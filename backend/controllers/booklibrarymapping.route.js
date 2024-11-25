@@ -11,29 +11,49 @@ router.get('/del/:mappingId', mappingDelAction);
 router.post('/add', mappingAddAction);
 
 async function mappingListAction(request, response) {
-    var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappings();
-    response.send(JSON.stringify(mappings));
+    try {
+        var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappings();
+        response.send(JSON.stringify(mappings));
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
+    }
 }
 
 async function mappingShowAction(request, response) {
-    var oneMapping = await bookLibraryMappingRepo.getOneBookLibraryMapping(request.params.mappingId);
-    response.send(JSON.stringify(oneMapping));
+    try {
+        var oneMapping = await bookLibraryMappingRepo.getOneBookLibraryMapping(request.params.mappingId);
+        response.send(JSON.stringify(oneMapping));
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
+    }
 }
 
 async function mappingsByBookAction(request, response) {
-    var mappings = await bookLibraryMappingRepo.getBookLibraryMappingsByBookId(request.params.bookId);
-    response.send(JSON.stringify(mappings));
+    try {
+        var mappings = await bookLibraryMappingRepo.getBookLibraryMappingsByBookId(request.params.bookId);
+        response.send(JSON.stringify(mappings));
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
+    }
 }
 
 async function mappingsByLibraryAction(request, response) {
-    var mappings = await bookLibraryMappingRepo.getBookLibraryMappingsByLibraryId(request.params.libraryId);
-    response.send(JSON.stringify(mappings));
+    try {
+        var mappings = await bookLibraryMappingRepo.getBookLibraryMappingsByLibraryId(request.params.libraryId);
+        response.send(JSON.stringify(mappings));
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
+    }
 }
 
 async function mappingDelAction(request, response) {
-    var numRows = await bookLibraryMappingRepo.delOneBookLibraryMapping(request.params.mappingId);
-    let result = { rowsDeleted: numRows };
-    response.send(JSON.stringify(result));
+    try {
+        var numRows = await bookLibraryMappingRepo.delOneBookLibraryMapping(request.params.mappingId);
+        let result = { rowsDeleted: numRows };
+        response.send(JSON.stringify(result));
+    } catch (error) {
+        response.status(500).json({ error: 'Failed to process request' });
+    }
 }
 
 async function mappingAddAction(request, response) {
