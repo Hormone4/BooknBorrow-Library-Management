@@ -55,10 +55,6 @@
                             <th>Password</th>
                             <td><input type="password" v-model="currentUser.user_password"></td>
                         </tr>
-                        <tr v-if="id !== '0' && id !== 'all'">
-                            <th>Created</th>
-                            <td><input type="date" v-model="currentUser.user_created"></td>
-                        </tr>
                         <tr>
                             <th>Role</th>
                             <td>
