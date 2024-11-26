@@ -86,9 +86,9 @@
                         <th>Book ID</th>
                         <th>Library ID</th>
                         <th>Status</th>
-                        <th>SEE Mapping</th>
-                        <th>EDIT Mapping</th>
-                        <th>DELETE Mapping</th>
+                        <th>SEE</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,17 +97,17 @@
                         <td>{{ mapping.book_id }}</td>
                         <td>{{ mapping.library_id }}</td>
                         <td>{{ mapping.book_status }}</td>
-                        <td>
+                        <td class="table-action-button">
                             <a :href="'/#/mappings/show/' + mapping.book_library_mapping_id">
                                 <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
                             </a>
                         </td>
-                        <td>
+                        <td class="table-action-button">
                             <a :href="'/#/mappings/edit/' + mapping.book_library_mapping_id">
                                 <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
                             </a>
                         </td>
-                        <td>
+                        <td class="table-action-button">
                             <input type="button" value="DELETE" @click="sendDeleteRequest(mapping.book_library_mapping_id)" class="zoom-hover"/>
                         </td>
                     </tr>

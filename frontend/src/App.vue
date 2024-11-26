@@ -38,6 +38,10 @@ export default {
     margin-bottom: 30px;
   }
 
+  .table-action-button {
+    width: 70px;
+  }
+
   input[type="button"], button {
     background-color: #42b983;
     color: white;

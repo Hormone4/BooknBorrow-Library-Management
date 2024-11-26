@@ -114,30 +114,32 @@
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
+            <th>Library ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>SEE Library</th>
-            <th>EDIT Library</th>
-            <th>DELETE Library</th>
+            <th>SEE</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="library in libraryArray" :key="library.library_id">
+            <td>{{ library.library_id }}</td>
             <td>{{ library.library_name }}</td>
             <td>{{ library.library_email }}</td>
             <td>{{ library.library_phone }}</td>
-            <td>
+            <td class="table-action-button">
               <a :href="'/#/libraries/show/' + library.library_id">
                 <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
               </a>
-              </td>
-              <td>
+            </td>
+            <td class="table-action-button">
               <a :href="'/#/libraries/edit/' + library.library_id">
                 <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
               </a>
             </td>
-            <td>
+            <td class="table-action-button">
               <input type="button" value="DELETE" @click="sendDeleteRequest(library.library_id)" class="zoom-hover"/>
             </td>
           </tr>
