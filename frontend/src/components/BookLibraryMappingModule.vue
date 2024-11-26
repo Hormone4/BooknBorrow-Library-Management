@@ -63,17 +63,6 @@
         <div v-if="action === 'list'">
             <h1 class="component-h1">Book-Library Mappings List</h1>
 
-            <!-- Search bar -->
-            <div class="container">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-8">
-                        <div class="search">
-                            <input type="text" @input="searchRequest()" id="searchBar" class="form-control" placeholder="Search for a Mapping">
-                            <input type="button" value="Search" @click="searchRequest()" class="zoom-hover"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- New Mapping button -->
             <input type="button" value="Add a new Mapping" @click="$router.push('/mappings/edit/0')" class="zoom-hover new-button" />
