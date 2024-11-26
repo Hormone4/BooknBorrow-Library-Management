@@ -94,11 +94,12 @@ module.exports = {
             book_library_mapping_id = verifyInput(book_library_mapping_id);
             user_id = verifyInput(user_id);
             borrow_returnDate = verifyInput(borrow_returnDate);
-
+            console.log("borrow_returnDate: " + borrow_returnDate);
             let sql = "INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) " +
-                      "VALUES (?, ?, now(), ?, NULL, 'borrowed', 0)";
+                      "VALUES (?, ?, now(), ?, NULL, 'ongoing', 0)";
             let [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id, borrow_returnDate]);
-            
+
+
             // Update book status in bookLibraryMapping
             sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";
             [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id]);
