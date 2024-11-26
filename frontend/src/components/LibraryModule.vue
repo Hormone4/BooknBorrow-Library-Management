@@ -29,19 +29,40 @@
           <td>{{ currentLibrary.library_creationYear }}</td>
         </tr>
         <tr>
-          <th>Zip Code</th>
-          <td>{{ currentLibrary.library_zipCode }}</td>
-        </tr>
-        <tr>
-          <th>Street Name</th>
-          <td>{{ currentLibrary.library_streetName }}</td>
-        </tr>
-        <tr>
-          <th>Street Number</th>
-          <td>{{ currentLibrary.library_streetNumber }}</td>
+          <th>Address</th>
+          <td>
+            {{ currentLibrary.library_zipCode }}</br>
+            {{ currentLibrary.library_streetName }}, {{ currentLibrary.library_streetNumber }} 
+          </td>
         </tr>
         </tbody>
       </table>
+      </br>
+
+      <h1 class="component-h1">Books in this Library</h1>
+      <ul class="book-list">
+        <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="3">
+                  <a :href="'/#/books/show/' + book.book_id">
+                    {{ book.book_name }}<br/>
+                    <i><small>{{ book.book_author }}</small></i>
+                  </a>
+                </th>
+              </tr>
+              <tr>
+                <th colspan="3">
+                  <a :href="'/#/books/show/' + book.book_id">
+                    <img v-bind:src="'../../static/book-covers/'+book.book_imageFileName" alt="" width="150" height="230">
+                  </a>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </li>
+      </ul>
     </div>
 
     <!-- Edit Library Details -->
@@ -126,7 +147,11 @@
         <tbody>
           <tr v-for="library in libraryArray" :key="library.library_id">
             <td>{{ library.library_id }}</td>
-            <td>{{ library.library_name }}</td>
+            <td>
+              <a :href="'/#/libraries/show/' + library.library_id">
+                {{ library.library_name }}
+              </a>
+            </td>
             <td>{{ library.library_email }}</td>
             <td>{{ library.library_phone }}</td>
             <td class="table-action-button">
@@ -157,6 +182,7 @@ export default {
   data() {
     return {
       libraryArray: [],
+      bookArray: [],
       currentLibrary: {
         library_id: 0,
         library_name: '',
@@ -197,6 +223,9 @@ export default {
       try {
         let responseLibrary = await this.$http.get("http://localhost:9000/api/libraries/show/" + this.$props.id);
         this.currentLibrary = responseLibrary.data;
+
+        let responseBooks = await this.$http.get("http://localhost:9000/api/libraries/listbooks/" + this.$props.id);
+        this.bookArray = responseBooks.data;
 
       } catch (exception) {
         console.log(exception);
@@ -292,9 +321,13 @@ export default {
     display: inline-block;
     margin: 0 10px;
   }
-
   a {
-    color: #42b983;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 
 
@@ -308,6 +341,28 @@ export default {
   .send-update {
     margin-top: 20px;
     padding: 10px;
+  }
+
+
+  /************ BOOK LIST ************/
+  .book-list {
+    margin: auto; /* Center the ul element */
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1500px;
+    list-style-type: none; /* Remove dots */
+  }
+
+  .book-list li {
+    margin: 0 20px 20px;
+    text-align: center;
+    position: relative;
+    max-width: 200px;
   }
 
   /************ SEARCH BAR ************/

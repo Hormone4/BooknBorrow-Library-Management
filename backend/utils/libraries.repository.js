@@ -102,8 +102,8 @@ module.exports = {
 
             // First delete related borrow records
             let sql = "DELETE b FROM borrow b " +
-                             "JOIN bookLibraryMapping blm ON b.book_library_mapping_id = blm.book_library_mapping_id " +
-                             "WHERE blm.library_id = ?";
+                      "JOIN bookLibraryMapping blm ON b.book_library_mapping_id = blm.book_library_mapping_id " +
+                      "WHERE blm.library_id = ?";
             let [okPacket, fields] = await pool.execute(sql, [library_id]);
 
             // Then delete the bookLibraryMapping records
@@ -128,11 +128,10 @@ module.exports = {
             // verify input
             library_id = verifyInput(library_id);
 
-            let sql = `
-                SELECT b.*, blm.book_status
-                FROM book b
-                JOIN bookLibraryMapping blm ON b.book_id = blm.book_id
-                WHERE blm.library_id = ?`;
+            let sql = "SELECT b.*, blm.book_status " +
+                      "FROM book b " +
+                      "JOIN bookLibraryMapping blm ON b.book_id = blm.book_id " +
+                      "WHERE blm.library_id = ?";
             const [rows, fields] = await pool.execute(sql, [library_id]);
             console.log("Library Books FETCHED: " + rows.length);
             return rows;
