@@ -44,6 +44,9 @@
     <!-- Edit Borrow Details -->
     <div v-if="action === 'edit'">
       <h1 class="component-h1">Edit Borrow</h1>
+      <h3 v-if="id === '0' || id === 'all'">
+        New Borrow:
+      </h3>
       <table class="table table-striped table-bordered table-hover show-table">
         <tbody>
           <tr>
@@ -58,13 +61,25 @@
             <th>User ID</th>
             <td><input type="number" v-model="currentBorrow.user_id" /></td>
           </tr>
-          <tr>
+          <tr v-if="id !== '0' && id !== 'all'">
             <th>Borrow Date</th>
             <td><input type="date" v-model="currentBorrow.borrow_borrowDate" /></td>
           </tr>
           <tr>
             <th>Return Date</th>
             <td><input type="date" v-model="currentBorrow.borrow_returnDate" /></td>
+          </tr>
+          <tr v-if="id !== '0' && id !== 'all'">
+            <th>Actual Return Date</th>
+            <td><input type="date" v-model="currentBorrow.borrow_actualReturnDate" /></td>
+          </tr>
+          <tr v-if="id !== '0' && id !== 'all'">
+            <th>Status</th>
+            <td><input type="text" v-model="currentBorrow.borrow_status" /></td>
+          </tr>
+          <tr v-if="id !== '0' && id !== 'all'">
+            <th>Fine</th>
+            <td><input type="number" v-model="currentBorrow.borrow_fine" /></td>
           </tr>
         </tbody>
       </table>
@@ -99,17 +114,17 @@
             <td>{{ borrow.borrow_borrowDate }}</td>
             <td>{{ borrow.borrow_returnDate }}</td>
             <td>{{ borrow.borrow_status }}</td>
-            <td>
+            <td class="table-action-button">
               <a :href="'/#/borrow/show/' + borrow.borrow_id">
                 <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
               </a>
             </td>
-            <td>
+            <td class="table-action-button">
               <a :href="'/#/borrow/edit/' + borrow.borrow_id">
                 <img src="../assets/logos/edit-logo.png" alt="[EDIT]" class="zoom-hover">
               </a>
             </td>
-            <td>
+            <td class="table-action-button">
               <input type="button" value="DELETE" @click="sendDeleteRequest(borrow.borrow_id)" class="zoom-hover"/>
             </td>
           </tr>
@@ -132,7 +147,7 @@ export default {
         user_id: 0,
         borrow_borrowDate: new Date().toISOString().slice(0, 10),
         borrow_returnDate: new Date().toISOString().slice(0, 10),
-        borrow_actualReturnDate: null,
+        borrow_actualReturnDate:  new Date().toISOString().slice(0, 10),
         borrow_status: 'borrowed',
         borrow_fine: 0
       }
@@ -156,8 +171,8 @@ export default {
           user_id: 0,
           borrow_borrowDate: new Date().toISOString().slice(0, 10),
           borrow_returnDate: new Date().toISOString().slice(0, 10),
-          borrow_actualReturnDate: "none",
-          borrow_status: 'borrowed',
+          borrow_actualReturnDate:  new Date().toISOString().slice(0, 10),
+          borrow_status: 'ongoing',
           borrow_fine: 0
         };
         return;
