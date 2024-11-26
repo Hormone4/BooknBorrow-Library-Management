@@ -97,7 +97,8 @@
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
-            <th>Book ID</th>
+            <th>Borrow ID</th>
+            <th>BLM ID</th>
             <th>User ID</th>
             <th>Borrow Date</th>
             <th>Return Date</th>
@@ -109,6 +110,7 @@
         </thead>
         <tbody>
           <tr v-for="borrow in borrowArray" :key="borrow.borrow_id">
+            <td>{{ borrow.borrow_id }}</td>
             <td>{{ borrow.book_library_mapping_id }}</td>
             <td>{{ borrow.user_id }}</td>
             <td>{{ borrow.borrow_borrowDate }}</td>
@@ -156,7 +158,7 @@ export default {
   methods: {
     async getAllData() {
       try {
-        let responseBorrows = await this.$http.get('http://localhost:9000/api/borrows/list');
+        let responseBorrows = await this.$http.get('http://localhost:9000/api/borrow/list');
         this.borrowArray = await responseBorrows.data;
       } catch (exception) {
         console.log(exception);
@@ -179,7 +181,7 @@ export default {
       }
 
       try {
-        let responseBorrow = await this.$http.get("http://localhost:9000/api/borrows/show/" + this.$props.id);
+        let responseBorrow = await this.$http.get("http://localhost:9000/api/borrow/show/" + this.$props.id);
         this.currentBorrow = responseBorrow.data;
       } catch (exception) {
         console.log(exception);
@@ -189,7 +191,7 @@ export default {
     async sendDeleteRequest(borrow_id) {
       try {
         alert("DELETING BORROW #" + borrow_id + "...");
-        let response = await this.$http.get("http://localhost:9000/api/borrows/del/" + borrow_id);
+        let response = await this.$http.get("http://localhost:9000/api/borrow/del/" + borrow_id);
         alert("DELETED: " + response.data.rowsDeleted + " borrow(s)");
         this.getAllData();
       } catch (ex) {
@@ -200,9 +202,9 @@ export default {
     async sendEditRequest() {
       try {
         alert("EDITING BORROW #" + this.currentBorrow.borrow_id + "...");
-        let response = await this.$http.post("http://localhost:9000/api/borrows/update/" + this.currentBorrow.borrow_id, this.currentBorrow);
+        let response = await this.$http.post("http://localhost:9000/api/borrow/update/" + this.currentBorrow.borrow_id, this.currentBorrow);
         alert("EDITED: " + response.data.rowsUpdated);
-        this.$router.push({path: '/borrows/list/all'});
+        this.$router.push({path: '/borrow/list/all'});
         this.getAllData();
       } catch (ex) {
         console.log(ex);

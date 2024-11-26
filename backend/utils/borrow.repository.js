@@ -88,16 +88,16 @@ module.exports = {
     },
 
 
-    async addOneBorrow(book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate) {
+    async addOneBorrow(book_library_mapping_id, user_id, borrow_returnDate) {
         try {
             // verify input
             book_library_mapping_id = verifyInput(book_library_mapping_id);
             user_id = verifyInput(user_id);
-            borrow_borrowDate = verifyInput(borrow_borrowDate);
             borrow_returnDate = verifyInput(borrow_returnDate);
 
-            let sql = "INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_status) VALUES (?, ?, ?, ?, 'borrowed')";
-            const [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate]);
+            let sql = "INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) " +
+                      "VALUES (?, ?, now(), ?, NULL, 'borrowed', 0)";
+            let [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id, borrow_returnDate]);
             
             // Update book status in bookLibraryMapping
             sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";
