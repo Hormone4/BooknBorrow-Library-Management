@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS borrow (
     borrow_borrowDate DATE NOT NULL,
     borrow_returnDate DATE NOT NULL,
     borrow_actualReturnDate DATE,
-    borrow_status ENUM('borrowed', 'returned', 'overdue') NOT NULL,
+    borrow_status ENUM('ongoing', 'finished', 'overdue') NOT NULL,
     borrow_fine INT,
     
     CONSTRAINT chk_returnDate CHECK (borrow_borrowDate <= borrow_returnDate)
@@ -125,10 +125,10 @@ INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
 ;
 
 INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) VALUES
-    (3, 1, '2023-06-01', '2023-06-15', '2023-06-13', 'returned', 0), -- , 'The Hobbit by John Doe, borrowed by John Doe'),
+    (3, 1, '2023-06-01', '2023-06-15', '2023-06-13', 'finished', 0), -- , 'The Hobbit by John Doe, borrowed by John Doe'),
     (6, 2, '2023-07-10', '2023-07-24', '2023-07-28', 'overdue', 15), -- , 'Sapiens by Jane Smith, borrowed by Jane Smith'),
-    (5, 3, '2023-08-05', '2023-08-19', NULL, 'borrowed', 0), -- , 'To Kill a Mockingbird by Emily Clark, borrowed by Emily Clark'),
-    (10, 4, '2023-09-01', '2023-09-15', NULL, 'borrowed', 0), -- , NULL),
+    (5, 3, '2023-08-05', '2023-08-19', NULL, 'ongoing', 0), -- , 'To Kill a Mockingbird by Emily Clark, borrowed by Emily Clark'),
+    (10, 4, '2023-09-01', '2023-09-15', NULL, 'ongoing', 0), -- , NULL),
     (6, 5, '2023-06-01', '2023-06-15', '2023-06-15', 'returned', 0) -- , NULL)
 ;
 
