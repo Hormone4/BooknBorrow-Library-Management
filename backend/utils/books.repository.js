@@ -58,6 +58,22 @@ module.exports = {
         }
     },
 
+    async getLibrariesContainingBooks(book_id) {
+    try {
+        // verify input
+        book_id = verifyInput(book_id);
+
+        let sql = "SELECT l.* FROM library l JOIN bookLibraryMapping blm ON l.library_id = blm.library_id " +
+            "WHERE blm.book_id = ?";
+        const [rows, fields] = await pool.execute(sql, [book_id]);
+        console.log("Libraries containing the book FETCHED: " + rows.length);
+        return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
     async getOneBook(book_id) {
         try {
             // verify input

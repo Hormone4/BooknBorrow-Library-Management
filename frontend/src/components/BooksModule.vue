@@ -36,6 +36,42 @@
           </tbody>
         </table>
       </div>
+
+      <h1 class="component-h1">Book available in the following Libraries</h1>
+
+        <!-- Library List -->
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>SEE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="library in libraryArray" :key="library.library_id">
+            <td class="table-action-button">{{ library.library_id }}</td>
+            <td>
+              <a :href="'/#/libraries/show/' + library.library_id">
+                {{ library.library_name }}
+              </a>
+            </td>
+            <td>{{ library.library_email }}</td>
+            <td>{{ library.library_phone }}</td>
+            <td>
+              {{ library.library_zipCode }}, {{ library.library_streetName }} {{ library.library_streetNumber }} 
+            </td>
+            <td class="table-action-button">
+              <a :href="'/#/libraries/show/' + library.library_id">
+                <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
 
@@ -164,6 +200,7 @@ export default {
   data() {
     return {   // variables that can be used in the template
       bookArray: [],
+      libraryArray: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
       currentBook: {
         book_id: 0,
@@ -225,6 +262,9 @@ export default {
       try {
         let responseBook = await this.$http.get("http://localhost:9000/api/books/show/" + this.$props.id);
         this.currentBook = responseBook.data;
+
+        let responseLibraries = await this.$http.get("http://localhost:9000/api/books/listlibraries/" + this.$props.id);
+        this.libraryArray = responseLibraries.data;
 
       } catch (ex) {
         console.log(ex);
