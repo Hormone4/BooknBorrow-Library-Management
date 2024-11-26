@@ -4,7 +4,7 @@
     <!-- Show Library Details -->
     <div v-if="action === 'show'">
 
-      <h1 class="component-h1">Library Details</h1>
+      <h1 class="component-h1">{{ currentLibrary.library_name }}</h1>
 
       <table class="table table-striped table-bordered table-hover show-table">
         <tbody>
@@ -38,6 +38,8 @@
         </tbody>
       </table>
       </br>
+      </br>
+      <hr>
 
       <h1 class="component-h1">Books in this Library</h1>
       <ul class="book-list">
