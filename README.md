@@ -16,6 +16,10 @@ Website for book-borrowing. BooknBorrow is a platform for users to borrow books 
 ## How to run
 Open terminal at the root of the repository and run the following commands:
 ```bash
+cd backend
+node server.js
+cd..
+
 cd frontend
 npm run dev
 ```
