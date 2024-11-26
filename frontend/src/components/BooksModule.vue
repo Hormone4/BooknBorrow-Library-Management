@@ -109,7 +109,10 @@
             <thead>
               <tr>
                 <th colspan="3">
-                  <a :href="'/#/books/show/' + book.book_id">{{ book.book_name }}<br/><i><small>{{ book.book_author }}</small></i> </a>
+                  <a :href="'/#/books/show/' + book.book_id">
+                    {{ book.book_name }}<br/>
+                    <i><small>{{ book.book_author }}</small></i>
+                  </a>
                 </th>
               </tr>
               <tr>
@@ -121,7 +124,7 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody> <!-- TODO: render the tbody only if user is ADMIN -->
               <tr>
                 <td>
                   <a :href="'/#/books/show/' + book.book_id">
@@ -135,6 +138,11 @@
                 </td>
                 <td>
                   <input type="button" value="DELETE" @click="sendDeleteRequest(book.book_id)" class="zoom-hover"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <small><b>Book ID: </b>{{ book.book_id }}</small>
                 </td>
               </tr>
             </tbody>
