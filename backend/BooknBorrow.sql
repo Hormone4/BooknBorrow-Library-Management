@@ -10,7 +10,7 @@ USE BooknBorrow;
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(100) NOT NULL UNIQUE,
+    user_name VARCHAR(100) NOT NULL,
     user_email VARCHAR(100) NOT NULL UNIQUE,
     user_password VARCHAR(100), -- sha2(SALT + password) with SALT being random (user_created for now)
     -- adaptive salted hashing: algorithm setting a time to hash a password.
