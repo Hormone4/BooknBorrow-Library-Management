@@ -11,19 +11,18 @@
     <h2>Discover Our Services</h2>
     <div class="card-container">
       <div class="card">
-        <h3>Book List</h3>
-        <p>Browse through a wide range of books available across multiple genres.</p>
-        <a href="#/books/list/all/" class="card-link">View Books</a>
+        <a href="#/books/list/all/">
+          <h3>Book List</h3>
+          <p>Browse through a wide range of books available across multiple genres.</p>
+          <div class="card-link zoom-hover">View Books</div>
+        </a>
       </div>
       <div class="card">
-        <h3>Libraries</h3>
-        <p>Explore our network of libraries and find the one closest to you.</p>
-        <a href="#/libraries/list/all" class="card-link">Find Libraries</a>
-      </div>
-      <div class="card">
-        <h3>Reservations</h3>
-        <p>Reserve your favorite books and enjoy seamless borrowing.</p>
-        <a href="#/borrow/list/all" class="card-link">Manage Reservations</a>
+        <a href="#/libraries/list/all">
+          <h3>Libraries</h3>
+          <p>Explore our network of libraries and find the one closest to you.</p>
+          <div class="card-link zoom-hover">Find Libraries</div>
+        </a>
       </div>
     </div>
   </div>
@@ -36,6 +35,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 /* Hero Section */
 .hero {
   background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794');
