@@ -86,6 +86,8 @@
                         <th>Book ID</th>
                         <th>Library ID</th>
                         <th>Status</th>
+                        <th>Book Name</th>
+                        <th>Library Name</th>
                         <th>SEE</th>
                         <th>EDIT</th>
                         <th>DELETE</th>
@@ -97,6 +99,8 @@
                         <td>{{ mapping.book_id }}</td>
                         <td>{{ mapping.library_id }}</td>
                         <td>{{ mapping.book_status }}</td>
+                        <td>{{ mapping.book_name }}</td>
+                        <td>{{ mapping.library_name }}</td>
                         <td class="table-action-button">
                             <a :href="'/#/mappings/show/' + mapping.book_library_mapping_id">
                                 <img src="../assets/logos/see-logo.png" alt="[SHOW]" class="zoom-hover">
@@ -135,7 +139,7 @@ export default {
     methods: {
         async getAllData() {
             try {
-                let responseMappings = await this.$http.get('http://localhost:9000/api/mappings/list');
+                let responseMappings = await this.$http.get('http://localhost:9000/api/mappings/listnames');
                 this.mappingArray = await responseMappings.data;
 
             } catch (exception) {

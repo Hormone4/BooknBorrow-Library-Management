@@ -7,6 +7,12 @@ router.get('/list', mappingListAction);
 router.get('/show/:mappingId', mappingShowAction);
 router.get('/del/:mappingId', mappingDelAction);
 router.post('/update/:mappingId', mappingUpdateAction);
+router.get('/listnames', mappingListWithNamesAction);
+
+async function mappingListWithNamesAction(request, response) {
+    var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappingsWithNames();
+    response.send(JSON.stringify(mappings));
+}
 
 async function mappingListAction(request, response) {
     var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappings();
