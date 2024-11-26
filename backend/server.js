@@ -56,6 +56,6 @@ app.use("/api/books", require("./controllers/booksapi.route"));
 app.use("/api/libraries", require("./controllers/libraries.route"));
 app.use("/api/mappings", require("./controllers/booklibrarymapping.route"));
 app.use("/api/borrows", require("./controllers/borrow.route"));
-//app.use("/api/borrows", require("./controllers/reservations.route"));
+app.use("/api/users", require("./controllers/user.route"));
 
 // app.use("/auth", require("./controllers/auth.route"));

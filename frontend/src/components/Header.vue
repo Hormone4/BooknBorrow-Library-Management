@@ -19,6 +19,9 @@
         <li class="zoom-hover">
           <a href="#/borrow/list/all"> Borrows</a>
         </li>
+        <li class="zoom-hover">
+          <a href="#/users/list/all"> Users</a>
+        </li>
       </ul>
 
       <ul @mouseover="active = true" @mouseleave="active = false" >
