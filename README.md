@@ -14,12 +14,24 @@ Website for book-borrowing. BooknBorrow is a platform for users to borrow books 
 
 
 ## How to run
-Open terminal at the root of the repository and run the following commands:
+Open terminal at the root of the repository and run the following command to install the necessary packages:
 ```bash
 cd backend
+npm install express express-session body-parser passport passport-local dotenv ejs mysql2 cors
 node server.js
 cd..
 
+cd frontend
+npm install -g vue-cli
+npm run dev
+```
+Then, to run the serverside:
+```bash
+cd backend
+node server.js
+```
+and to run the clientside:
+```bash
 cd frontend
 npm run dev
 ```
