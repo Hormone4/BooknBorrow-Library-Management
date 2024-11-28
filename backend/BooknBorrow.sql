@@ -107,7 +107,7 @@ INSERT INTO book (book_name, book_author, book_description, book_publicationDate
   ('Pride and Prejudice', 'Jane Austen', 'A classic novel about love and social class in 19th-century England.', '1813-01-28', '9781503290563', 'Pride-and-Prejudice-cover.webp'),
   ('The Catcher in the Rye', 'J.D. Salinger', 'A coming-of-age novel following the adventures of Holden Caulfield.', '1951-07-16', '9780316769488', 'The-Catcher-in-the-Rye-cover.jpg'),
   ('The Lord of the Rings', 'J.R.R. Tolkien', 'A fantasy epic about the quest to destroy a powerful ring.', '1954-07-29', '9780544003415', 'The-Lord-of-the-Rings-cover.jpg'),
-  ('The Alchemist', 'Paulo Coelho', 'A philosophical novel about a shepherd\'s journey to find his treasure.', '1988-01-01', '9780062315007', 'The-Alchemist-cover.jpg')
+  ('The Alchemist', 'Paulo Coelho', 'A philosophical novel about a shepherd\s journey to find his treasure.', '1988-01-01', '9780062315007', 'The-Alchemist-cover.jpg')
 ;
 
 INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
@@ -129,7 +129,7 @@ INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_
     (6, 2, '2023-07-10', '2023-07-24', '2023-07-28', 'overdue', 15), -- , 'Sapiens by Jane Smith, borrowed by Jane Smith'),
     (5, 3, '2023-08-05', '2023-08-19', NULL, 'ongoing', 0), -- , 'To Kill a Mockingbird by Emily Clark, borrowed by Emily Clark'),
     (10, 4, '2023-09-01', '2023-09-15', NULL, 'ongoing', 0), -- , NULL),
-    (6, 5, '2023-06-01', '2023-06-15', '2023-06-15', 'returned', 0) -- , NULL)
+    (6, 5, '2023-06-01', '2023-06-15', '2023-06-15', 'finished', 0) -- , NULL)
 ;
 
 

@@ -2,7 +2,7 @@
   <div>
 
     <div v-if="action === 'show'">
-      <h1 class="component-h1">Book Details</h1>
+      <h1 class="component-h1">{{ currentBook.book_name }}</h1>
 
       <div class="show-book">
         <img v-bind:src="'../../static/book-covers/'+currentBook.book_imageFileName" alt="" width="300">
@@ -36,8 +36,11 @@
           </tbody>
         </table>
       </div>
+      </br>
 
-      <h1 class="component-h1">Book available in the following Libraries</h1>
+      <hr>
+
+      <h1 class="component-h1">This book is available in the following Libraries</h1>
 
         <!-- Library List -->
       <table class="table table-striped table-bordered table-hover">
