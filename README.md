@@ -23,14 +23,13 @@ cd..
 
 cd frontend
 npm install -g vue-cli
-npm run dev
 ```
 Then, to run the serverside:
 ```bash
 cd backend
 node server.js
 ```
-and to run the clientside:
+and to run the clientside (in a new console window):
 ```bash
 cd frontend
 npm run dev
