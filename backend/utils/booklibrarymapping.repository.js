@@ -86,6 +86,20 @@ module.exports = {
         }
     },
 
+    async getBookNameByBookLibraryMappingId(book_library_mapping_id) {
+        try {
+            let sql = "SELECT book.* " +
+                      "FROM bookLibraryMapping INNER JOIN book ON bookLibraryMapping.book_id = book.book_id " +
+                      "WHERE book_library_mapping_id = ?";
+            const [rows, fields] = await pool.execute(sql, [book_library_mapping_id]);
+            console.log("BookLibraryMapping FETCHED: " + rows.length);
+            return rows.length === 1 ? rows[0].book_name : false;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
     async addOneBookLibraryMapping(book_id, library_id, book_status) {
         try {
             let sql = "INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES (?, ?, ?)";
