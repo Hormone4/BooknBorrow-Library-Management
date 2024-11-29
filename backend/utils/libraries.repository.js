@@ -128,10 +128,9 @@ module.exports = {
             // verify input
             library_id = verifyInput(library_id);
 
-            let sql = "SELECT b.*, blm.book_status " +
-                      "FROM book b " +
+            let sql = "SELECT b.* FROM book b " +
                       "JOIN bookLibraryMapping blm ON b.book_id = blm.book_id " +
-                      "WHERE blm.library_id = ?";
+                      "WHERE blm.library_id = ? GROUP BY b.book_id";
             const [rows, fields] = await pool.execute(sql, [library_id]);
             console.log("Library Books FETCHED: " + rows.length);
             return rows;
