@@ -91,6 +91,11 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: ContactModule
+    },
+    {
+    path : 'auth',
+    name : 'auth',
+    component: ProfileModule
     }
   ]
 })
