@@ -31,12 +31,13 @@ app.use(session({
 
 // enable Cross Origin Resource Sharing (needed for cross-origin API)
 const cors = require('cors');
-app.use(cors());
+app.use(cors({ origin: "http://localhost:8080", credentials: true, methods: [ 'GET', 'POST' ] })); 
+
 
 // configure passport
-// const auth = require("./utils/users.auth");
-// auth.initializeAuthentications(app);
-
+const auth = require("./utils/users.auth");
+auth.initializeAuthentications(app);
+app.use("/auth", require("./controllers/auth.route"));
 
 
 // *** ROUTES/CONTROLLERS ***
