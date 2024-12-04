@@ -8,6 +8,7 @@ router.get('/show/:mappingId', mappingShowAction);
 router.get('/del/:mappingId', mappingDelAction);
 router.post('/update/:mappingId', mappingUpdateAction);
 router.get('/listnames', mappingListWithNamesAction);
+router.get('/bookname/:mappingId', bookNameByMappingAction);
 
 async function mappingListWithNamesAction(request, response) {
     var mappings = await bookLibraryMappingRepo.getAllBookLibraryMappingsWithNames();
@@ -32,6 +33,11 @@ async function mappingsByBookAction(request, response) {
 async function mappingsByLibraryAction(request, response) {
     var mappings = await bookLibraryMappingRepo.getBookLibraryMappingsByLibraryId(request.params.libraryId);
     response.send(JSON.stringify(mappings));
+}
+
+async function bookNameByMappingAction(request, response) {
+    var bookName = await bookLibraryMappingRepo.getBookNameByBookLibraryMappingId(request.params.mappingId);
+    response.send(JSON.stringify(bookName));
 }
 
 async function mappingDelAction(request, response) {

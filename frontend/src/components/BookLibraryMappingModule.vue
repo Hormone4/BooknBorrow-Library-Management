@@ -36,11 +36,11 @@
                     </tr>
                     <tr>
                         <th>Book ID</th>
-                        <td><input type="number" v-model="currentMapping.book_id" /></td>
+                        <td><input type="number" @input="updateBook()" v-model="currentMapping.book_id" /></td>
                     </tr>
                     <tr>
                         <th>Library ID</th>
-                        <td><input type="number" v-model="currentMapping.library_id" /></td>
+                        <td><input type="number" @input="updateLibrary()" v-model="currentMapping.library_id" /></td>
                     </tr>
                     <tr>
                         <th>Book Status</th>
@@ -55,6 +55,8 @@
                     </tr>
                 </tbody>
             </table>
+            <div id="edit-info-book"></div>
+            <div id="edit-info-library"></div>
             <div id="edit-error"></div>
             <input type="button" value="SEND" @click="sendEditRequest()" class="zoom-hover send-update" />
         </div>
@@ -157,9 +159,7 @@ export default {
 
         async sendDeleteRequest(mapping_id) {
             try {
-                alert("DELETING MAPPING #" + mapping_id + "...");
                 let response = await this.$http.get("http://localhost:9000/api/mappings/del/" + mapping_id);
-                alert("DELETED: " + response.data.rowsDeleted + " mapping(s)");
                 this.getAllData();
 
             } catch (ex) {
@@ -169,13 +169,11 @@ export default {
 
         async sendEditRequest() {
             try {
-                alert("EDITING MAPPING #" + this.currentMapping.book_library_mapping_id + "...");
                 let response = await this.$http.post("http://localhost:9000/api/mappings/update/" + this.currentMapping.book_library_mapping_id, {
                     book_id: this.currentMapping.book_id,
                     library_id: this.currentMapping.library_id,
                     book_status: this.currentMapping.book_status
                 });
-                alert("EDITED: " + response.data.rowsUpdated);
                 this.$router.push({path: '/mappings/list/all'});
                 this.getAllData();
 
@@ -201,7 +199,29 @@ export default {
             } catch (ex) {
                 console.log(ex);
             }
-        }
+        },
+
+        async updateBook() {
+            try {
+                let response = await this.$http.get("http://localhost:9000/api/books/show/" + this.currentMapping.book_id);
+                document.getElementById("edit-info-book").innerHTML = "<b>Book:</b> " + response.data.book_name + ", <b>by:</b> " + response.data.book_author;
+
+            } catch (ex) {
+                console.log(ex);
+                document.getElementById("edit-info-book").innerHTML = "Book not found";
+            }
+        },
+
+        async updateLibrary() {
+            try {
+                let response = await this.$http.get("http://localhost:9000/api/libraries/show/" + this.currentMapping.library_id);
+                document.getElementById("edit-info-library").innerHTML = "<b>Library:</b> " + response.data.library_name;
+            }
+            catch (ex) {
+                console.log(ex);
+                document.getElementById("edit-info-library").innerHTML = "Library not found";
+            }
+        },
     },
 
     watch: {
@@ -211,6 +231,8 @@ export default {
         action: function(newAction, oldAction) {
             if (newAction === 'list') {
                 this.getAllData();
+                document.getElementById("edit-info-book").innerHTML = "";
+                document.getElementById("edit-info-library").innerHTML = "";
                 document.getElementById("edit-error").innerHTML = "";
             }
         }
@@ -251,6 +273,7 @@ a {
 
 .send-update {
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 10px;
 }
 
