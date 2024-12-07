@@ -43,6 +43,9 @@
                 <!-- <a href="#/login"> Login</a> -->
                 <a href="#/profile/login"> Login</a>
               </li>
+              <li class="zoom-hover">
+                <input type="button" @click="sendRequest('get', 'logout')" value="LOGOUT" />
+              </li>
             </ul>
           </div>
         </li>
@@ -60,6 +63,19 @@ export default {
     return {   // variables that can be used in the template
       active: false
       }
+  },
+  
+  methods: {
+    async sendRequest(method, endpoint, params) {
+      try {
+        this.$router.push('/');
+        let response = null;
+        response = await this.$http.get("http://localhost:9000/api/auth/"+endpoint);
+        this.msg = JSON.stringify(response.data);
+      } catch (error) {
+        console.log(ex)
+      }
+    }
   },
 }
 </script>

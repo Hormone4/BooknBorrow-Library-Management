@@ -43,7 +43,8 @@ module.exports = {
             // verify input
             user_id = verifyInput(user_id);
 
-            let sql = "SELECT * FROM users WHERE user_id = ?";
+            let sql = "SELECT user_id, user_name, user_email, user_created, user_role " +
+                      "FROM users WHERE user_id = ?";
             const [rows, fields] = await pool.execute(sql, [user_id]);
 
             console.log("SINGLE User FETCHED: " + rows.length);
@@ -119,7 +120,8 @@ module.exports = {
 
     async areValidCredentials(username, password) {
         try {
-          let sql = "SELECT * FROM users WHERE user_name = ? AND user_password COLLATE utf8mb4_general_ci  = sha2(concat(user_created, ?), 224) COLLATE utf8mb4_general_ci ";
+          let sql = "SELECT * FROM USERS WHERE user_name = ? AND user_password COLLATE utf8mb4_general_ci = sha2(concat(user_created, ?), 224) COLLATE utf8mb4_general_ci "; 
+          // TODO: better salt + pw hash (bcrypt, pbkdf2, argon2)
           // COLLATE usually not needed (mariaDb compatibility)
           const [rows, fields] = await pool.execute(sql, [username, password]); 
           console.log(rows);
@@ -132,7 +134,9 @@ module.exports = {
           console.log(err);
           throw err;
         }
-      },  async getOneUser(userName) {
+    },
+      
+    async getOneUser(userName) {
         try {
           let conn = await pool.getConnection();
           let sql = "SELECT user_id,user_name,user_email,user_role FROM users WHERE user_name = ? ";
@@ -147,5 +151,5 @@ module.exports = {
           console.log(err);
           throw err;
         }
-      }
+    }
 };

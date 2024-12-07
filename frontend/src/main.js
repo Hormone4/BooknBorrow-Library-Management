@@ -12,9 +12,9 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  render: h => h(App),
+  render: h => h(App),   // Render the App component
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
-}).$mount('#app');
+}).$mount('#app');   // Mount the app to the #app div in index.html

@@ -80,7 +80,7 @@ export default new Router({
       redirect: '/users/list/all'
     },
 
-    // Profile Module Routes
+    // Auth Module Routes
     {
       path: '/profile/:action',
       name: 'profile',
@@ -91,11 +91,6 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: ContactModule
-    },
-    {
-    path : 'auth',
-    name : 'auth',
-    component: ProfileModule
     }
   ]
 })
