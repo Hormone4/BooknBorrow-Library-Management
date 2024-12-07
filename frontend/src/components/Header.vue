@@ -32,15 +32,12 @@
 
             <ul v-if="active === true" class="profile-list">
               <li class="zoom-hover">
-                <!-- <a href="#/profile/"> My Profile</a> -->
                 <a href="#/profile/myprofile"> My Profile</a>
               </li>
               <li class="zoom-hover">
-                <!-- <a href="#/register"> Register</a> -->
                 <a href="#/profile/register"> Register</a>
               </li>
               <li class="zoom-hover">
-                <!-- <a href="#/login"> Login</a> -->
                 <a href="#/profile/login"> Login</a>
               </li>
               <li class="zoom-hover">
