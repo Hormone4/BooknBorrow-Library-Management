@@ -2,7 +2,13 @@
   <div>
 
     <div v-if="action === 'myprofile'">
-      <h1 class="component-h1">Your Profile: {{currentUser.user_name}}</h1>
+      <div v-if="currentUser.user_id === 0">
+        <h1 class="component-h1">You don't have a profile yet?</h1>
+        <a href="#/profile/register">Click here</a> to create your profile.
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+      </div>
+      <div v-if="currentUser.user_id !== 0">
+        <h1 class="component-h1">Your Profile: {{currentUser.user_name}}</h1>
         <div class="show-user">
             <table class="table table-striped table-bordered">
                 <tbody>
@@ -25,6 +31,7 @@
                 </tbody>
             </table>
         </div>
+      </div>
     </div>
 
 
@@ -33,16 +40,16 @@
       <div class="form">
         <div class="form-group">
           <label for="username">Username:</label>
-          <input type="text" class="form-control" id="username" name="username" required>
+          <input type="text" class="form-control" id="username" name="username" v-model="currentUser.user_name">
           <br>
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          <input type="email" class="form-control" id="email" name="email" v-model="currentUser.user_email">
           <br>
           <label for="password">Password:</label>
-          <input type="password" class="form-control" id="password" name="password" required>
+          <input type="password" class="form-control" id="password" name="password" v-model="currentUser.user_password">
           <br>
-          <button type="submit">Submit</button>
-          <p> you already have an account? <router-link to="/login">Login</router-link></p>
+          <button type="submit" @click="sendEditRequest()" class="zoom-hover send-update">Submit</button>
+          <p> you already have an account? <a href="#/profile/login">Login</a></p>
         </div>
       </div>
     </div>
@@ -58,8 +65,8 @@
           <label for="password">Password:</label>
           <input type="password" class="form-control" id="password" name="password" required>
           <br>
-          <button type="submit" @click="submitAuth()">Submit</button>
-          <p> you don't have an account? <router-link to="/register">Register</router-link></p>
+          <button type="submit" @click="submitAuth()" class="zoom-hover">Submit</button>
+          <p> you don't have an account? <a href="#/profile/register">Register</a></p>
         </div>
       </div>
       <div>
@@ -135,6 +142,28 @@
           errorDiv.innerHTML = "Wrong username or password";
           errorDiv.style.color = "red";
           document.getElementById("edit-error").appendChild(errorDiv);
+        }
+      },
+
+      async sendEditRequest() {
+        try {
+            let response = await this.$http.post("http://localhost:9000/api/users/update/" + this.currentUser.user_id, {
+                user_name: this.currentUser.user_name,
+                user_email: this.currentUser.user_email,
+                user_password: this.currentUser.user_password,
+                user_role: "USER"
+            });
+
+            let errorDiv = document.createElement("div");
+            errorDiv.innerHTML = "Profile successfully created. You can now login";
+            errorDiv.style.color = "red";
+            document.getElementById("edit-error").appendChild(errorDiv);
+        } catch (error) {
+            console.log(error);
+            let errorDiv = document.createElement("div");
+            errorDiv.innerHTML = "Someone with that username/email already exists";
+            errorDiv.style.color = "red";
+            document.getElementById("edit-error").appendChild(errorDiv);
         }
       }
     },
