@@ -45,7 +45,7 @@ async function loginPostAction(request, response) {
         areValid = false;
         // return next(err);
       }
-      let resultObject = { "loginResult": areValid, "timestamp": new Date().toLocaleString() };
+      let resultObject = { "loginResult": areValid, "timestamp": new Date().toLocaleString(), "userRole": user.user_role };
       response.send(JSON.stringify(resultObject));
     });
   } else {
