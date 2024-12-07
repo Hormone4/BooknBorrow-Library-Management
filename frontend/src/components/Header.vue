@@ -68,7 +68,7 @@ export default {
   methods: {
     async sendRequest(method, endpoint, params) {
       try {
-        this.$router.push('/');
+        this.$router.push('/profile/login');
         let response = null;
         response = await this.$http.get("http://localhost:9000/api/auth/"+endpoint);
         this.msg = JSON.stringify(response.data);
