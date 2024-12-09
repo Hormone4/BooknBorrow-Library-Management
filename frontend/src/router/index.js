@@ -9,6 +9,7 @@ import BookLibraryMappingModule from '@/components/BookLibraryMappingModule.vue'
 import UserModule from '@/components/UserModule.vue'
 import ProfileModule from '@/components/ProfileModule.vue'
 import ContactModule from '@/components/ContactModule.vue'
+import StatisticsModule from '@/components/StatisticsModule.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -91,6 +92,13 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: ContactModule
+    },
+    //Statistics Module Routes
+
+    {
+      path : '/statistics',
+      name : 'statistics',
+      component : StatisticsModule
     }
   ]
 })
