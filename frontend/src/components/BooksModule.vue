@@ -41,7 +41,7 @@
       <hr>
 
       <h1 class="component-h1">This book is available in the following Libraries</h1>
-
+      <p>You must create an account to borrow a book :D</p>
         <!-- Library List -->
       <table class="table table-striped table-bordered table-hover">
         <thead>
