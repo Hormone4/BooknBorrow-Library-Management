@@ -51,6 +51,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
+            <th>BORROW</th>
             <th>SEE</th>
           </tr>
         </thead>
@@ -66,6 +67,9 @@
             <td>{{ library.library_phone }}</td>
             <td>
               {{ library.library_zipCode }}, {{ library.library_streetName }} {{ library.library_streetNumber }} 
+            </td>
+            <td>
+              <input type="button" value="BORROW" @click="borrowBook(library.book_library_mapping_id)" class="zoom-hover"/>
             </td>
             <td class="table-action-button">
               <a :href="'/#/libraries/show/' + library.library_id">
@@ -306,6 +310,16 @@ export default {
 
       } catch (ex) {
         console.log(ex)
+      }
+    },
+
+    async borrowBook(book_library_mapping_id) {
+      try {
+        alert("BORROWING BOOK #" + book_library_mapping_id + "...");
+        let response = await this.$http.get("http://localhost:9000/api/borrow/add/" + book_library_mapping_id);
+        alert("BORROWED: " + response.data.rowsUpdated + " book(s)");
+      } catch (ex) {
+        console.log(ex);
       }
     },
 

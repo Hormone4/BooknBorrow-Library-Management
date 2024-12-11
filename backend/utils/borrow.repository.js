@@ -112,6 +112,27 @@ module.exports = {
         }
     },
 
+    async addOneBorrowFromBLM(book_library_mapping_id, user_id) {
+        try {
+            // verify input
+            book_library_mapping_id = verifyInput(book_library_mapping_id);
+            user_id = verifyInput(user_id);
+            let sql = "INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) " +
+                      "VALUES (?, ?, now(), now() + INTERVAL 30 DAY, NULL, 'ongoing', 0)";
+            let [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id]);
+
+            // Update book status in bookLibraryMapping
+            sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";
+            [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id]);
+
+            console.log("INSERT " + JSON.stringify(okPacket));
+            return okPacket.insertId;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
     async returnBorrow(borrow_id, actualReturnDate) {
         try {
             // verify input
