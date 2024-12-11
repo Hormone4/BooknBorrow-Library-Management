@@ -22,6 +22,9 @@
         <li class="zoom-hover">
           <a href="#/users/list/all"> Users</a>
         </li>
+        <li class="zoom-hover">
+          <a href="#/statistics"> Statistics</a>
+        </li>
       </ul>
 
       <ul @mouseover="active = true" @mouseleave="active = false" >
@@ -61,7 +64,7 @@ export default {
       active: false
       }
   },
-  
+
   methods: {
     async sendRequest(method, endpoint, params) {
       try {
