@@ -56,7 +56,7 @@
         </thead>
         <tbody>
           <tr v-for="library in libraryArray" :key="library.library_id">
-            <td class="table-action-button">{{ library.library_id }}</td>
+            <td class="table-action-button">{{ library.book_library_mapping_id }}</td>
             <td>
               <a :href="'/#/libraries/show/' + library.library_id">
                 {{ library.library_name }}
