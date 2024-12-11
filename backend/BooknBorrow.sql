@@ -184,7 +184,8 @@ INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
     (8, 5, 'available'),
     (9, 5, 'available'),
     (10, 5, 'available'),
-    (12, 5, 'borrowed')
+    (12, 5, 'borrowed');
+
 
 INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) VALUES
     (3, 1, '2023-06-01', '2023-06-15', '2023-06-13', 'finished', 0), -- , 'The Hobbit by John Doe, borrowed by John Doe'),
