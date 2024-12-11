@@ -105,8 +105,6 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         this.sendRequest('post', 'login', { username: username, userpass: password });
-        // redirect to profile page
-        //this.$router.push('/profile/myprofile');
       },
 
       async refreshCurrentUser() {
@@ -135,6 +133,8 @@
           //errorDiv.innerHTML = JSON.stringify(response.data).replace(/\"/g, "");
           errorDiv.style.color = "red";
           document.getElementById("edit-error").appendChild(errorDiv);
+          // redirect to profile page
+          this.$router.push('/profile/myprofile');
 
         } catch (error) {
           console.log(ex)
@@ -174,10 +174,11 @@
       },
       action: function(newAction, oldAction) {
         // remove the error message
-        document.getElementById("edit-error").innerHTML = "";
         if (newAction === "myprofile") {
           this.refreshCurrentUser();
         }
+        else
+          document.getElementById("edit-error").innerHTML = "";
       }
     }
   }
