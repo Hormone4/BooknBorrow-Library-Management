@@ -2,11 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const bookLibraryMappingRepo = require('../utils/booklibrarymapping.repository');
+const auth = require("../utils/user.auth");
 
 router.get('/list', mappingListAction);
 router.get('/show/:mappingId', mappingShowAction);
-router.get('/del/:mappingId', mappingDelAction);
-router.post('/update/:mappingId', mappingUpdateAction);
+router.get('/del/:mappingId', auth.authorizeRequest("ADMIN"), mappingDelAction);
+router.post('/update/:mappingId', auth.authorizeRequest("ADMIN"), mappingUpdateAction);
 router.get('/listnames', mappingListWithNamesAction);
 router.get('/bookname/:mappingId', bookNameByMappingAction);
 

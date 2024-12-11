@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const libraryRepo = require('../utils/libraries.repository');
 const bookRepo = require("../utils/books.repository");
+const auth = require("../utils/user.auth");
 
 
 router.get('/list', libraryListAction); //Works
 router.get('/show/:libraryId', libraryShowAction);
-router.get('/del/:libraryId', libraryDelAction);
-router.post('/update/:libraryId', libraryUpdateAction);
+router.get('/del/:libraryId', auth.authorizeRequest("ADMIN"), libraryDelAction);
+router.post('/update/:libraryId', auth.authorizeRequest("ADMIN"), libraryUpdateAction);
 router.get('/listbooks/:libraryId', libraryBooksAction);
 router.get('/search/:input', librarySearchAction);
 

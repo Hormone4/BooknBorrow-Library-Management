@@ -1,12 +1,14 @@
 const express = require('express');
 const userRepo = require('../utils/user.repository');
+const auth = require("../utils/user.auth");
+
 
 const router = express.Router();
 
-router.get('/list', userListAction);
-router.get('/show/:userId', userShowAction);
-router.get('/del/:userId', userDelAction);
-router.post('/update/:userId', userUpdateAction);
+router.get('/list', auth.authorizeRequest("ADMIN"), userListAction);
+router.get('/show/:userId', auth.authorizeRequest("ADMIN"), userShowAction);
+router.get('/del/:userId', auth.authorizeRequest("ADMIN"), userDelAction);
+router.post('/update/:userId', auth.authorizeRequest("ADMIN"), userUpdateAction);
 
 async function userListAction(request, response) {
     try {

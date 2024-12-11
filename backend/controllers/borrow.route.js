@@ -1,13 +1,14 @@
 const express = require('express');
 const borrowRepo = require('../utils/borrow.repository');
+const auth = require("../utils/user.auth");
 
 const router = express.Router();
 
 router.get('/list', borrowListAction);
 router.get('/show/:borrowId', borrowShowAction);
 router.get('/user/:userId', borrowByUserAction);
-router.get('/del/:borrowId', borrowDelAction);
-router.post('/update/:borrowId', borrowUpdateAction);
+router.get('/del/:borrowId', auth.authorizeRequest("ADMIN"), borrowDelAction);
+router.post('/update/:borrowId', auth.authorizeRequest("ADMIN"), borrowUpdateAction);
 router.post('/return/:borrowId', borrowReturnAction);
 
 async function borrowListAction(request, response) {

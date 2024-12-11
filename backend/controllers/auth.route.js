@@ -22,7 +22,7 @@ async function userdataAction(request, response) {
 async function protectedGetAction(request, response) {
   // TODO: authorize using all factors (resource / context / environment) ...
   let userRole = "GUEST CONTENT";
-  if (request.isAuthenticated()) {
+  if (request.isAuthenticated()) {   // the isAuthenticated() method is provided by passport
     if (request.user.user_role === "ADMIN") {
       userRole = "ADMIN CONTENT";
     } else {
