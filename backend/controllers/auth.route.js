@@ -23,7 +23,6 @@ async function getRoleAction(request, response) {
   }
   else
     response.send("GUEST");
-  console.log("ROLE: " + request.user.user_role);
 }
 
 // use same endpoints for both roles
