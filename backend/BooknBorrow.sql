@@ -84,9 +84,7 @@ INSERT INTO users (user_name, user_email, user_password, user_created, user_role
     ('Jane Smith', 'jane.smith@example.com', SHA2(CONCAT(now(), 'secretpass'), 224), now(), 'USER'),
     ('Emily Clark', 'emily.clark@example.com', SHA2(CONCAT(now(), 'mypassword'), 224), now(), 'USER'),
     ('Sarah Lee', 'sarah.lee@example.com', SHA2(CONCAT(now(), 'letmein'), 224), now(), 'USER'),
-    ('Michael Brown', 'michael.brown@example.com', SHA2(CONCAT(now(), 'adminpass'), 224), now(), 'ADMIN')
-;
-INSERT INTO users (user_name, user_email, user_password, user_created, user_role) VALUES
+    ('Michael Brown', 'michael.brown@example.com', SHA2(CONCAT(now(), 'adminpass'), 224), now(), 'ADMIN'),
     ('Robert Wilson', 'robert.wilson@example.com', SHA2(CONCAT(now(), 'pass123'), 224), now(), 'USER'),
     ('Lisa Anderson', 'lisa.anderson@example.com', SHA2(CONCAT(now(), 'secure456'), 224), now(), 'USER'),
     ('David Chen', 'david.chen@example.com', SHA2(CONCAT(now(), 'chen789'), 224), now(), 'USER'),
@@ -96,7 +94,8 @@ INSERT INTO users (user_name, user_email, user_password, user_created, user_role
     ('Thomas White', 'thomas.white@example.com', SHA2(CONCAT(now(), 'white789'), 224), now(), 'USER'),
     ('Sophie Martin', 'sophie.martin@example.com', SHA2(CONCAT(now(), 'sophie123'), 224), now(), 'USER'),
     ('Kevin Taylor', 'kevin.taylor@example.com', SHA2(CONCAT(now(), 'taylor456'), 224), now(), 'USER'),
-    ('Anna Miller', 'anna.miller@example.com', SHA2(CONCAT(now(), 'miller789'), 224), now(), 'USER');
+    ('Anna Miller', 'anna.miller@example.com', SHA2(CONCAT(now(), 'miller789'), 224), now(), 'USER')
+;
 
 INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) VALUES
     ('Central Library', 'central@library.com', '1234567890', 1995, '10001', 'Main St', '101'),
@@ -132,9 +131,7 @@ INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
     (8, 3, 'available'),
     (9, 4, 'available'),
     (1, 3, 'borrowed'),
-    (2, 2, 'available')
-;
-INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
+    (2, 2, 'available'),
     (2, 1, 'available'),
     (3, 1, 'borrowed'),
     (4, 1, 'available'),
@@ -184,17 +181,15 @@ INSERT INTO bookLibraryMapping (book_id, library_id, book_status) VALUES
     (8, 5, 'available'),
     (9, 5, 'available'),
     (10, 5, 'available'),
-    (12, 5, 'borrowed');
-
+    (12, 5, 'borrowed')
+;
 
 INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) VALUES
     (3, 1, '2024-06-01', '2024-06-15', '2024-06-13', 'finished', 0), -- , 'The Hobbit by John Doe, borrowed by John Doe'),
     (6, 2, '2024-07-10', '2024-07-24', '2024-07-28', 'overdue', 15), -- , 'Sapiens by Jane Smith, borrowed by Jane Smith'),
     (5, 3, '2024-08-05', '2024-08-19', NULL, 'ongoing', 0), -- , 'To Kill a Mockingbird by Emily Clark, borrowed by Emily Clark'),
     (10, 4, '2024-09-01', '2024-09-15', NULL, 'ongoing', 0), -- , NULL),
-    (6, 5, '2024-06-01', '2024-06-15', '2024-06-15', 'finished', 0) -- , NULL)
-;
-INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) VALUES
+    (6, 5, '2024-06-01', '2024-06-15', '2024-06-15', 'finished', 0), -- , NULL)
     (8, 6, '2024-05-01', '2024-05-15', '2024-05-14', 'finished', 0),
     (12, 7, '2024-05-10', '2024-05-24', '2024-05-26', 'overdue', 10),
     (15, 8, '2024-05-20', '2024-06-03', '2024-06-02', 'finished', 0),
@@ -244,7 +239,8 @@ INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_
     (12, 7, '2024-10-15', '2024-10-29', NULL, 'ongoing', 0),
     (15, 8, '2024-10-25', '2024-11-08', NULL, 'ongoing', 0),
     (18, 9, '2024-11-05', '2024-11-19', NULL, 'ongoing', 0),
-    (22, 10, '2024-11-15', '2024-11-29', NULL, 'ongoing', 0);
+    (22, 10, '2024-11-15', '2024-11-29', NULL, 'ongoing', 0)
+;
 
 SELECT * FROM users;
 SELECT * FROM library;
