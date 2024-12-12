@@ -2,13 +2,16 @@
   <div>
 
     <div v-if="action === 'myprofile'">
+      <!-- If the user is not logged in -->
       <div v-if="currentUser.user_id === 0">
         <h1 class="component-h1">You don't have a profile yet?</h1>
         <a href="#/profile/register">Click here</a> to create your profile.
         <br><br><br><br><br><br><br><br><br><br><br><br>
       </div>
+
+      <!-- If the user is logged in -->
       <div v-if="currentUser.user_id !== 0">
-        <h1 class="component-h1">Your Profile: {{currentUser.user_name}}</h1>
+        <h1 class="component-h1">Your Profile, {{currentUser.user_name}}</h1>
         <div class="show-user">
             <table class="table table-striped table-bordered">
                 <tbody>
@@ -31,6 +34,57 @@
                 </tbody>
             </table>
         </div>
+        <br><br>
+        <hr>
+        
+        <!-- Book list -->
+        <div>
+          <h1 class="component-h1">Your borrows</h1>
+          <ul class="book-list">
+            <li v-for="book of bookArray" v-bind:key="book.book_id" class="zoom-hover">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th colspan="3">
+                      <a :href="'/#/books/show/' + book.book_id">
+                        {{ book.book_name }}<br/>
+                        <i><small>{{ book.book_author }}</small></i>
+                      </a>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">
+                      <a :href="'/#/books/show/' + book.book_id">
+                        <img v-bind:src="'../../static/book-covers/'+book.book_imageFileName" alt="" width="150" height="230">
+                      </a>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      <b>Borrow status:</b><br/>
+                      {{ book.borrow_status }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>Due date:</b><br/>
+                      {{book.borrow_returnDate}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>Fine:</b> {{book.borrow_fine}}$
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
 
@@ -91,6 +145,7 @@
     data() {
         return {
             role: '',
+            bookArray: [],
             currentUser: {
                 user_id: 0,
                 user_name: '',
@@ -111,6 +166,8 @@
         try {
           let response = await this.$http.get("http://localhost:9000/api/auth/"+this.role.toLowerCase());
           this.currentUser = response.data;
+          response = await this.$http.get("http://localhost:9000/api/borrow/userbooks/"+this.currentUser.user_id);
+          this.bookArray = response.data;
         } catch (error) {
           console.log(error);
         }
@@ -210,5 +267,35 @@
     border: #42b983 3px solid;
     padding: 20px;
     margin: auto auto 20px;
+  }
+
+  /************ BOOK LIST ************/
+  .book-list {
+    margin: auto; /* Center the ul element */
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1500px;
+    list-style-type: none; /* Remove dots */
+  }
+
+  .book-list li {
+    margin: 0 20px 20px;
+    text-align: center;
+    position: relative;
+    max-width: 200px;
+  }
+
+  .book-list a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .book-list a:hover {
+    text-decoration: underline;
   }
 </style>

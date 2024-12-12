@@ -11,6 +11,13 @@ router.get('/add/:blmId', addBorrowByBlmAction);
 router.get('/del/:borrowId', auth.authorizeRequest("ADMIN"), borrowDelAction);
 router.post('/update/:borrowId', auth.authorizeRequest("ADMIN"), borrowUpdateAction);
 router.post('/return/:borrowId', borrowReturnAction);
+router.get('/userbooks/:userId', userBooksAction);   // only USERS
+
+
+async function userBooksAction(request, response) {
+    var userBorrows = await borrowRepo.getBooksBorrowedByUser(request.params.userId);
+    response.send(JSON.stringify(userBorrows));
+}
 
 
 async function addBorrowByBlmAction(request, response) {
