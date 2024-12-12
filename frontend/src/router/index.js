@@ -9,6 +9,7 @@ import BookLibraryMappingModule from '@/components/BookLibraryMappingModule.vue'
 import UserModule from '@/components/UserModule.vue'
 import ProfileModule from '@/components/ProfileModule.vue'
 import ContactModule from '@/components/ContactModule.vue'
+import StatisticsModule from '@/components/StatisticsModule.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -80,7 +81,7 @@ export default new Router({
       redirect: '/users/list/all'
     },
 
-    // Profile Module Routes
+    // Auth Module Routes
     {
       path: '/profile/:action',
       name: 'profile',
@@ -92,10 +93,12 @@ export default new Router({
       name: 'contact',
       component: ContactModule
     },
+    //Statistics Module Routes
+
     {
-    path : 'auth',
-    name : 'auth',
-    component: ProfileModule
+      path : '/statistics',
+      name : 'statistics',
+      component : StatisticsModule
     }
   ]
 })

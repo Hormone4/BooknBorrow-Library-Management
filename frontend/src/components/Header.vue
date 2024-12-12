@@ -3,24 +3,27 @@
     <nav>
       <ul>
         <li>
-          <a href="#/">
+          <a href="#/" @click="getUserRole()">
             <h1> <img src="../assets/logos/borrrow-logo.png" alt="BooknBorrow" width="100"> BooknBorrow </h1>
           </a>
         </li>
         <li class="zoom-hover">
-          <a href="#/books/list/all/"> Books</a>
+          <a href="#/books/list/all/" @click="getUserRole()"> Books</a>
         </li>
         <li class="zoom-hover">
-          <a href="#/libraries/list/all"> Libraries</a>
+          <a href="#/libraries/list/all" @click="getUserRole()"> Libraries</a>
         </li>
-        <li class="zoom-hover">
+        <li v-if="user_role === 'ADMIN'" class="zoom-hover">
           <a href="#/mappings/list/all"> Mappings</a>
         </li>
-        <li class="zoom-hover">
+        <li v-if="user_role === 'ADMIN'" class="zoom-hover">
           <a href="#/borrow/list/all"> Borrows</a>
         </li>
-        <li class="zoom-hover">
+        <li v-if="user_role === 'ADMIN'" class="zoom-hover">
           <a href="#/users/list/all"> Users</a>
+        </li>
+        <li class="zoom-hover">
+          <a href="#/statistics"> Statistics</a>
         </li>
       </ul>
 
@@ -32,16 +35,16 @@
 
             <ul v-if="active === true" class="profile-list">
               <li class="zoom-hover">
-                <!-- <a href="#/profile/"> My Profile</a> -->
                 <a href="#/profile/myprofile"> My Profile</a>
               </li>
               <li class="zoom-hover">
-                <!-- <a href="#/register"> Register</a> -->
                 <a href="#/profile/register"> Register</a>
               </li>
               <li class="zoom-hover">
-                <!-- <a href="#/login"> Login</a> -->
                 <a href="#/profile/login"> Login</a>
+              </li>
+              <li class="zoom-hover">
+                <input type="button" @click="sendLogoutRequest('get', 'logout')" value="LOGOUT" />
               </li>
             </ul>
           </div>
@@ -58,10 +61,43 @@ export default {
 
   data () {
     return {   // variables that can be used in the template
+      user_role: 'GUEST',
       active: false
       }
   },
-}
+
+  methods: {
+    async getUserRole() {
+      try {
+        //alert("getUserRole");
+        let response = await this.$http.get("http://localhost:9000/api/auth/role");
+        this.user_role = response.data;
+      } catch (ex) {
+        console.log(ex);
+      }
+    },
+
+    async sendLogoutRequest(method, endpoint, params) {
+      try {
+        this.$router.push('/profile/login');
+        let response = null;
+        response = await this.$http.get("http://localhost:9000/api/auth/"+endpoint);
+        this.msg = JSON.stringify(response.data);
+        this.getUserRole();
+      } catch (error) {
+        console.log(ex)
+      }
+    }
+  },
+
+  watch: {   // watch for changes in the variables
+    user_role: function(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.getUserRole();
+      }
+    }
+  },
+};
 </script>
 
 <style scoped>

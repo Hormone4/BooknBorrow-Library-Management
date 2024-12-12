@@ -18,10 +18,6 @@
                             <td>{{ currentUser.user_email }}</td>
                         </tr>
                         <tr>
-                            <th>Password</th>
-                            <td>{{ currentUser.user_password }}</td>
-                        </tr>
-                        <tr>
                             <th>Created</th>
                             <td>{{ currentUser.user_created }}</td>
                         </tr>
@@ -149,7 +145,7 @@ export default {
                     user_id: 0,
                     user_name: 'user name',
                     user_email: 'user@email.com',
-                    user_password: 'user-pass-word',
+                    user_password: '',
                     user_created: new Date().toISOString().slice(0, 10),
                     user_role: 'USER'
                 };

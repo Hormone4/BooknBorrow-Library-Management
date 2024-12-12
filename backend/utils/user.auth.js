@@ -1,8 +1,8 @@
 const passport = require("passport");
-const usersRepo = require(__dirname + "\\users.repository.js"); // use same folder as the current file
+const usersRepo = require(__dirname + "\\user.repository.js"); // use same folder as the current file
 
-// const localStrategy = require((xxx));'passport-local');
-// passport.use(new LocalStrategy
+// const localStrategy = require('passport-local');
+// passport.use(new LocalStrategy(xxx));
 // check https://www.passportjs.org/howtos/password/ for full localStrategy implementation
 // instead, we will call request.login on our own, much cleaner...
 
@@ -44,12 +44,14 @@ module.exports = {
           if (requiredRole === request.user.user_role) { 
             return next();
           } else {
+            console.log("401 Unautorized (bad user level)");
             return response.end("401 Unautorized (bad user level)"); 
           }
         } else { // No special role needed for page -> next middleware
           return next();
         }
       } else { // not authenticated at all
+        console.log("401 Unautorized (not authenticated)");
         return response.end("401 Unautorized (not authenticated)");
         // OR: response.redirect("/auth"); 
       }

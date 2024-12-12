@@ -63,8 +63,9 @@ module.exports = {
         // verify input
         book_id = verifyInput(book_id);
 
-        let sql = "SELECT l.* FROM library l JOIN bookLibraryMapping blm ON l.library_id = blm.library_id " +
-            "WHERE blm.book_id = ? GROUP BY l.library_id";
+        let sql = "SELECT blm.book_library_mapping_id, l.* FROM library l JOIN bookLibraryMapping blm ON l.library_id = blm.library_id " +
+            "WHERE blm.book_id = ? ORDER BY l.library_name"
+            ;// GROUP BY l.library_id";
         const [rows, fields] = await pool.execute(sql, [book_id]);
         console.log("Libraries containing the book FETCHED: " + rows.length);
         return rows;

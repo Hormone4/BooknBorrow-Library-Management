@@ -40,7 +40,8 @@ a {
 }
 /* Hero Section */
 .hero {
-  background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794');
+  /* Background Image in the static folder */
+  background-image: url('../../static/front_page.jpg');
   background-size: cover;
   background-position: center;
   color: white;

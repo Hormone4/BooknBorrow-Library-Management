@@ -1,14 +1,31 @@
 const express = require('express');
 const borrowRepo = require('../utils/borrow.repository');
+const auth = require("../utils/user.auth");
 
 const router = express.Router();
 
 router.get('/list', borrowListAction);
 router.get('/show/:borrowId', borrowShowAction);
 router.get('/user/:userId', borrowByUserAction);
-router.get('/del/:borrowId', borrowDelAction);
-router.post('/update/:borrowId', borrowUpdateAction);
+router.get('/add/:blmId', addBorrowByBlmAction);
+router.get('/del/:borrowId', auth.authorizeRequest("ADMIN"), borrowDelAction);
+router.post('/update/:borrowId', auth.authorizeRequest("ADMIN"), borrowUpdateAction);
 router.post('/return/:borrowId', borrowReturnAction);
+router.get('/userbooks/:userId', userBooksAction);   // only USERS
+
+
+async function userBooksAction(request, response) {
+    var userBorrows = await borrowRepo.getBooksBorrowedByUser(request.params.userId);
+    response.send(JSON.stringify(userBorrows));
+}
+
+
+async function addBorrowByBlmAction(request, response) {
+    if (request.isAuthenticated()) {   // the isAuthenticated() method is provided by passport
+        var borrow = await borrowRepo.addOneBorrowFromBLM(request.params.blmId, request.user.user_id);
+        response.send(JSON.stringify(borrow));
+    }
+}
 
 async function borrowListAction(request, response) {
     var borrows = await borrowRepo.getAllBorrows();

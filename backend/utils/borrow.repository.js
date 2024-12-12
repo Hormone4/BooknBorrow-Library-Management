@@ -87,6 +87,28 @@ module.exports = {
         }
     },
 
+    async getBooksBorrowedByUser(user_id) {
+        try {
+            // verify input
+            user_id = verifyInput(user_id);
+
+            let sql = "SELECT b.*, br.borrow_borrowDate, br.borrow_returnDate, br.borrow_status, br.borrow_fine " +
+                      "FROM borrow br JOIN bookLibraryMapping blm ON br.book_library_mapping_id = blm.book_library_mapping_id JOIN book b ON blm.book_id = b.book_id " +
+                      "WHERE br.user_id = ? ORDER BY br.borrow_borrowDate DESC";
+            const [rows, fields] = await pool.execute(sql, [user_id]);
+            rows.forEach(row => {
+                row.borrow_borrowDate = row.borrow_borrowDate.toISOString().slice(0, 10);
+                row.borrow_returnDate = row.borrow_returnDate.toISOString().slice(0, 10);
+            });
+            console.log("User Borrows FETCHED: " + rows.length);
+            return rows;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
 
     async addOneBorrow(book_library_mapping_id, user_id, borrow_returnDate) {
         try {
@@ -99,6 +121,27 @@ module.exports = {
                       "VALUES (?, ?, now(), ?, NULL, 'ongoing', 0)";
             let [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id, borrow_returnDate]);
 
+
+            // Update book status in bookLibraryMapping
+            sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";
+            [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id]);
+
+            console.log("INSERT " + JSON.stringify(okPacket));
+            return okPacket.insertId;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
+    async addOneBorrowFromBLM(book_library_mapping_id, user_id) {
+        try {
+            // verify input
+            book_library_mapping_id = verifyInput(book_library_mapping_id);
+            user_id = verifyInput(user_id);
+            let sql = "INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_returnDate, borrow_actualReturnDate, borrow_status, borrow_fine) " +
+                      "VALUES (?, ?, now(), now() + INTERVAL 30 DAY, NULL, 'ongoing', 0)";
+            let [okPacket, fields] = await pool.execute(sql, [book_library_mapping_id, user_id]);
 
             // Update book status in bookLibraryMapping
             sql = "UPDATE bookLibraryMapping SET book_status = 'borrowed' WHERE book_library_mapping_id = ?";

@@ -48,25 +48,6 @@ async getOverdueBorrowsByLibrary() {
     }
 },
 
-async getUserBorrowingStats() {
-    try {
-        let sql = `
-            SELECT u.user_name,
-                   COUNT(*) as total_borrows,
-                   SUM(CASE WHEN br.borrow_status = 'overdue' THEN 1 ELSE 0 END) as overdue_count,
-                   SUM(br.borrow_fine) as total_fines
-            FROM users u
-            JOIN borrow br ON u.user_id = br.user_id
-            GROUP BY u.user_id
-            ORDER BY total_borrows DESC`;
-        const [rows] = await pool.execute(sql);
-        return rows;
-    } catch (err) {
-        console.log(err);
-        throw err;
-    }
-},
-
 async getLibraryAvailabilityStats() {
     try {
         let sql = `
@@ -84,4 +65,25 @@ async getLibraryAvailabilityStats() {
         throw err;
     }
 }
+
+,
+async getMonthlyBorrowStats() {
+    try {
+        let sql = `
+            SELECT
+                DATE_FORMAT(br.borrow_borrowDate, '%Y-%m') as month,
+                COUNT(*) as total_borrows,
+                COUNT(DISTINCT u.user_id) as unique_borrowers,
+                ROUND(AVG(CASE WHEN br.borrow_fine > 0 THEN br.borrow_fine ELSE NULL END), 2) as avg_fine
+            FROM borrow br
+            JOIN users u ON br.user_id = u.user_id
+            GROUP BY DATE_FORMAT(br.borrow_borrowDate, '%Y-%m')
+            ORDER BY month DESC`;
+        const [rows] = await pool.execute(sql);
+        return rows;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+},
 }

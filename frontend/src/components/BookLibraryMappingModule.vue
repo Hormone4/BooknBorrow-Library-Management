@@ -160,8 +160,11 @@ export default {
         async sendDeleteRequest(mapping_id) {
             try {
                 let response = await this.$http.get("http://localhost:9000/api/mappings/del/" + mapping_id);
-                this.getAllData();
 
+                if (response.data.toString().startsWith("401")) {   // if response.data starts with "401"
+                    alert("You are not authorized to delete this");
+                }
+                this.getAllData();
             } catch (ex) {
                 console.log(ex);
             }
@@ -174,6 +177,9 @@ export default {
                     library_id: this.currentMapping.library_id,
                     book_status: this.currentMapping.book_status
                 });
+                if (response.data.toString().startsWith("401")) {   // if response.data starts with "401"
+                    alert("You are not authorized to do this");
+                }
                 this.$router.push({path: '/mappings/list/all'});
                 this.getAllData();
 

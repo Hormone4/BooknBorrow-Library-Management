@@ -35,7 +35,7 @@ app.use(cors({ origin: "http://localhost:8080", credentials: true, methods: [ 'G
 
 
 // configure passport
-const auth = require("./utils/users.auth");
+const auth = require("./utils/user.auth");
 auth.initializeAuthentications(app);
 app.use("/auth", require("./controllers/auth.route"));
 
@@ -58,5 +58,5 @@ app.use("/api/libraries", require("./controllers/libraries.route"));
 app.use("/api/mappings", require("./controllers/booklibrarymapping.route"));
 app.use("/api/borrow", require("./controllers/borrow.route"));
 app.use("/api/users", require("./controllers/user.route"));
-
-// app.use("/auth", require("./controllers/auth.route"));
+app.use("/api/auth", require("./controllers/auth.route"));
+app.use("/api/statistics", require("./controllers/statistics.route"));
