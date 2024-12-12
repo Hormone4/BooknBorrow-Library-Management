@@ -61,6 +61,23 @@ module.exports = {
         }
     },
 
+    async getUserRoleById(user_id) {
+        try {
+            user_id = verifyInput(user_id);
+            let sql = "SELECT user_role FROM users WHERE user_id = ?";
+            const [rows, fields] = await pool.execute(sql, [user_id]);
+            if (rows.length === 1) {
+                return rows[0].user_role;
+            } else {
+                return false;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
     async addUser(user_name, user_email, user_password, user_role) {
         try {
             // verify input

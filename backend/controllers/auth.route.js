@@ -12,6 +12,19 @@ router.get("/admin", auth.authorizeRequest("ADMIN"), userdataAction); // expose 
 router.get("/protected", protectedGetAction); // execute authorization in action method: needed for resource-based auth
 router.post("/login", loginPostAction);
 router.get("/logout", logoutAction);
+router.get("/role", getRoleAction);
+
+async function getRoleAction(request, response) {
+  if (request.isAuthenticated()) { // Do we have an authenticated user?
+    if (request.user.user_role === "ADMIN") 
+      response.send("ADMIN");
+    else
+      response.send("USER");
+  }
+  else
+    response.send("GUEST");
+  console.log("ROLE: " + request.user.user_role);
+}
 
 // use same endpoints for both roles
 async function userdataAction(request, response) {
