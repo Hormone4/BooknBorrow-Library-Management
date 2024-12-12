@@ -41,7 +41,7 @@
       <hr>
 
       <h1 class="component-h1">This book is available in the following Libraries</h1>
-      <p>You must create an account to borrow a book :D</p>
+      <p>You must create an account to borrow a book</p>
         <!-- Library List -->
       <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -167,7 +167,7 @@
               </tr>
             </thead>
 
-            <tbody> <!-- TODO: render the tbody only if user is ADMIN -->
+            <tbody v-if="user_role === 'ADMIN'"> <!-- TODO: render the tbody only if user is ADMIN -->
               <tr>
                 <td>
                   <a :href="'/#/books/show/' + book.book_id">
@@ -206,6 +206,7 @@ export default {
   // id: book_id
   data() {
     return {   // variables that can be used in the template
+      user_role: 'GUEST',
       bookArray: [],
       libraryArray: [],
       // book (book_id, book_name, book_author, book_description, book_publicationDate, book_isbn)
@@ -222,6 +223,15 @@ export default {
   },
 
   methods: {   // logic that can be called from the template
+
+    async getUserRole() {
+      try {
+        let response = await this.$http.get("http://localhost:9000/api/auth/role");
+        this.user_role = response.data;
+      } catch (ex) {
+        console.log(ex);
+      }
+    },
 
     async getAllData() {
       try {
@@ -315,9 +325,15 @@ export default {
 
     async borrowBook(book_library_mapping_id) {
       try {
-        alert("BORROWING BOOK #" + book_library_mapping_id + "...");
-        let response = await this.$http.get("http://localhost:9000/api/borrow/add/" + book_library_mapping_id);
-        alert("BORROWED: " + response.data.rowsUpdated + " book(s)");
+        if (this.user_role === 'GUEST') {
+          alert("You must create an account to borrow a book");
+          return;
+        }
+        else {
+          //alert("BORROWING BOOK #" + book_library_mapping_id + "...");
+          let response = await this.$http.get("http://localhost:9000/api/borrow/add/" + book_library_mapping_id);
+          alert("BORROWED: " + response.data.rowsUpdated + " book(s)");
+        }
       } catch (ex) {
         console.log(ex);
       }
@@ -352,6 +368,7 @@ export default {
   },
 
   created() {   // executed when the component is created
+    this.getUserRole();
     this.getAllData();
     this.refreshCurrentBook();
   }
