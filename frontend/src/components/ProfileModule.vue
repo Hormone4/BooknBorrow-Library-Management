@@ -126,15 +126,16 @@
             response = await this.$http.get("http://localhost:9000/api/auth/"+endpoint);
           
           this.role = response.data.userRole;
-          if (response.data.loginResult)
+          if (response.data.loginResult) {
             errorDiv.innerHTML = "Login successful";
+            this.$router.push('/profile/myprofile');
+          }
           else
             errorDiv.innerHTML = "Wrong username or password";
           //errorDiv.innerHTML = JSON.stringify(response.data).replace(/\"/g, "");
           errorDiv.style.color = "red";
           document.getElementById("edit-error").appendChild(errorDiv);
           // redirect to profile page
-          this.$router.push('/profile/myprofile');
 
         } catch (error) {
           console.log(ex)
