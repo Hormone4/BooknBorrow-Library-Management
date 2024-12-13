@@ -124,6 +124,7 @@
         </div>
       </div>
       <div>
+        <h1 class="component-h1">For testing purposes</h1>
           ('John Doe', 'john.doe@example.com', SHA2(CONCAT(now(), 'password123'), 224), now(), 'USER'),</br>
           ('Jane Smith', 'jane.smith@example.com', SHA2(CONCAT(now(), 'secretpass'), 224), now(), 'USER'),</br>
           ('Emily Clark', 'emily.clark@example.com', SHA2(CONCAT(now(), 'mypassword'), 224), now(), 'USER'),</br>
