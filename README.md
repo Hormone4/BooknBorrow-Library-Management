@@ -27,6 +27,7 @@ cd..
 
 cd frontend
 npm install
+npm install axios@0.25.0
 npm install -g vue-cli
 cd..
 ```
