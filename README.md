@@ -23,13 +23,13 @@ Open terminal at the ```root``` of the repository and run the following command 
 ```bash
 cd backend
 npm install express express-session body-parser passport passport-local dotenv ejs mysql2 cors
-cd..
+cd ..
 
 cd frontend
 npm install
 npm install axios@0.25.0
 npm install -g vue-cli
-cd..
+cd ..
 ```
 Copy-paste the ```.env``` file from the ```template``` folder at the root of the ```backend``` folder, and write your correct information inside:
 - ```DB_PASS=yourMysqlPassword```
