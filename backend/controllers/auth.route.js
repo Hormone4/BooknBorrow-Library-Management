@@ -45,24 +45,50 @@ async function protectedGetAction(request, response) {
 }
 
 async function loginPostAction(request, response) {
-  // passport.authenticate('local', { successRedirect: '/' }));
-  let areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
-
-  if (areValid) {
-    user = await userRepo.getOneUser(request.body.username);
-    request.login(user, function (err) { 
-      if (err) { 
-        console.log("LOGINERROR");
-        console.log(err); 
-        areValid = false;
-        // return next(err);
+  try {
+    let areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
+    
+    if (areValid) {
+      let user = await userRepo.getOneUser(request.body.username);
+      if (!user) {
+        return response.status(401).json({ 
+          "loginResult": false, 
+          "message": "User not found", 
+          "timestamp": new Date().toLocaleString() 
+        });
       }
-      let resultObject = { "loginResult": areValid, "timestamp": new Date().toLocaleString(), "userRole": user.user_role };
-      response.send(JSON.stringify(resultObject));
+      
+      request.login(user, function (err) { 
+        if (err) { 
+          console.log("LOGIN ERROR:", err);
+          return response.status(500).json({ 
+            "loginResult": false, 
+            "message": "Login process failed", 
+            "timestamp": new Date().toLocaleString() 
+          });
+        }
+        
+        let resultObject = { 
+          "loginResult": true, 
+          "timestamp": new Date().toLocaleString(), 
+          "userRole": user.user_role 
+        };
+        response.json(resultObject);
+      });
+    } else {
+      response.json({ 
+        "loginResult": false, 
+        "message": "Invalid credentials",
+        "timestamp": new Date().toLocaleString() 
+      });
+    }
+  } catch (error) {
+    console.error("Authentication error:", error);
+    response.status(500).json({ 
+      "loginResult": false, 
+      "message": "Server error during authentication",
+      "timestamp": new Date().toLocaleString() 
     });
-  } else {
-    let resultObject = { "loginResult": areValid, "timestamp": new Date().toLocaleString() };
-    response.send(JSON.stringify(resultObject));
   }
 }
 

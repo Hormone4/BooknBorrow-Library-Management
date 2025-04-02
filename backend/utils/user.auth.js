@@ -20,20 +20,31 @@ module.exports = {
     // Result will be saved into session
     passport.serializeUser(function (userFromDb, doneFunction) { 
       console.log("SERIALIZING...");
-      console.log(userFromDb);
-      const userObj = { "id": userFromDb.user_id, "name": userFromDb.user_name, "role": userFromDb.user_role }; // only the ID would be enough...
+      // Only store the minimal necessary data in the session
+      const userObj = { "id": userFromDb.user_id }; // Only store ID for lookups
       console.log(userObj);
       doneFunction(null, userObj);
     });
-
-    // This will be login when serialized user is in the session
-    // Result will be saved into request.user
+    
     passport.deserializeUser(async function (userObj, doneFunction) { 
       console.log("DE - SERIALIZING... ");
       console.log(userObj);
-      let userFromDb = await usersRepo.getOneUser(userObj.name);
-      console.log(userFromDb);
-      doneFunction(null, userFromDb);
+      
+      try {
+        // Use getUserById instead of getOneUser
+        let userFromDb = await usersRepo.getUserById(userObj.id);
+        
+        if (!userFromDb) {
+          console.log("User not found in database during deserialization");
+          return doneFunction(null, false);
+        }
+        
+        console.log(userFromDb);
+        return doneFunction(null, userFromDb);
+      } catch (error) {
+        console.error("Database error during deserialization:", error);
+        return doneFunction(error);
+      }
     });
   },
 

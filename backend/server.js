@@ -22,7 +22,7 @@ app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 const session = require("express-session");
 app.use(session({
     secret: "SecretRandomStringDskghadslkghdlkghdghaksdghdksh",   // session storage will be stored encrypted
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, // storing session identifier, maxAge is the time the cookie will be stored in the browser (1 day, in milliseconds)
     resave: false
 }));

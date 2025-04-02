@@ -39,24 +39,18 @@ module.exports = {
     },
 
     async getUserById(user_id) {
+        let connection;
         try {
-            // verify input
             user_id = verifyInput(user_id);
-
-            let sql = "SELECT user_id, user_name, user_email, user_created, user_role " +
-                      "FROM users WHERE user_id = ?";
+            let sql = "SELECT * FROM users WHERE user_id = ?";
             const [rows, fields] = await pool.execute(sql, [user_id]);
-
-            console.log("SINGLE User FETCHED: " + rows.length);
-
             if (rows.length === 1) {
-                rows[0].user_created = rows[0].user_created.toISOString().slice(0, 10);
                 return rows[0];
             } else {
-                return false;
+                return null;
             }
         } catch (err) {
-            console.log(err);
+            console.error("Error in getUserById:", err);
             throw err;
         }
     },
