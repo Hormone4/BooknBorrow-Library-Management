@@ -26,7 +26,7 @@ module.exports = {
 
     async getAllLibraries() {
         try {
-            let sql = "SELECT * FROM library";
+            let sql = "SELECT * FROM `library`";
             const [rows, fields] = await pool.execute(sql);
             console.log("Libraries FETCHED: " + rows.length);
             return rows;
@@ -41,7 +41,7 @@ module.exports = {
             // verify input
             library_id = verifyInput(library_id);
             
-            let sql = "SELECT * FROM library WHERE library_id = ?";
+            let sql = "SELECT * FROM `library` WHERE library_id = ?";
             const [rows, fields] = await pool.execute(sql, [library_id]);
             console.log("SINGLE Library FETCHED: " + rows.length);
             return rows.length === 1 ? rows[0] : false;
@@ -62,7 +62,7 @@ module.exports = {
             library_streetName = verifyInput(library_streetName);
             library_streetNumber = verifyInput(library_streetNumber);
 
-            let sql = "INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) "+
+            let sql = "INSERT INTO `library` (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) "+
                              "VALUES (?, ?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await pool.execute(sql, [library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber]);
             console.log("INSERT " + JSON.stringify(okPacket));
@@ -85,7 +85,7 @@ module.exports = {
             library_streetName = verifyInput(library_streetName);
             library_streetNumber = verifyInput(library_streetNumber);
 
-            let sql = "UPDATE library SET library_name=?, library_email=?, library_phone=?, library_creationYear=?, library_zipCode=?, library_streetName=?, library_streetNumber=? WHERE library_id=?";
+            let sql = "UPDATE `library` SET library_name=?, library_email=?, library_phone=?, library_creationYear=?, library_zipCode=?, library_streetName=?, library_streetNumber=? WHERE library_id=?";
             const [okPacket, fields] = await pool.execute(sql, [library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber, library_id]);
             console.log("UPDATE " + JSON.stringify(okPacket));
             return okPacket.affectedRows;
@@ -111,8 +111,8 @@ module.exports = {
                   "WHERE library_id = ?";
             [okPacket, fields] = await pool.execute(sql, [library_id]);
 
-            // Finally delete the library
-            sql = "DELETE FROM library WHERE library_id = ?";
+            // Finally delete the `library`
+            sql = "DELETE FROM `library` WHERE library_id = ?";
             [okPacket, fields] = await pool.execute(sql, [library_id]);
 
             console.log("DELETE " + JSON.stringify(okPacket));
@@ -145,7 +145,7 @@ module.exports = {
             // verify input
             userText = verifyInput(userText);
 
-            let sql = "SELECT * FROM library WHERE library_name LIKE ? OR library_zipCode LIKE ? OR library_streetName LIKE ?";
+            let sql = "SELECT * FROM `library` WHERE library_name LIKE ? OR library_zipCode LIKE ? OR library_streetName LIKE ?";
             const [rows, fields] = await pool.execute(sql, [`%${userText}%`, `%${userText}%`, `%${userText}%`]);
             console.log("Libraries FILTERED: " + rows.length);
             return rows;

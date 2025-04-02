@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
-DROP TABLE IF EXISTS library;
-CREATE TABLE IF NOT EXISTS library (
+DROP TABLE IF EXISTS `library`;
+CREATE TABLE IF NOT EXISTS `library` (
     library_id INT AUTO_INCREMENT PRIMARY KEY,   -- should be a GUID/UUID
     library_name VARCHAR(50) NOT NULL,
     library_email VARCHAR(50) NOT NULL UNIQUE,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS bookLibraryMapping (
     library_id INT NOT NULL,
     book_status ENUM('available', 'borrowed', 'reserved') NOT NULL,
     FOREIGN KEY (book_id) REFERENCES book(book_id),
-    FOREIGN KEY (library_id) REFERENCES library(library_id)
+    FOREIGN KEY (library_id) REFERENCES `library`(library_id)
 );
 
 
@@ -97,7 +97,7 @@ INSERT INTO users (user_name, user_email, user_password, user_created, user_role
     ('Anna Miller', 'anna.miller@example.com', SHA2(CONCAT(now(), 'miller789'), 224), now(), 'USER')
 ;
 
-INSERT INTO library (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) VALUES
+INSERT INTO `library` (library_name, library_email, library_phone, library_creationYear, library_zipCode, library_streetName, library_streetNumber) VALUES
     ('Central Library', 'central@library.com', '1234567890', 1995, '10001', 'Main St', '101'),
     ('Westside Library', 'westside@library.com', '0987654321', 2005, '10002', 'Broadway', '202'),
     ('Eastside Library', 'eastside@library.com', '1122334455', 2010, '10003', 'Lexington Ave', '303'),
@@ -243,7 +243,7 @@ INSERT INTO borrow (book_library_mapping_id, user_id, borrow_borrowDate, borrow_
 ;
 
 SELECT * FROM users;
-SELECT * FROM library;
+SELECT * FROM `library`;
 SELECT * FROM book;
 SELECT * FROM bookLibraryMapping;
 SELECT * FROM borrow;
